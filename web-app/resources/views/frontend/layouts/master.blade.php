@@ -1,192 +1,187 @@
+```blade
 <!doctype html>
 <html class="no-js" lang="en">
-    
-<!-- Mirrored from themebeyond.com/pre/petco-prev/petco-live/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Dec 2024 01:34:34 GMT -->
 <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Petco - Pet Breeder & Adoption HTML Template</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Petco - Pet Breeder & Adoption HTML Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="shortcut icon" type="image/x-icon" href="frontend/img/favicon.png">
-        <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/img/favicon.png') }}">
 
-		<!-- CSS here -->
-        <link rel="stylesheet" href="frontend/css/bootstrap.min.css">
-        <link rel="stylesheet" href="frontend/css/animate.min.css">
-        <link rel="stylesheet" href="frontend/css/magnific-popup.css">
-        <link rel="stylesheet" href="frontend/css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="frontend/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="frontend/css/nice-select.css">
-        <link rel="stylesheet" href="frontend/css/flaticon.css">
-        <link rel="stylesheet" href="frontend/css/odometer.css">
-        <link rel="stylesheet" href="frontend/css/jquery-ui.css">
-        <link rel="stylesheet" href="frontend/css/slick.css">
-        <link rel="stylesheet" href="frontend/css/default.css">
-        <link rel="stylesheet" href="frontend/css/style.css">
-        <link rel="stylesheet" href="frontend/css/responsive.css">
-    </head>
-    <body>
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/odometer.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="{{ asset('frontend/img/preloader.gif') }}" alt="">
+    </div>
+    <!-- Preloader-end -->
 
-        <!-- Preloader -->
-        <div id="preloader">
-            <img src="frontend/img/preloader.gif" alt="">
-        </div>
-        <!-- Preloader-end -->
+    <!-- Scroll-top -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <i class="fas fa-angle-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
 
-		<!-- Scroll-top -->
-        <button class="scroll-top scroll-to-target" data-target="html">
-            <i class="fas fa-angle-up"></i>
-        </button>
-        <!-- Scroll-top-end-->
-
-        <!-- header-area -->
-        <header>
-            <div class="header-top-area">
-                <div class="container custom-container">
-                    <div class="row align-items-center">
-                        <div class="col-md-7">
-                            <div class="header-top-left">
-                                <ul>
-                                    <li>Call us: 747-800-9880</li>
-                                    <li><i class="far fa-clock"></i>Opening Hours: 7:00 am - 9:00 pm (Mon - Sun)</li>
-                                </ul>
-                            </div>
+    <!-- header-area -->
+    <header>
+        <div class="header-top-area">
+            <div class="container custom-container">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <div class="header-top-left">
+                            <ul>
+                                <li>Call us: 747-800-9880</li>
+                                <li><i class="far fa-clock"></i>Opening Hours: 7:00 am - 9:00 pm (Mon - Sun)</li>
+                            </ul>
                         </div>
-                        <div class="col-md-5">
-                            <div class="header-top-right">
-                                <ul class="header-top-social">
-                                    <li class="follow">Follow :</li>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="header-top-right">
+                            <ul class="header-top-social">
+                                <li class="follow">Follow :</li>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="sticky-header" class="menu-area">
-                <div class="container custom-container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
-                            <div class="menu-wrap">
-                                <nav class="menu-nav show">
-                                    <div class="logo"><a href="index.html"><img src="frontend/img/logo/logo.png" alt=""></a></div>
-                                    <div class="navbar-wrap main-menu d-none d-lg-flex">
-                                        <ul class="navigation">
-                                            <li class="active menu-item-has-children"><a href="index.html">Home</a>
-                                                <ul class="submenu">
-                                                    <li class="active"><a href="index.html">Home One</a></li>
-                                                    <li><a href="index-2.html">Home Two</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="dog-list.html">Dog List</a></li>
-                                            <li class="menu-item-has-children"><a href="shop.html">Shop</a>
-                                                <ul class="submenu">
-                                                    <li><a href="shop.html">Our Shop</a></li>
-                                                    <li><a href="shop-details.html">Shop Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="adoption.html">Adoption</a></li>
-                                            <li class="menu-item-has-children"><a href="breeder.html">Breeder</a>
-                                                <ul class="submenu">
-                                                    <li><a href="breeder.html">Our Breeder</a></li>
-                                                    <li><a href="breeder-details.html">Breeder Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children"><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Our Blog</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">contacts</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="header-action d-none d-md-block">
-                                        <ul>
-                                            <li class="header-search"><a href="#"><i class="flaticon-search"></i></a></li>
-                                            <li class="header-shop-cart"><a href="#"><i class="flaticon-shopping-bag"></i><span>2</span></a>
-                                                <ul class="minicart">
-                                                    <li class="d-flex align-items-start">
-                                                        <div class="cart-img">
-                                                            <a href="#"><img src="frontend/img/product/cart_p01.jpg" alt=""></a>
+        </div>
+        <div id="sticky-header" class="menu-area">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                        <div class="menu-wrap">
+                            <nav class="menu-nav show">
+                                <div class="logo"><a href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a></div>
+                                <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                    <ul class="navigation">
+                                        <li class="active menu-item-has-children"><a href="index.html">Home</a>
+                                            <ul class="submenu">
+                                                <li class="active"><a href="index.html">Home One</a></li>
+                                                <li><a href="index-2.html">Home Two</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="dog-list.html">Dog List</a></li>
+                                        <li class="menu-item-has-children"><a href="shop.html">Shop</a>
+                                            <ul class="submenu">
+                                                <li><a href="shop.html">Our Shop</a></li>
+                                                <li><a href="shop-details.html">Shop Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="adoption.html">Adoption</a></li>
+                                        <li class="menu-item-has-children"><a href="breeder.html">Breeder</a>
+                                            <ul class="submenu">
+                                                <li><a href="breeder.html">Our Breeder</a></li>
+                                                <li><a href="breeder-details.html">Breeder Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="blog.html">Blog</a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">Our Blog</a></li>
+                                                <li><a href="blog-details.html">Blog Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">contacts</a></li>
+                                    </ul>
+                                </div>
+                                <div class="header-action d-none d-md-block">
+                                    <ul>
+                                        <li class="header-search"><a href="#"><i class="flaticon-search"></i></a></li>
+                                        <li class="header-shop-cart"><a href="#"><i class="flaticon-shopping-bag"></i><span>2</span></a>
+                                            <ul class="minicart">
+                                                <li class="d-flex align-items-start">
+                                                    <div class="cart-img">
+                                                        <a href="#"><img src="{{ asset('frontend/img/product/cart_p01.jpg') }}" alt=""></a>
+                                                    </div>
+                                                    <div class="cart-content">
+                                                        <h4><a href="#">The King Charles Spaniel</a></h4>
+                                                        <div class="cart-price">
+                                                            <span class="new">$229.9</span>
+                                                            <span><del>$229.9</del></span>
                                                         </div>
-                                                        <div class="cart-content">
-                                                            <h4><a href="#">The King Charles Spaniel</a></h4>
-                                                            <div class="cart-price">
-                                                                <span class="new">$229.9</span>
-                                                                <span><del>$229.9</del></span>
-                                                            </div>
+                                                    </div>
+                                                    <div class="del-icon">
+                                                        <a href="#"><i class="far fa-trash-alt"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex align-items-start">
+                                                    <div class="cart-img">
+                                                        <a href="#"><img src="{{ asset('frontend/img/product/cart_p02.jpg') }}" alt=""></a>
+                                                    </div>
+                                                    <div class="cart-content">
+                                                        <h4><a href="#">The Labrador Retriever</a></h4>
+                                                        <div class="cart-price">
+                                                            <span class="new">$229.9</span>
+                                                            <span><del>$229.9</del></span>
                                                         </div>
-                                                        <div class="del-icon">
-                                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-start">
-                                                        <div class="cart-img">
-                                                            <a href="#"><img src="img/product/cart_p02.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="cart-content">
-                                                            <h4><a href="#">The Labrador Retriever</a></h4>
-                                                            <div class="cart-price">
-                                                                <span class="new">$229.9</span>
-                                                                <span><del>$229.9</del></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="del-icon">
-                                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="total-price">
-                                                            <span class="f-left">Total:</span>
-                                                            <span class="f-right">$239.9</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="checkout-link">
-                                                            <a href="#">Shopping Cart</a>
-                                                            <a class="black-color" href="#">Checkout</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="header-btn"><a href="adoption.html" class="btn">Adopt Here <img src="img/icon/w_pawprint.png" alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </nav>
-                            </div>
-                            <!-- Mobile Menu  -->
-                            <div class="mobile-menu">
-                                <nav class="menu-box">
-                                    <div class="close-btn"><i class="fas fa-times"></i></div>
-                                    <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
-                                    </div>
-                                    <div class="menu-outer">
-                                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-                                    </div>
-                                    <div class="social-links">
-                                        <ul class="clearfix">
-                                            <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                                            <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
-                                            <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                                            <li><a href="#"><span class="fab fa-instagram"></span></a></li>
-                                            <li><a href="#"><span class="fab fa-youtube"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </nav>
-                            </div>
-                            <div class="menu-backdrop"></div>
-                            <!-- End Mobile Menu -->
+                                                    </div>
+                                                    <div class="del-icon">
+                                                        <a href="#"><i class="far fa-trash-alt"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="total-price">
+                                                        <span class="f-left">Total:</span>
+                                                        <span class="f-right">$239.9</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="checkout-link">
+                                                        <a href="#">Shopping Cart</a>
+                                                        <a class="black-color" href="#">Checkout</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="header-btn"><a href="adoption.html" class="btn">Adopt Here <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </nav>
                         </div>
+                        <!-- Mobile Menu -->
+                        <div class="mobile-menu">
+                            <nav class="menu-box">
+                                <div class="close-btn"><i class="fas fa-times"></i></div>
+                                <div class="nav-logo"><a href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt="" title=""></a></div>
+                                <div class="menu-outer">
+                                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                </div>
+                                <div class="social-links">
+                                    <ul class="clearfix">
+                                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="menu-backdrop"></div>
+                        <!-- End Mobile Menu -->
                     </div>
                 </div>
-                <div class="header-shape" data-background="img/bg/header_shape.png"></div>
+                <div class="header-shape" data-background="{{ asset('frontend/img/bg/header_shape.png') }}"></div>
             </div>
             <!-- header-search -->
             <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
@@ -213,14 +208,12 @@
         </header>
         <!-- header-area-end -->
 
-
         <!-- main-area -->
         <main>
-
             <!-- slider-area -->
             <section class="slider-area">
                 <div class="slider-active">
-                    <div class="single-slider slider-bg d-flex align-items-center" data-background="img/slider/slider_bg01.jpg">
+                    <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
                         <div class="container custom-container">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-7 col-md-10">
@@ -231,13 +224,13 @@
                                         <div class="slider-desc">
                                             <p class="desc" data-animation="fadeInUpBig" data-delay=".4s" data-duration="1.2s">Human Shampoo on Dogs After six days of delirat, the jury found Hernandez guilty of first-degree murder</p>
                                         </div>
-                                        <a href="dog-list.html" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="img/icon/w_pawprint.png" alt=""></a>
+                                        <a href="dog-list.html" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="single-slider slider-bg d-flex align-items-center" data-background="img/slider/slider_bg02.jpg">
+                    <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('frontend/img/slider/slider_bg02.jpg') }}">
                         <div class="container custom-container">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-7 col-md-10">
@@ -248,15 +241,15 @@
                                         <div class="slider-desc">
                                             <p class="desc" data-animation="fadeInUpBig" data-delay=".4s" data-duration="1.2s">Human Shampoo on Dogs After six days of delirat, the jury found Hernandez guilty of first-degree murder</p>
                                         </div>
-                                        <a href="dog-list.html" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="img/icon/w_pawprint.png" alt=""></a>
+                                        <a href="dog-list.html" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="slider-shape"><img src="img/slider/slider_shape01.png" alt=""></div>
-                <div class="slider-shape shape-two"><img src="img/slider/slider_shape02.png" alt=""></div>
+                <div class="slider-shape"><img src="{{ asset('frontend/img/slider/slider_shape01.png') }}" alt=""></div>
+                <div class="slider-shape shape-two"><img src="{{ asset('frontend/img/slider/slider_shape02.png') }}" alt=""></div>
             </section>
             <!-- slider-area-end -->
 
@@ -299,7 +292,7 @@
             <!-- find-area-end -->
 
             <!-- counter-area -->
-            <section class="counter-area counter-bg" data-background="img/bg/counter_bg.jpg">
+            <section class="counter-area counter-bg" data-background="{{ asset('frontend/img/bg/counter_bg.jpg') }}">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8">
@@ -345,19 +338,19 @@
                     <div class="row align-items-center align-items-xl-end justify-content-center">
                         <div class="col-xl-7 col-lg-6 col-md-10 order-0 order-lg-2">
                             <div class="adoption-img">
-                                <img src="img/images/adoption_img.jpg" alt="">
+                                <img src="{{ asset('frontend/img/images/adoption_img.jpg') }}" alt="">
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-6">
                             <div class="adoption-content">
                                 <h2 class="title">Working For <br> Dog <span>Adoption</span> Free, Happy Time</h2>
                                 <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a breed brwn and information.</p>
-                                <a href="adoption.html" class="btn">Adoption <img src="img/icon/w_pawprint.png" alt=""></a>
+                                <a href="adoption.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="adoption-shape"><img src="img/images/adoption_shape.png" alt=""></div>
+                <div class="adoption-shape"><img src="{{ asset('frontend/img/images/adoption_shape.png') }}" alt=""></div>
             </section>
             <!-- adoption-area-end -->
 
@@ -367,7 +360,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-7 col-lg-9">
                             <div class="section-title text-center mb-65">
-                                <div class="section-icon"><img src="img/icon/pawprint.png" alt=""></div>
+                                <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
                                 <h5 class="sub-title">Service to Breeds</h5>
                                 <h2 class="title">Most Popular Dog Breed</h2>
                                 <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a breed brwn and information Most dogs</p>
@@ -379,7 +372,7 @@
                             <div class="breed-services-active owl-carousel">
                                 <div class="breed-services-item">
                                     <div class="thumb">
-                                        <img src="img/images/breed_services_img01.jpg" alt="">
+                                        <img src="{{ asset('frontend/img/images/breed_services_img01.jpg') }}" alt="">
                                     </div>
                                     <div class="content">
                                         <h3 class="title"><a href="breeder-details.html">Golden Retriever</a></h3>
@@ -387,7 +380,7 @@
                                 </div>
                                 <div class="breed-services-item">
                                     <div class="thumb">
-                                        <img src="img/images/breed_services_img02.jpg" alt="">
+                                        <img src="{{ asset('frontend/img/images/breed_services_img02.jpg') }}" alt="">
                                     </div>
                                     <div class="content">
                                         <h3 class="title"><a href="breeder-details.html">German Sharped</a></h3>
@@ -395,7 +388,7 @@
                                 </div>
                                 <div class="breed-services-item">
                                     <div class="thumb">
-                                        <img src="img/images/breed_services_img03.jpg" alt="">
+                                        <img src="{{ asset('frontend/img/images/breed_services_img03.jpg') }}" alt="">
                                     </div>
                                     <div class="content">
                                         <h3 class="title"><a href="breeder-details.html">Siberian Husky</a></h3>
@@ -403,7 +396,7 @@
                                 </div>
                                 <div class="breed-services-item">
                                     <div class="thumb">
-                                        <img src="img/images/breed_services_img04.jpg" alt="">
+                                        <img src="{{ asset('frontend/img/images/breed_services_img04.jpg') }}" alt="">
                                     </div>
                                     <div class="content">
                                         <h3 class="title"><a href="breeder-details.html">Bernes Mountain</a></h3>
@@ -412,17 +405,17 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="breed-services-info" data-background="img/bg/breed_services_bg.jpg">
+                            <div class="breed-services-info" data-background="{{ asset('frontend/img/bg/breed_services_bg.jpg') }}">
                                 <h5 class="sub-title">Dog Breeder</h5>
                                 <h3 class="title">Available for Breed</h3>
                                 <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provid dogs</p>
-                                <a href="dog-list.html" class="btn">More Pets <img src="img/icon/w_pawprint.png" alt=""></a>
+                                <a href="dog-list.html" class="btn">More Pets <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="breed-services-shape"><img src="img/images/breed_services_shape01.png" alt=""></div>
-                <div class="breed-services-shape shape-two"><img src="img/images/breed_services_shape02.png" alt=""></div>
+                <div class="breed-services-shape"><img src="{{ asset('frontend/img/images/breed_services_shape01.png') }}" alt=""></div>
+                <div class="breed-services-shape shape-two"><img src="{{ asset('frontend/img/images/breed_services_shape02.png') }}" alt=""></div>
             </section>
             <!-- breeds-services-end -->
 
@@ -432,8 +425,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="faq-img-wrap">
-                                <img src="img/images/faq_tv.png" class="img-frame" alt="">
-                                <img src="img/images/faq_img.png" class="main-img" alt="">
+                                <img src="{{ asset('frontend/img/images/faq_tv.png') }}" class="img-frame" alt="">
+                                <img src="{{ asset('frontend/img/images/faq_img.png') }}" class="main-img" alt="">
                                 <a href="https://www.youtube.com/watch?v=XdFfCPK5ycw" class="popup-video"></a>
                             </div>
                         </div>
@@ -494,7 +487,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="faq-shape"><img src="img/images/faq_shape.png" alt=""></div>
+                <div class="faq-shape"><img src="{{ asset('frontend/img/images/faq_shape.png') }}" alt=""></div>
             </section>
             <!-- faq-area-end -->
 
@@ -504,37 +497,37 @@
                     <div class="row brand-active">
                         <div class="col-12">
                             <div class="brand-item">
-                                <img src="img/brand/brand_item01.png" alt="img">
+                                <img src="{{ asset('frontend/img/brand/brand_item01.png') }}" alt="img">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="brand-item">
-                                <img src="img/brand/brand_item02.png" alt="img">
+                                <img src="{{ asset('frontend/img/brand/brand_item02.png') }}" alt="img">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="brand-item">
-                                <img src="img/brand/brand_item03.png" alt="img">
+                                <img src="{{ asset('frontend/img/brand/brand_item03.png') }}" alt="img">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="brand-item">
-                                <img src="img/brand/brand_item04.png" alt="img">
+                                <img src="{{ asset('frontend/img/brand/brand_item04.png') }}" alt="img">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="brand-item">
-                                <img src="img/brand/brand_item05.png" alt="img">
+                                <img src="{{ asset('frontend/img/brand/brand_item05.png') }}" alt="img">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="brand-item">
-                                <img src="img/brand/brand_item06.png" alt="img">
+                                <img src="{{ asset('frontend/img/brand/brand_item06.png') }}" alt="img">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="brand-item">
-                                <img src="img/brand/brand_item03.png" alt="img">
+                                <img src="{{ asset('frontend/img/brand/brand_item03.png') }}" alt="img">
                             </div>
                         </div>
                     </div>
@@ -548,7 +541,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-7 col-lg-9">
                             <div class="section-title text-center mb-65">
-                                <div class="section-icon"><img src="img/icon/pawprint.png" alt=""></div>
+                                <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
                                 <h5 class="sub-title">Meet the animals</h5>
                                 <h2 class="title">Puppies Waiting for Adoption</h2>
                                 <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a
@@ -560,8 +553,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="adoption-shop-item">
                                 <div class="adoption-shop-thumb">
-                                    <img src="img/product/adoption_shop_thumb01.jpg" alt="">
-                                    <a href="shop-details.html" class="btn">Adoption <img src="img/icon/w_pawprint.png" alt=""></a>
+                                    <img src="{{ asset('frontend/img/product/adoption_shop_thumb01.jpg') }}" alt="">
+                                    <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                 </div>
                                 <div class="adoption-shop-content">
                                     <h4 class="title"><a href="shop-details.html">Mister Tartosh</a></h4>
@@ -589,8 +582,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="adoption-shop-item">
                                 <div class="adoption-shop-thumb">
-                                    <img src="img/product/adoption_shop_thumb02.jpg" alt="">
-                                    <a href="shop-details.html" class="btn">Adoption <img src="img/icon/w_pawprint.png" alt=""></a>
+                                    <img src="{{ asset('frontend/img/product/adoption_shop_thumb02.jpg') }}" alt="">
+                                    <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                 </div>
                                 <div class="adoption-shop-content">
                                     <h4 class="title"><a href="shop-details.html">Charlie</a></h4>
@@ -618,8 +611,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="adoption-shop-item">
                                 <div class="adoption-shop-thumb">
-                                    <img src="img/product/adoption_shop_thumb03.jpg" alt="">
-                                    <a href="shop-details.html" class="btn">Adoption <img src="img/icon/w_pawprint.png" alt=""></a>
+                                    <img src="{{ asset('frontend/img/product/adoption_shop_thumb03.jpg') }}" alt="">
+                                    <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                 </div>
                                 <div class="adoption-shop-content">
                                     <h4 class="title"><a href="shop-details.html">Alessia Max</a></h4>
@@ -647,8 +640,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="adoption-shop-item">
                                 <div class="adoption-shop-thumb">
-                                    <img src="img/product/adoption_shop_thumb04.jpg" alt="">
-                                    <a href="shop-details.html" class="btn">Adoption <img src="img/icon/w_pawprint.png" alt=""></a>
+                                    <img src="{{ asset('frontend/img/product/adoption_shop_thumb04.jpg') }}" alt="">
+                                    <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                 </div>
                                 <div class="adoption-shop-content">
                                     <h4 class="title"><a href="shop-details.html">Canadian</a></h4>
@@ -676,8 +669,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="adoption-shop-item">
                                 <div class="adoption-shop-thumb">
-                                    <img src="img/product/adoption_shop_thumb05.jpg" alt="">
-                                    <a href="shop-details.html" class="btn">Adoption <img src="img/icon/w_pawprint.png" alt=""></a>
+                                    <img src="{{ asset('frontend/img/product/adoption_shop_thumb05.jpg') }}" alt="">
+                                    <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                 </div>
                                 <div class="adoption-shop-content">
                                     <h4 class="title"><a href="shop-details.html">Entertainment</a></h4>
@@ -705,8 +698,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="adoption-shop-item">
                                 <div class="adoption-shop-thumb">
-                                    <img src="img/product/adoption_shop_thumb06.jpg" alt="">
-                                    <a href="shop-details.html" class="btn">Adoption <img src="img/icon/w_pawprint.png" alt=""></a>
+                                    <img src="{{ asset('frontend/img/product/adoption_shop_thumb06.jpg') }}" alt="">
+                                    <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                                 </div>
                                 <div class="adoption-shop-content">
                                     <h4 class="title"><a href="shop-details.html">Dangerous</a></h4>
@@ -742,7 +735,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-7 col-lg-9">
                             <div class="section-title text-center mb-65">
-                                <div class="section-icon"><img src="img/icon/pawprint.png" alt=""></div>
+                                <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
                                 <h5 class="sub-title">Testimonials</h5>
                                 <h2 class="title">Our Happy Customers</h2>
                                 <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a
@@ -754,7 +747,7 @@
                         <div class="col-lg-6">
                             <div class="testimonial-item">
                                 <div class="testi-avatar-thumb">
-                                    <img src="img/images/testi_avatar01.png" alt="">
+                                    <img src="{{ asset('frontend/img/images/testi_avatar01.png') }}" alt="">
                                 </div>
                                 <div class="testi-content">
                                     <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
@@ -768,7 +761,7 @@
                         <div class="col-lg-6">
                             <div class="testimonial-item">
                                 <div class="testi-avatar-thumb">
-                                    <img src="img/images/testi_avatar02.png" alt="">
+                                    <img src="{{ asset('frontend/img/images/testi_avatar02.png') }}" alt="">
                                 </div>
                                 <div class="testi-content">
                                     <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
@@ -782,7 +775,7 @@
                         <div class="col-lg-6">
                             <div class="testimonial-item">
                                 <div class="testi-avatar-thumb">
-                                    <img src="img/images/testi_avatar01.png" alt="">
+                                    <img src="{{ asset('frontend/img/images/testi_avatar01.png') }}" alt="">
                                 </div>
                                 <div class="testi-content">
                                     <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
@@ -796,7 +789,7 @@
                         <div class="col-lg-6">
                             <div class="testimonial-item">
                                 <div class="testi-avatar-thumb">
-                                    <img src="img/images/testi_avatar02.png" alt="">
+                                    <img src="{{ asset('frontend/img/images/testi_avatar02.png') }}" alt="">
                                 </div>
                                 <div class="testi-content">
                                     <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
@@ -818,7 +811,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-7 col-lg-9">
                             <div class="section-title text-center mb-65">
-                                <div class="section-icon"><img src="img/icon/pawprint.png" alt=""></div>
+                                <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
                                 <h5 class="sub-title">Our News</h5>
                                 <h2 class="title">Latest News Update</h2>
                                 <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a
@@ -830,7 +823,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="blog-post-item mb-50">
                                 <div class="blog-post-thumb">
-                                    <a href="blog-details.html"><img src="img/blog/blog_post_thumb01.jpg" alt=""></a>
+                                    <a href="blog-details.html"><img src="{{ asset('frontend/img/blog/blog_post_thumb01.jpg') }}" alt=""></a>
                                     <div class="blog-post-tag">
                                         <a href="#"><i class="flaticon-bookmark-1"></i>Sharped</a>
                                     </div>
@@ -844,14 +837,14 @@
                                     </div>
                                     <h3 class="title"><a href="blog-details.html">Working For Dog Adoption</a></h3>
                                     <p>The best overall dog test is Embark Breed & Health Kit view at Chewy.</p>
-                                    <a href="blog-details.html" class="read-more">Read More <img src="img/icon/pawprint.png" alt=""></a>
+                                    <a href="blog-details.html" class="read-more">Read More <img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="blog-post-item mb-50">
                                 <div class="blog-post-thumb">
-                                    <a href="blog-details.html"><img src="img/blog/blog_post_thumb02.jpg" alt=""></a>
+                                    <a href="blog-details.html"><img src="{{ asset('frontend/img/blog/blog_post_thumb02.jpg') }}" alt=""></a>
                                     <div class="blog-post-tag">
                                         <a href="#"><i class="flaticon-bookmark-1"></i>Creative</a>
                                     </div>
@@ -865,14 +858,14 @@
                                     </div>
                                     <h3 class="title"><a href="blog-details.html">Dog Derived From an Ancient</a></h3>
                                     <p>The best overall dog test is Embark Breed & Health Kit view at Chewy.</p>
-                                    <a href="blog-details.html" class="read-more">Read More <img src="img/icon/pawprint.png" alt=""></a>
+                                    <a href="blog-details.html" class="read-more">Read More <img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="blog-post-item mb-50">
                                 <div class="blog-post-thumb">
-                                    <a href="blog-details.html"><img src="img/blog/blog_post_thumb03.jpg" alt=""></a>
+                                    <a href="blog-details.html"><img src="{{ asset('frontend/img/blog/blog_post_thumb03.jpg') }}" alt=""></a>
                                     <div class="blog-post-tag">
                                         <a href="#"><i class="flaticon-bookmark-1"></i>Business</a>
                                     </div>
@@ -886,7 +879,7 @@
                                     </div>
                                     <h3 class="title"><a href="blog-details.html">Ten Dog Breeds are Noted</a></h3>
                                     <p>The best overall dog test is Embark Breed & Health Kit view at Chewy.</p>
-                                    <a href="blog-details.html" class="read-more">Read More <img src="img/icon/pawprint.png" alt=""></a>
+                                    <a href="blog-details.html" class="read-more">Read More <img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -911,28 +904,26 @@
                                         <button type="submit" class="btn">Subscribe</button>
                                     </form>
                                 </div>
-                                <div class="newsletter-shape"><img src="img/images/newsletter_shape01.png" alt=""></div>
-                                <div class="newsletter-shape shape-two"><img src="img/images/newsletter_shape02.png" alt=""></div>
+                                <div class="newsletter-shape"><img src="{{ asset('frontend/img/images/newsletter_shape01.png') }}" alt=""></div>
+                                <div class="newsletter-shape shape-two"><img src="{{ asset('frontend/img/images/newsletter_shape02.png') }}" alt=""></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- newsletter-area-end -->
-
         </main>
         <!-- main-area-end -->
 
-
         <!-- footer-start -->
-        <footer>
+        <footerduration>
             <div class="footer-top-area footer-bg">
                 <div class="container">
                     <div class="row justify-content-between">
                         <div class="col-3">
                             <div class="footer-widget">
                                 <div class="f-logo">
-                                    <a href="index.html"><img src="img/logo/logo.png" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a>
                                 </div>
                                 <div class="footer-text">
                                     <p>The best overall dog DNA test Embark Breed & Health Kit (view at Chewy) which provides overall dog you.</p>
@@ -991,27 +982,27 @@
                                 <h4 class="fw-title">Instagram</h4>
                                 <div class="fw-insta">
                                     <ul>
-                                        <li><a href="#"><img src="img/images/insta_img01.png" alt=""></a></li>
-                                        <li><a href="#"><img src="img/images/insta_img02.png" alt=""></a></li>
-                                        <li><a href="#"><img src="img/images/insta_img03.png" alt=""></a></li>
-                                        <li><a href="#"><img src="img/images/insta_img04.png" alt=""></a></li>
-                                        <li><a href="#"><img src="img/images/insta_img05.png" alt=""></a></li>
-                                        <li><a href="#"><img src="img/images/insta_img06.png" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/img/images/insta_img01.png') }}" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/img/images/insta_img02.png') }}" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/img/images/insta_img03.png') }}" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/img/images/insta_img04.png') }}" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/img/images/insta_img05.png') }}" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/img/images/insta_img06.png') }}" alt=""></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="footer-shape"><img src="img/images/footer_shape01.png" alt=""></div>
-                <div class="footer-shape shape-two"><img src="img/images/footer_shape02.png" alt=""></div>
+                <div class="footer-shape"><img src="{{ asset('frontend/img/images/footer_shape01.png') }}" alt=""></div>
+                <div class="footer-shape shape-two"><img src="{{ asset('frontend/img/images/footer_shape02.png') }}" alt=""></div>
             </div>
             <div class="copyright-area">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="copyright-text">
-                                <p>Copyright &copy; 2021 Petco. All Rights Reserved.</p>
+                                <p>Copyright © 2021 Petco. All Rights Reserved.</p>
                             </div>
                         </div>
                         <div class="col-md-4 d-none d-md-block">
@@ -1019,12 +1010,12 @@
                                 <div class="dropdown">
                                     <button class="dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        <img src="img/icon/united-states.png" alt=""> English
+                                        <img src="{{ asset('frontend/img/icon/united-states.png') }}" alt=""> English
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                        <a class="dropdown-item" href="index.html"><img src="img/icon/russia.png" alt="">Russia</a>
-                                        <a class="dropdown-item" href="index.html"><img src="img/icon/thailand.png" alt="">Thailand</a>
-                                        <a class="dropdown-item" href="index.html"><img src="img/icon/india.png" alt="">India</a>
+                                        <a class="dropdown-item" href="index.html"><img src="{{ asset('frontend/img/icon/russia.png') }}" alt="">Russia</a>
+                                        <a class="dropdown-item" href="index.html"><img src="{{ asset('frontend/img/icon/thailand.png') }}" alt="">Thailand</a>
+                                        <a class="dropdown-item" href="index.html"><img src="{{ asset('frontend/img/icon/india.png') }}" alt="">India</a>
                                     </div>
                                 </div>
                             </div>
@@ -1035,26 +1026,21 @@
         </footer>
         <!-- footer-end -->
 
-
-
-
-
-		<!-- JS here -->
-        <script src="frontend/js/vendor/jquery-3.6.0.min.js"></script>
-        <script src="frontend/js/bootstrap.min.js"></script>
-        <script src="frontend/js/isotope.pkgd.min.js"></script>
-        <script src="frontend/js/imagesloaded.pkgd.min.js"></script>
-        <script src="frontend/js/jquery.magnific-popup.min.js"></script>
-        <script src="frontend/js/owl.carousel.min.js"></script>
-        <script src="frontend/js/jquery.odometer.min.js"></script>
-        <script src="frontend/js/jquery.nice-select.min.js"></script>
-        <script src="frontend/js/jquery-ui.min.js"></script>
-        <script src="frontend/js/jquery.appear.js"></script>
-        <script src="frontend/js/slick.min.js"></script>
-        <script src="frontend/js/wow.min.js"></script>
-        <script src="frontend/js/plugins.js"></script>
-        <script src="frontend/js/main.js"></script>
+        <!-- JS here -->
+        <script src="{{ asset('frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/imagesloaded.pkgd.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/jquery.odometer.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/jquery.appear.js') }}"></script>
+        <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/plugins.js') }}"></script>
+        <script src="{{ asset('frontend/js/main.js') }}"></script>
     </body>
-
-<!-- Mirrored from themebeyond.com/pre/petco-prev/petco-live/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Dec 2024 01:35:01 GMT -->
 </html>
+```
