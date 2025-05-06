@@ -20,12 +20,10 @@ Route::get('/', function () {
     return view('frontend.home');
 });
 
-Route::get('/test1', function () {
-    return view('admin.dashboard');
-});
+
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
