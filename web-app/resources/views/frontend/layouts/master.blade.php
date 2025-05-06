@@ -42,13 +42,15 @@
     @include('frontend.layouts.navbar')
     <!-- header-area-end -->
 
+    <!-- can extend this page all another pages -->
     <div>
         @yield('content')
     </div>
+    <!-- can extend this page all another pages -->
 
-        <!-- footer-start -->
-        @include('frontend.layouts.footer')
-        <!-- footer-end -->
+    <!-- footer-start -->
+    @include('frontend.layouts.footer')
+    <!-- footer-end -->
 
         <!-- JS here -->
         <script src="{{ asset('frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
