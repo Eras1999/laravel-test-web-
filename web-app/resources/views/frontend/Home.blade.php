@@ -1,15 +1,31 @@
+
 @extends('frontend.layouts.master')
 
+@section('content')
 
-
- @section('content')
-
- <!-- main-area -->
- <main>
+<!-- main-area -->
+<main>
     <!-- slider-area -->
     <section class="slider-area">
-        <div class="slider-active">
+        <div class="slider-active owl-carousel">
             <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
+                <div class="container custom-container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-10">
+                            <div class="slider-content">
+                                <div class="slider-title">
+                                    <h2 class="title" data-animation="fadeInUpBig" data-delay=".2s" data-duration="1.2s">Best Friend <span>with</span> Happy Time</h2>
+                                </div>
+                                <div class="slider-desc">
+                                    <p class="desc" data-animation="fadeInUpBig" data-delay=".4s" data-duration="1.2s">Human Shampoo on Dogs After six days of delirat, the jury found Hernandez guilty of first-degree murder</p>
+                                </div>
+                                <a href="dog-list.html" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('frontend/img/slider/slider_bg02.jpg') }}">
                 <div class="container custom-container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-10">
@@ -711,4 +727,17 @@
 </main>
 <!-- main-area-end -->
 
- @endsection
+@endsection
+
+@section('styles')
+<!-- Owl Carousel CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
+@endsection
+
+@section('scripts')
+<!-- jQuery (required for Owl Carousel) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- Owl Carousel JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+@endsection
