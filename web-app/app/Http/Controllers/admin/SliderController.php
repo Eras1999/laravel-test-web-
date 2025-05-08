@@ -7,5 +7,10 @@ use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
-    //
+    public function Index(){
+        return view('admin.Home.slider');
+    
+}
+
+
 }

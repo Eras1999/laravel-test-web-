@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\admin\SliderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
- 
+Route::controller(SliderController::class)->middleware(['auth','verified'])->group(function (){
+    Route::get('/SliderIndex','Index')->name('slider.index');
+   
+});
 
 require __DIR__.'/auth.php';
