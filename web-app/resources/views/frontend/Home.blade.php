@@ -574,80 +574,55 @@
     <!-- adoption-shop-area-end -->
 
     <!-- testimonial-area -->
-    <section class="testimonial-area testimonial-bg">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-7 col-lg-9">
-                    <div class="section-title text-center mb-65">
-                        <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
-                        <h5 class="sub-title">Testimonials</h5>
-                        <h2 class="title">Our Happy Customers</h2>
-                        <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a
-                            breed brwn and information Most dogs</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row testimonial-active">
-                <div class="col-lg-6">
-                    <div class="testimonial-item">
-                        <div class="testi-avatar-thumb">
-                            <img src="{{ asset('frontend/img/images/testi_avatar01.png') }}" alt="">
-                        </div>
-                        <div class="testi-content">
-                            <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
-                            <div class="testi-avatar-info">
-                                <h5 class="title">Alessia Cara</h5>
-                                <span>Googel CEO</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="testimonial-item">
-                        <div class="testi-avatar-thumb">
-                            <img src="{{ asset('frontend/img/images/testi_avatar02.png') }}" alt="">
-                        </div>
-                        <div class="testi-content">
-                            <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
-                            <div class="testi-avatar-info">
-                                <h5 class="title">Alessia Cara</h5>
-                                <span>Googel CEO</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="testimonial-item">
-                        <div class="testi-avatar-thumb">
-                            <img src="{{ asset('frontend/img/images/testi_avatar01.png') }}" alt="">
-                        </div>
-                        <div class="testi-content">
-                            <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
-                            <div class="testi-avatar-info">
-                                <h5 class="title">Alessia Cara</h5>
-                                <span>Googel CEO</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="testimonial-item">
-                        <div class="testi-avatar-thumb">
-                            <img src="{{ asset('frontend/img/images/testi_avatar02.png') }}" alt="">
-                        </div>
-                        <div class="testi-content">
-                            <p>“ The best overall dog DNA test Embark Breed & Health Kit (view at Chewy), which provides with a breed brwn and information ”</p>
-                            <div class="testi-avatar-info">
-                                <h5 class="title">Alessia Cara</h5>
-                                <span>Googel CEO</span>
-                            </div>
-                        </div>
-                    </div>
+<section class="testimonial-area testimonial-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-9">
+                <div class="section-title text-center mb-65">
+                    <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
+                    <h5 class="sub-title">Testimonials</h5>
+                    <h2 class="title">Our Happy Customers</h2>
+                    <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a
+                        breed brwn and information Most dogs</p>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- testimonial-area-end -->
+        <div class="row testimonial-active">
+            @forelse ($testimonials as $testimonial)
+                <div class="col-lg-6">
+                    <div class="testimonial-item">
+                        <div class="testi-avatar-thumb">
+                            <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->name }}">
+                        </div>
+                        <div class="testi-content">
+                            <p>“ {{ $testimonial->description }} ”</p>
+                            <div class="testi-avatar-info">
+                                <h5 class="title">{{ $testimonial->name }}</h5>
+                                <span>{{ $testimonial->profession }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-lg-6">
+                    <div class="testimonial-item">
+                        <div class="testi-avatar-thumb">
+                            <img src="{{ asset('frontend/img/images/testi_avatar01.png') }}" alt="Default Testimonial">
+                        </div>
+                        <div class="testi-content">
+                            <p>“ No testimonials available yet. ”</p>
+                            <div class="testi-avatar-info">
+                                <h5 class="title">Default User</h5>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+<!-- testimonial-area-end -->
 
     <!-- blog-area -->
     <section class="blog-area pt-110 pb-60">

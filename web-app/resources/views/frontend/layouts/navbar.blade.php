@@ -37,82 +37,37 @@
                                     <li class="active menu-item-has-children"><a href="index.html">Home</a>
                                         <ul class="submenu">
                                             <li class="active"><a href="index.html">Home One</a></li>
-                                            <li><a href="index-2.html">Home Two</a></li>
+                                           <!-- <li><a href="index-2.html">Home Two</a></li>-->
                                         </ul>
                                     </li>
-                                    <li><a href="dog-list.html">Dog List</a></li>
-                                    <li class="menu-item-has-children"><a href="shop.html">Shop</a>
+                                    <li><a href="aboutUs.html">About Us</a></li>
+                                    <li class="menu-item-has-children"><a href="rescue.html">Rescue</a>
                                         <ul class="submenu">
-                                            <li><a href="shop.html">Our Shop</a></li>
-                                            <li><a href="shop-details.html">Shop Details</a></li>
+                                        <!--    <li><a href="shop.html">Our Shop</a></li>
+                                            <li><a href="shop-details.html">Shop Details</a></li>-->
                                         </ul>
                                     </li>
-                                    <li><a href="adoption.html">Adoption</a></li>
-                                    <li class="menu-item-has-children"><a href="breeder.html">Breeder</a>
+                                    <li><a href="adoption.html">Report </a></li>
+                                    <li class="menu-item-has-children"><a href="snakeID.html">SnakeID</a>
                                         <ul class="submenu">
-                                            <li><a href="breeder.html">Our Breeder</a></li>
-                                            <li><a href="breeder-details.html">Breeder Details</a></li>
+                                        <!--    <li><a href="breeder.html">Our Breeder</a></li>
+                                            <li><a href="breeder-details.html">Breeder Details</a></li>-->
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children"><a href="blog.html">Blog</a>
                                         <ul class="submenu">
-                                            <li><a href="blog.html">Our Blog</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                        <!--    <li><a href="blog.html">Our Blog</a></li>
+                                            <li><a href="blog-details.html">Blog Details</a></li>-->
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">contacts</a></li>
+                                    <li><a href="contact.html">Contacts</a></li>
                                 </ul>
                             </div>
                             <div class="header-action d-none d-md-block">
                                 <ul>
                                     <li class="header-search"><a href="#"><i class="flaticon-search"></i></a></li>
-                                    <li class="header-shop-cart"><a href="#"><i class="flaticon-shopping-bag"></i><span>2</span></a>
-                                        <ul class="minicart">
-                                            <li class="d-flex align-items-start">
-                                                <div class="cart-img">
-                                                    <a href="#"><img src="{{ asset('frontend/img/product/cart_p01.jpg') }}" alt=""></a>
-                                                </div>
-                                                <div class="cart-content">
-                                                    <h4><a href="#">The King Charles Spaniel</a></h4>
-                                                    <div class="cart-price">
-                                                        <span class="new">$229.9</span>
-                                                        <span><del>$229.9</del></span>
-                                                    </div>
-                                                </div>
-                                                <div class="del-icon">
-                                                    <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex align-items-start">
-                                                <div class="cart-img">
-                                                    <a href="#"><img src="{{ asset('frontend/img/product/cart_p02.jpg') }}" alt=""></a>
-                                                </div>
-                                                <div class="cart-content">
-                                                    <h4><a href="#">The Labrador Retriever</a></h4>
-                                                    <div class="cart-price">
-                                                        <span class="new">$229.9</span>
-                                                        <span><del>$229.9</del></span>
-                                                    </div>
-                                                </div>
-                                                <div class="del-icon">
-                                                    <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="total-price">
-                                                    <span class="f-left">Total:</span>
-                                                    <span class="f-right">$239.9</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="checkout-link">
-                                                    <a href="#">Shopping Cart</a>
-                                                    <a class="black-color" href="#">Checkout</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="header-btn"><a href="adoption.html" class="btn">Adopt Here <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
+                                    
+                                    <li class="header-btn"><a href="adoption.html" class="btn">Login <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
                                 </ul>
                             </div>
                         </nav>
