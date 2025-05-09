@@ -5,9 +5,32 @@
 
 <!-- main-area -->
 <main>
-    <!-- slider-area -->
-    <section class="slider-area">
-        <div class="slider-active owl-carousel">
+<!-- slider-area -->
+<section class="slider-area">
+    <div class="slider-active owl-carousel">
+        @forelse ($sliders as $slider)
+            <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('storage/' . $slider->image_link) }}">
+                <div class="container custom-container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-10">
+                            <div class="slider-content">
+                                <div class="slider-title">
+                                    <h2 class="title" data-animation="fadeInUpBig" data-delay=".2s" data-duration="1.2s">{{ $slider->top_heading }} <span>{{ $slider->sub_heading }}</span></h2>
+                                </div>
+                                <div class="slider-desc">
+                                    <p class="desc" data-animation="fadeInUpBig" data-delay=".4s" data-duration="1.2s">{{ $slider->content }}</p>
+                                </div>
+                                @if ($slider->view_more_link)
+                                    <a href="{{ $slider->view_more_link }}" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
+                                @else
+                                    <a href="#" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @empty
             <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
                 <div class="container custom-container">
                     <div class="row">
@@ -25,44 +48,53 @@
                     </div>
                 </div>
             </div>
-            <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('frontend/img/slider/slider_bg02.jpg') }}">
-                <div class="container custom-container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-10">
-                            <div class="slider-content">
-                                <div class="slider-title">
-                                    <h2 class="title" data-animation="fadeInUpBig" data-delay=".2s" data-duration="1.2s">Best Friend <span>with</span> Happy Time</h2>
-                                </div>
-                                <div class="slider-desc">
-                                    <p class="desc" data-animation="fadeInUpBig" data-delay=".4s" data-duration="1.2s">Human Shampoo on Dogs After six days of delirat, the jury found Hernandez guilty of first-degree murder</p>
-                                </div>
-                                <a href="dog-list.html" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slider slider-bg d-flex align-items-center" data-background="{{ asset('frontend/img/slider/slider_bg02.jpg') }}">
-                <div class="container custom-container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-10">
-                            <div class="slider-content">
-                                <div class="slider-title">
-                                    <h2 class="title" data-animation="fadeInUpBig" data-delay=".2s" data-duration="1.2s">Best Friend <span>with</span> Happy Time</h2>
-                                </div>
-                                <div class="slider-desc">
-                                    <p class="desc" data-animation="fadeInUpBig" data-delay=".4s" data-duration="1.2s">Human Shampoo on Dogs After six days of delirat, the jury found Hernandez guilty of first-degree murder</p>
-                                </div>
-                                <a href="dog-list.html" class="btn" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">View More <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slider-shape"><img src="{{ asset('frontend/img/slider/slider_shape01.png') }}" alt=""></div>
-        <div class="slider-shape shape-two"><img src="{{ asset('frontend/img/slider/slider_shape02.png') }}" alt=""></div>
-    </section>
+        @endforelse
+    </div>
+    <div class="slider-shape"><img src="{{ asset('frontend/img/slider/slider_shape01.png') }}" alt=""></div>
+    <div class="slider-shape shape-two"><img src="{{ asset('frontend/img/slider/slider_shape02.png') }}" alt=""></div>
+</section>
+<!-- slider-area-end -->
+
+@section('scripts')
+    <script>
+        $(window).on('load', function() {
+            try {
+                if ($('.slider-active').length) {
+                    // Destroy any existing Owl Carousel instance to avoid conflicts
+                    $('.slider-active').trigger('destroy.owl.carousel');
+
+                    // Initialize Owl Carousel
+                    $('.slider-active').owlCarousel({
+                        loop: true,
+                        margin: 0,
+                        nav: false,
+                        dots: true,
+                        autoplay: true,
+                        autoplayTimeout: 5000, // 5 seconds
+                        autoplayHoverPause: false, // Disable hover pause for testing
+                        items: 1,
+                        animateOut: 'fadeOut',
+                        animateIn: 'fadeIn',
+                        smartSpeed: 1000, // Smooth transition speed
+                        onInitialized: function() {
+                            console.log('Owl Carousel initialized');
+                        },
+                        onTranslate: function() {
+                            console.log('Slide transition started');
+                        }
+                    });
+
+                    // Refresh the carousel to ensure proper rendering
+                    $('.slider-active').trigger('refresh.owl.carousel');
+                } else {
+                    console.error('Slider element (.slider-active) not found');
+                }
+            } catch (error) {
+                console.error('Error initializing Owl Carousel:', error);
+            }
+        });
+    </script>
+@endsection
     <!-- slider-area-end -->
 
     <!-- find-area -->

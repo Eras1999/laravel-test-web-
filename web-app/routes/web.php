@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('frontend.home');
+    $sliders = \App\Models\Slider::all();
+    return view('frontend.home', compact('sliders'));
 });
 
 
@@ -36,6 +37,9 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(SliderController::class)->middleware(['auth','verified'])->group(function (){
     Route::get('/SliderIndex','Index')->name('slider.index');
+    Route::POST('/saveSlider','storeslider')->name('slider.store'); 
+    Route::post('/sliderUpdate','updateslider')->name('slider.update');
+    Route::get('/deleteSlider/{id}','deleteslider')->name('slider.delete');
    
 });
 
