@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Models\Admin;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Customize authentication to use Admin model
+        $this->app['auth']->viaRequest('web', function ($request) {
+            if ($request->input('email')) {
+                $admin = Admin::where('email', $request->input('email'))->where('status', 1)->first();
+                if ($admin && $request->input('password')) {
+                    if (\Hash::check($request->input('password'), $admin->password)) {
+                        return $admin;
+                    }
+                }
+            }
+        });
     }
 }
