@@ -16,7 +16,6 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/AdminIndex">admins</a>
                             <a class="nav-link" href="/SliderIndex">Slider</a>
                             <a class="nav-link" href="/TestimonialIndex">Testimonial</a>
                             <a class="nav-link" href="/ContactIndex">Contact</a>

@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\ContactController;
-use App\Http\Controllers\admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,13 +57,6 @@ Route::controller(ContactController::class)->middleware(['auth', 'verified'])->g
     Route::get('/ContactIndex', 'index')->name('contact.index');
     Route::patch('/update-contact-status/{id}', 'updateStatus')->name('contact.updateStatus');
     Route::get('/delete-contact/{id}', 'delete')->name('contact.delete');
-});
-
-Route::controller(AdminController::class)->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/AdminIndex', 'index')->name('admin.index');
-    Route::get('/AddAdmin', 'showAddAdminForm')->name('admin.add');
-    Route::post('/saveAdmin', 'store')->name('admin.store');
-    Route::get('/deleteAdmin/{id}', 'delete')->name('admin.delete');
 });
 
 require __DIR__.'/auth.php';
