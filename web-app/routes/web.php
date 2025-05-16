@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\ContactController;
+use App\Http\Controllers\admin\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $sliders = \App\Models\Slider::all();
     $testimonials = \App\Models\Testimonial::all();
-    return view('frontend.home', compact('sliders', 'testimonials'));
+    $news = \App\Models\News::orderBy('date', 'desc')->paginate(3);
+    return view('frontend.home', compact('sliders', 'testimonials', 'news'));
 })->name('home');
 
 Route::get('/dashboard', function () {
@@ -57,6 +59,13 @@ Route::controller(ContactController::class)->middleware(['auth', 'verified'])->g
     Route::get('/ContactIndex', 'index')->name('contact.index');
     Route::patch('/update-contact-status/{id}', 'updateStatus')->name('contact.updateStatus');
     Route::get('/delete-contact/{id}', 'delete')->name('contact.delete');
+});
+
+Route::controller(NewsController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/NewsIndex', 'index')->name('news.index');
+    Route::post('/saveNews', 'store')->name('news.store');
+    Route::patch('/updateNews/{id}', 'update')->name('news.update'); // Changed from post to patch
+    Route::get('/deleteNews/{id}', 'destroy')->name('news.delete');
 });
 
 require __DIR__.'/auth.php';
