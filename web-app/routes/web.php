@@ -68,4 +68,27 @@ Route::controller(NewsController::class)->middleware(['auth', 'verified'])->grou
     Route::get('/deleteNews/{id}', 'destroy')->name('news.delete');
 });
 
+
+Route::get('/privacy-policy', function () {
+    return view('frontend.privacy-policy');
+})->name('privacy-policy');
+
+
+Route::get('/terms-and-conditions', function () {
+    return view('frontend.terms-and-conditions');
+})->name('terms-conditions');
+
+Route::get('/what-we-do', function () {
+    return view('frontend.what-we-do');
+})->name('what-we-do');
+
+Route::get('/faq', function () {
+    return view('frontend.faq');
+})->name('faq');
+
+
+Route::get('/about-us', function () {
+    return view('frontend.about-us');
+})->name('about-us');
+
 require __DIR__.'/auth.php';

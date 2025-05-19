@@ -8,12 +8,12 @@
                             <a href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a>
                         </div>
                         <div class="footer-text">
-                            <p>The best overall dog DNA test Embark Breed & Health Kit (view at Chewy) which provides overall dog you.</p>
+                            <p>"Saving one animal won't change the world, but for that one animal, the world changes forever. Join our community-powered platform to make a difference today."</p>
                         </div>
                         <div class="footer-contact">
                             <div class="icon"><i class="fas fa-headphones"></i></div>
                             <div class="content">
-                                <h4 class="title"><a href="tel:0987654321">747-800-9880</a></h4>
+                                <h4 class="title"><a href="tel:0987654321">011 1234567</a></h4>
                                 <span>Call Now</span>
                             </div>
                         </div>
@@ -32,9 +32,9 @@
                         <h4 class="fw-title">Our Policies</h4>
                         <div class="fw-link">
                             <ul>
-                                <li><a href="contact.html">Privacy Policy</a></li>
-                                <li><a href="contact.html">Terms and Conditions</a></li>
-                                <li><a href="contact.html">Editorial Policy</a></li>
+                                <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
+                                <li><a href="{{ route('terms-conditions') }}">Terms and Conditions</a></li>
+                                <li><a href="{{ route('faq') }}">FAQ</a></li>
                                 <li><a href="contact.html">Return Policy</a></li>
                                 <li><a href="contact.html">IP Policy</a></li>
                                 <li><a href="contact.html">Grievance Redressal Policy</a></li>
@@ -54,7 +54,7 @@
                                 <li><a href="contact.html">Return Policy</a></li>
                                 <li><a href="contact.html">Grievance Policy</a></li>
                                 <li><a href="contact.html">Redressal Policy</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="{{ route('what-we-do') }}">What We Do</a></li>
                             </ul>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright-text">
-                        <p>Copyright © 2021 Petco. All Rights Reserved.</p>
+                        <p>Copyright © 2025 SaveSathwa. All Rights Reserved.</p>
                     </div>
                 </div>
                 <div class="col-md-4 d-none d-md-block">

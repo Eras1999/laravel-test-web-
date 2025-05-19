@@ -34,39 +34,32 @@
                             <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a></div>
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
-                                    <li class="active menu-item-has-children"><a href="{{ route('home') }}">Home</a>
+                                    <li class="{{ request()->routeIs('home') ? 'active' : '' }} menu-item-has-children">
+                                        <a href="{{ route('home') }}">Home</a>
                                         <ul class="submenu">
-                                            <li class="active"><a href="{{ route('home') }}">Home One</a></li>
-                                            <!-- <li><a href="index-2.html">Home Two</a></li>-->
+                                            <li class="{{ request()->routeIs('home') ? 'active' : '' }}"><a href="{{ route('home') }}">Home One</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="aboutUs.html">About Us</a></li>
+                                    <li class="{{ request()->routeIs('about-us') ? 'active' : '' }}"><a href="{{ route('about-us') }}">About Us</a></li>
                                     <li class="menu-item-has-children"><a href="rescue.html">Rescue</a>
                                         <ul class="submenu">
-                                            <!--    <li><a href="shop.html">Our Shop</a></li>
-                                                <li><a href="shop-details.html">Shop Details</a></li>-->
                                         </ul>
                                     </li>
-                                    <li><a href="adoption.html">Report </a></li>
+                                    <li><a href="adoption.html">Report</a></li>
                                     <li class="menu-item-has-children"><a href="snakeID.html">SnakeID</a>
                                         <ul class="submenu">
-                                            <!--    <li><a href="breeder.html">Our Breeder</a></li>
-                                                <li><a href="breeder-details.html">Breeder Details</a></li>-->
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children"><a href="blog.html">Blog</a>
                                         <ul class="submenu">
-                                            <!--    <li><a href="blog.html">Our Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>-->
                                         </ul>
                                     </li>
-                                    <li><a href="{{ route('contact') }}">Contacts</a></li>
+                                    <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contacts</a></li>
                                 </ul>
                             </div>
                             <div class="header-action d-none d-md-block">
                                 <ul>
                                     <li class="header-search"><a href="#"><i class="flaticon-search"></i></a></li>
-                                    
                                     <li class="header-btn"><a href="adoption.html" class="btn">Login <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
                                 </ul>
                             </div>
@@ -78,7 +71,6 @@
                             <div class="close-btn"><i class="fas fa-times"></i></div>
                             <div class="nav-logo"><a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt="" title=""></a></div>
                             <div class="menu-outer">
-                                <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
                             </div>
                             <div class="social-links">
                                 <ul class="clearfix">
@@ -92,12 +84,10 @@
                         </nav>
                     </div>
                     <div class="menu-backdrop"></div>
-                    <!-- End Mobile Menu -->
                 </div>
             </div>
             <div class="header-shape" data-background="{{ asset('frontend/img/bg/header_shape.png') }}"></div>
         </div>
-        <!-- header-search -->
         <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="search-close">
                 <span><i class="fas fa-times"></i></span>
@@ -118,5 +108,5 @@
                 </div>
             </div>
         </div>
-        <!-- header-search-end -->
-    </header>
+    </div>
+</header>

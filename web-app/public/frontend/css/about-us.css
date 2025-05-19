@@ -1,0 +1,311 @@
+/* About Us Hero Section */
+.about-hero {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.about-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+
+.about-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hero-content .hero-title {
+    background: linear-gradient(45deg,  #ff5733); /* Colorful gradient */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 20px; /* Square with rounded corners */
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: inline-block; /* Ensures the background fits the text */
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumb-item a,
+.breadcrumb-item.active {
+    color: #28a745;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "|";
+    color: #28a745;
+}
+
+/* About Section General */
+.about-section {
+    padding: 60px 0;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Our Story Section */
+.about-story img {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Why Choose Us Cards */
+.why-choose-us .about-card {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.why-choose-us .about-card:hover {
+    transform: translateY(-10px);
+}
+
+.why-choose-us .about-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.why-choose-us .about-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.why-choose-us .about-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Key Features Slider */
+.key-features .features-slider {
+    margin-top: 40px;
+}
+
+.key-features .feature-slide {
+    text-align: center;
+    padding: 20px;
+}
+
+.key-features .feature-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.key-features .feature-slide h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.key-features .feature-slide p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.features-slider .slick-prev,
+.features-slider .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+.features-slider .slick-prev:before,
+.features-slider .slick-next:before {
+    font-size: 20px;
+    line-height: 40px;
+    color: white;
+    opacity: 0.75;
+}
+
+.features-slider .slick-prev:before {
+    content: '←';
+}
+
+.features-slider .slick-next:before {
+    content: '→';
+}
+
+.features-slider .slick-prev {
+    left: 10px;
+}
+
+.features-slider .slick-next {
+    right: 10px;
+}
+
+.features-slider .slick-dots {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.features-slider .slick-dots li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.features-slider .slick-dots li button {
+    font-size: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.features-slider .slick-dots li.slick-active button {
+    background: #333;
+}
+
+/* Our Partnerships */
+.our-partnerships .partner-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.our-partnerships .partner-logo img {
+    max-width: 150px;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.our-partnerships .partner-logo img:hover {
+    filter: grayscale(0%);
+}
+
+/* Our Impact Stats */
+.our-impact .impact-stat {
+    text-align: center;
+    padding: 20px;
+}
+
+.our-impact .impact-stat h3 {
+    font-size: 2.5rem;
+    color: #ff5733;
+    margin-bottom: 10px;
+}
+
+.our-impact .impact-stat p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Call to Action Section */
+.cta-section {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.cta-section .btn {
+    background: #ff5733;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+}
+
+.cta-section .btn:hover {
+    background: #e04e2b;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .about-hero {
+        height: 400px;
+    }
+
+    .hero-content .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .about-story img {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-hero {
+        height: 300px;
+    }
+
+    .hero-content .hero-title {
+        font-size: 2rem;
+    }
+
+    .about-section {
+        padding: 40px 0;
+    }
+
+    .about-section h2 {
+        font-size: 2rem;
+    }
+
+    .why-choose-us .about-card {
+        margin-bottom: 20px;
+    }
+
+    .features-slider .feature-slide img {
+        height: 150px;
+    }
+}
