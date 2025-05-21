@@ -18,12 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Redirect root to Sign Up page for all users (authenticated or not)
 Route::get('/', function () {
+    return redirect()->route('signin');
+})->name('home');
+
+// Homepage route, accessible only to authenticated users
+Route::get('/home', function () {
     $sliders = \App\Models\Slider::all();
     $testimonials = \App\Models\Testimonial::all();
     $news = \App\Models\News::orderBy('date', 'desc')->paginate(3);
     return view('frontend.home', compact('sliders', 'testimonials', 'news'));
-})->name('home');
+})->middleware(['auth', 'verified'])->name('home.authenticated');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -64,15 +70,13 @@ Route::controller(ContactController::class)->middleware(['auth', 'verified'])->g
 Route::controller(NewsController::class)->middleware(['auth', 'verified'])->group(function () {
     Route::get('/NewsIndex', 'index')->name('news.index');
     Route::post('/saveNews', 'store')->name('news.store');
-    Route::patch('/updateNews/{id}', 'update')->name('news.update'); // Changed from post to patch
+    Route::patch('/updateNews/{id}', 'update')->name('news.update');
     Route::get('/deleteNews/{id}', 'destroy')->name('news.delete');
 });
-
 
 Route::get('/privacy-policy', function () {
     return view('frontend.privacy-policy');
 })->name('privacy-policy');
-
 
 Route::get('/terms-and-conditions', function () {
     return view('frontend.terms-and-conditions');
@@ -86,9 +90,21 @@ Route::get('/faq', function () {
     return view('frontend.faq');
 })->name('faq');
 
-
 Route::get('/about-us', function () {
     return view('frontend.about-us');
 })->name('about-us');
 
 require __DIR__.'/auth.php';
+
+// Custom Authentication Routes
+Route::get('/signin', function () {
+    return view('frontend.signin');
+})->name('signin');
+
+Route::get('/signup', function () {
+    return view('frontend.signup');
+})->name('signup');
+
+Route::get('/forgot-password', function () {
+    return view('frontend.forgot-password');
+})->name('forgot-password');

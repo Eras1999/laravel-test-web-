@@ -60,7 +60,7 @@
                             <div class="header-action d-none d-md-block">
                                 <ul>
                                     <li class="header-search"><a href="#"><i class="flaticon-search"></i></a></li>
-                                    <li class="header-btn"><a href="adoption.html" class="btn">Login <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
+                                    <li class="header-btn"><a href="{{ route('signin') }}" class="btn">Login <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
                                 </ul>
                             </div>
                         </nav>
