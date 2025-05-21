@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - SaveSathwa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/css/auth.css') }}">
 </head>
 <body class="auth-page signin-page">
@@ -18,11 +19,26 @@
                                 <h2>Sign In</h2>
                                 <p>Welcome back! Please sign in to continue.</p>
                             </div>
-                            <form action="#" method="POST" class="auth-form">
+                            @if(session('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                            @endif
+                            @if(session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form action="{{ route('signin.post') }}" method="POST" class="auth-form">
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" value="{{ old('email') }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
@@ -46,5 +62,8 @@
             </div>
         </section>
     </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
