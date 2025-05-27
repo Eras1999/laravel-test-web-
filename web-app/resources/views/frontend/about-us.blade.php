@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-
+@section('title', 'About Us - SaveSathwa')
 @section('content')
 <main>
     <!-- Hero Section with Image and Title -->

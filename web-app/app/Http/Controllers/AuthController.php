@@ -4,88 +4,96 @@ namespace App\Http\Controllers;
 
 use App\Models\UserCredential;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-    // Show Sign Up Page
-    public function showSignUp()
+    // Existing Normal Sign In
+    public function showSignInForm()
+    {
+        return view('frontend.signin');
+    }
+
+    public function signIn(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended(route('home.authenticated'));
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials']);
+    }
+
+    // Existing Normal Sign Up
+    public function showSignUpForm()
     {
         return view('frontend.signup');
     }
 
-    // Handle Sign Up
-    public function signup(Request $request)
+    public function signUp(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:user_credentials,email',
             'password' => 'required|string|min:8|confirmed',
-            'terms' => 'accepted',
         ]);
 
         UserCredential::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('signin')->with('success', 'Successfully signed up! Please sign in.');
+        return redirect()->route('signin')->with('success', 'Registration successful! Please sign in.');
     }
 
-    // Show Sign In Page
-    public function showSignIn()
+    // Google Authentication
+    public function redirectToGoogle()
     {
-        return view('frontend.signin');
+        return Socialite::driver('google')->redirect();
     }
 
-    // Handle Sign In
-    public function signin(Request $request)
+    public function handleGoogleCallback()
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
+        try {
+            $googleUser = Socialite::driver('google')->user();
 
-        $user = UserCredential::where('email', $request->email)->first();
+            // Check if user already exists
+            $user = UserCredential::where('email', $googleUser->email)->first();
 
-        if ($user && Hash::check($request->password, $user->password)) {
-            Session::put('user', $user);
-            return redirect()->route('home.authenticated');
+            if ($user) {
+                // If user exists, log them in
+                Auth::login($user, true);
+            } else {
+                // If user doesn't exist, create a new user
+                $newUser = UserCredential::create([
+                    'name' => $googleUser->name,
+                    'email' => $googleUser->email,
+                    'password' => Hash::make(uniqid()), // Generate a random password
+                ]);
+
+                Auth::login($newUser, true);
+            }
+
+            // Ensure the user is authenticated before redirecting
+            if (Auth::check()) {
+                return redirect()->route('home.authenticated');
+            } else {
+                return redirect()->route('signin')->withErrors(['error' => 'Authentication failed after Google login.']);
+            }
+        } catch (\Exception $e) {
+            // Log the exception for debugging
+            \Log::error('Google login error: ' . $e->getMessage());
+            return redirect()->route('signin')->withErrors(['error' => 'Unable to login with Google. Please try again.']);
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
 
-    // Show Forgot Password Page
-    public function showForgotPassword()
+    public function logout(Request $request)
     {
-        return view('frontend.forgot-password');
-    }
-
-    // Handle Forgot Password
-    public function forgotPassword(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
-
-        $user = UserCredential::where('email', $request->email)->first();
-
-        if (!$user) {
-            return back()->withErrors(['email' => 'Email not found'])->withInput();
-        }
-
-        // In a real application, you would send an email with a reset link here.
-        // For simplicity, we'll just redirect with a message.
-        return redirect()->route('signin')->with('success', 'A password reset link has been sent to your email.');
-    }
-
-    // Handle Logout
-    public function logout()
-    {
-        Session::forget('user');
+        Auth::logout();
         return redirect()->route('signin');
     }
 }

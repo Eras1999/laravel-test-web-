@@ -60,23 +60,21 @@
                             <div class="header-action d-none d-md-block">
                                 <ul>
                                     <li class="header-search"><a href="#"><i class="flaticon-search"></i></a></li>
-                                    @if(Session::has('user'))
-                                        <li class="header-btn">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    {{ Session::get('user')->name }} <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt="">
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                                                    <form action="{{ route('logout') }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="dropdown-item">Logout</button>
-                                                    </form>
-                                                </div>
+                                    @auth
+                                        <li class="header-btn dropdown">
+                                            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                {{ Auth::user()->name }} <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt="">
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
                                             </div>
                                         </li>
                                     @else
                                         <li class="header-btn"><a href="{{ route('signin') }}" class="btn">Login <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
-                                    @endif
+                                    @endauth
                                 </ul>
                             </div>
                         </nav>
