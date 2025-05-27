@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -35,19 +36,33 @@ class AuthController extends Controller
 
     public function signUp(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:user_credentials,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:user_credentials,email',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
 
-        UserCredential::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+            $user = UserCredential::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        return redirect()->route('signin')->with('success', 'Registration successful! Please sign in.');
+            Log::info('User created successfully', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'name' => $user->name,
+            ]);
+
+            return redirect()->route('signin')->with('success', 'Registration successful! Please sign in.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::error('Database error during sign-up: ' . $e->getMessage(), ['email' => $request->email]);
+            return back()->withErrors(['error' => 'Database error occurred. Please try again.'])->withInput();
+        } catch (\Exception $e) {
+            Log::error('Sign-up error: ' . $e->getMessage(), ['email' => $request->email, 'request' => $request->all()]);
+            return back()->withErrors(['error' => 'Registration failed. Please try again.'])->withInput();
+        }
     }
 
     // Google Authentication
