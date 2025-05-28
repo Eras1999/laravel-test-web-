@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\AuthController;
+use App\Models\UserCredential;
 use Illuminate\Support\Facades\Route;
 
 // Redirect root to Sign In page for all users (authenticated or not)
@@ -100,6 +101,12 @@ Route::get('/snakeID', function () {
 Route::get('/blog', function () {
     return view('frontend.blog');
 })->name('blog');
+
+// New Route for User Credentials in Admin Panel
+Route::get('/UserCredentialsIndex', function () {
+    $userCredentials = UserCredential::all();
+    return view('admin.user-credentials', compact('userCredentials'));
+})->middleware(['auth', 'verified'])->name('user-credentials.index');
 
 require __DIR__.'/auth.php';
 
