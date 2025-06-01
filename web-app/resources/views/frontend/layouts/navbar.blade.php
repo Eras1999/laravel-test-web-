@@ -31,13 +31,13 @@
                     <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
                     <div class="menu-wrap">
                         <nav class="menu-nav show">
-                            <div class="logo"><a href="{{ route('home.authenticated') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a></div>
+                            <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a></div>
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
-                                    <li class="{{ request()->routeIs('home.authenticated') ? 'active' : '' }} menu-item-has-children">
-                                        <a href="{{ route('home.authenticated') }}">Home</a>
+                                    <li class="{{ request()->is('/') || request()->routeIs('home.authenticated') ? 'active' : '' }} menu-item-has-children">
+                                        <a href="{{ route('home') }}">Home</a>
                                         <ul class="submenu">
-                                            <li class="{{ request()->routeIs('home.authenticated') ? 'active' : '' }}"><a href="{{ route('home.authenticated') }}">Home One</a></li>
+                                            <li class="{{ request()->is('/') || request()->routeIs('home.authenticated') ? 'active' : '' }}"><a href="{{ route('home') }}">Home One</a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('about-us') ? 'active' : '' }}"><a href="{{ route('about-us') }}">About Us</a></li>
@@ -60,21 +60,22 @@
                             <div class="header-action d-none d-md-block">
                                 <ul>
                                     <li class="header-search"><a href="#"><i class="flaticon-search"></i></a></li>
-                                    @auth
+                                    @if (Auth::guard('frontend')->check())
                                         <li class="header-btn dropdown">
-                                            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                {{ Auth::user()->name }} <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt="">
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                </form>
-                                            </div>
+                                            <a href="#" class="btn user-btn" onclick="toggleDropdown(event)">{{ Auth::guard('frontend')->user()->name }} <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{ route('profile') }}"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                                                <li>
+                                                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
                                         </li>
                                     @else
                                         <li class="header-btn"><a href="{{ route('signin') }}" class="btn">Login <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a></li>
-                                    @endauth
+                                    @endif
                                 </ul>
                             </div>
                         </nav>
@@ -83,7 +84,7 @@
                     <div class="mobile-menu">
                         <nav class="menu-box">
                             <div class="close-btn"><i class="fas fa-times"></i></div>
-                            <div class="nav-logo"><a href="{{ route('home.authenticated') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt="" title=""></a></div>
+                            <div class="nav-logo"><a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt="" title=""></a></div>
                             <div class="menu-outer">
                             </div>
                             <div class="social-links">
@@ -123,4 +124,21 @@
             </div>
         </div>
     </div>
+    <script>
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const dropdownMenu = event.currentTarget.nextElementSibling;
+            dropdownMenu.classList.toggle('show');
+        }
+
+        // Close dropdown if clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown-menu');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.parentElement.contains(event.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        });
+    </script>
 </header>

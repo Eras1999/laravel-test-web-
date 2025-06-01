@@ -18,11 +18,20 @@
                                 <h2>Sign In</h2>
                                 <p>Welcome back! Please sign in to continue.</p>
                             </div>
-                            <form action="{{ route('signin') }}" method="POST" class="auth-form">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form action="{{ route('signin.post') }}" method="POST" class="auth-form">
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required value="{{ old('email') }}">
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" value="{{ old('email') }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
@@ -39,9 +48,6 @@
                             </form>
                             <div class="auth-footer">
                                 <p>Don't have an account? <a href="{{ route('signup') }}">Sign Up</a></p>
-                                <a href="{{ route('login.google') }}" class="btn auth-btn" style="background-color: #4285f4; margin-top: 10px;">
-                                    <i class="fab fa-google"></i> Sign in with Google
-                                </a>
                             </div>
                         </div>
                     </div>

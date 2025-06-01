@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class UserCredential extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use Notifiable;
 
     protected $table = 'user_credentials';
 
@@ -16,6 +15,7 @@ class UserCredential extends Authenticatable
         'name',
         'email',
         'password',
+        'terms_accepted',
     ];
 
     protected $hidden = [
@@ -24,6 +24,6 @@ class UserCredential extends Authenticatable
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'terms_accepted' => 'boolean',
     ];
 }

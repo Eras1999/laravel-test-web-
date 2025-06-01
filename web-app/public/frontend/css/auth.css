@@ -38,7 +38,7 @@
 }
 
 .forgot-password-page {
-    background-image: url('../img/auth/forgot-password-bg.jpeg');
+    background-image: url('../img/auth/forgot-password-bg.jpg');
 }
 
 /* Container and Layout */
@@ -61,18 +61,18 @@
 }
 
 .col-lg-5 {
-    flex: 0 0 70%;
-    max-width: 70%;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
 }
 
 .col-md-7 {
-    flex: 0 0 80%;
-    max-width: 80%;
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
 }
 
 .col-sm-9 {
-    flex: 0 0 90%;
-    max-width: 90%;
+    flex: 0 0 75%;
+    max-width: 75%;
 }
 
 /* Auth Card Styling */
@@ -102,6 +102,35 @@
     font-size: 1.1rem;
     color: #666;
     margin-bottom: 30px;
+}
+
+/* Alert Styling */
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.alert li {
+    margin-bottom: 5px;
 }
 
 /* Form Styling */
@@ -212,52 +241,6 @@
     text-decoration: underline;
 }
 
-/* Dropdown Styling for Navbar */
-.header-btn.dropdown {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: middle;
-    content: "\f0d7";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    border: none;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    min-width: 150px;
-    z-index: 1000;
-    display: none;
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
-.dropdown-item {
-    display: block;
-    padding: 10px 15px;
-    color: #333;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background-color: #f8f9fa;
-    color: #ff5733;
-}
-
 /* Responsive Design */
 @media (max-width: 1200px) {
     .col-lg-5 {
@@ -321,8 +304,8 @@
 
 @media (max-width: 576px) {
     .col-sm-9 {
-        flex: 0 0 98%;
-        max-width: 98%;
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 
     .auth-card {

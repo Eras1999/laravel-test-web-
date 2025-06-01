@@ -16,11 +16,10 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('slider.index') }}">Slider</a>
-                            <a class="nav-link" href="{{ route('Testimonial.index') }}">Testimonial</a>
-                            <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
-                            <a class="nav-link" href="{{ route('news.index') }}">Latest News</a>
-                            <a class="nav-link" href="{{ route('user-credentials.index') }}">User Credentials</a>
+                            <a class="nav-link" href="/SliderIndex">Slider</a>
+                            <a class="nav-link" href="/TestimonialIndex">Testimonial</a>
+                            <a class="nav-link" href="/ContactIndex">Contact</a>
+                            <a class="nav-link" href="/NewsIndex">Latest News</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

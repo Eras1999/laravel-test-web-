@@ -5,22 +5,35 @@ use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\NewsController;
-use App\Http\Controllers\AuthController;
-use App\Models\UserCredential;
+use App\Http\Controllers\FrontendAuthController;
 use Illuminate\Support\Facades\Route;
 
-// Redirect root to Sign In page for all users (authenticated or not)
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+// Root route to handle authenticated and unauthenticated users
 Route::get('/', function () {
-    return redirect()->route('signin');
+    if (Auth::guard('frontend')->check()) {
+        return redirect()->route('home.authenticated');
+    }
+    return view('frontend.home'); // Show a public home page for unauthenticated users
 })->name('home');
 
-// Homepage route, accessible only to authenticated users
+// Homepage route, accessible only to authenticated frontend users
 Route::get('/home', function () {
     $sliders = \App\Models\Slider::all();
     $testimonials = \App\Models\Testimonial::all();
     $news = \App\Models\News::orderBy('date', 'desc')->paginate(3);
     return view('frontend.home', compact('sliders', 'testimonials', 'news'));
-})->middleware(['auth'])->name('home.authenticated');
+})->middleware(['auth:frontend'])->name('home.authenticated');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -30,7 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::controller(SliderController::class)->middleware(['auth','verified'])->group(function (){
@@ -86,39 +98,15 @@ Route::get('/about-us', function () {
     return view('frontend.about-us');
 })->name('about-us');
 
-Route::get('/rescue', function () {
-    return view('frontend.rescue');
-})->name('rescue');
-
-Route::get('/report', function () {
-    return view('frontend.report');
-})->name('report');
-
-Route::get('/snakeID', function () {
-    return view('frontend.snakeID');
-})->name('snakeID');
-
-Route::get('/blog', function () {
-    return view('frontend.blog');
-})->name('blog');
-
-// New Route for User Credentials in Admin Panel
-Route::get('/UserCredentialsIndex', function () {
-    $userCredentials = UserCredential::all();
-    return view('admin.user-credentials', compact('userCredentials'));
-})->middleware(['auth', 'verified'])->name('user-credentials.index');
-
 require __DIR__.'/auth.php';
 
-// Custom Authentication Routes
-Route::get('/signin', [AuthController::class, 'showSignInForm'])->name('signin');
-Route::post('/signin', [AuthController::class, 'signIn']);
-Route::get('/signup', [AuthController::class, 'showSignUpForm'])->name('signup');
-Route::post('/signup', [AuthController::class, 'signUp']);
+// Custom Authentication Routes for Frontend Users
+Route::get('/signin', [FrontendAuthController::class, 'showSignIn'])->name('signin');
+Route::post('/signin', [FrontendAuthController::class, 'signIn'])->name('signin.post');
+Route::get('/signup', [FrontendAuthController::class, 'showSignUp'])->name('signup');
+Route::post('/signup', [FrontendAuthController::class, 'signUp'])->name('signup.post');
 Route::get('/forgot-password', function () {
     return view('frontend.forgot-password');
 })->name('forgot-password');
-
-// Google Socialite Routes
-Route::get('/login/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('/login/google/callback', [AuthController::class, 'handleGoogleCallback']);
+Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
+Route::get('/my-profile', [FrontendAuthController::class, 'showProfile'])->name('profile')->middleware('auth:frontend');

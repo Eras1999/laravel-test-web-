@@ -1,0 +1,127 @@
+.header-action .dropdown {
+    position: relative;
+}
+
+.header-action .dropdown .btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background: #ff5733;
+    color: white;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.header-action .dropdown .btn:hover {
+    background: #e04e2b;
+    transform: scale(1.05);
+}
+
+.header-action .dropdown .btn img {
+    margin-left: 6px;
+    transition: transform 0.3s ease;
+}
+
+.header-action .dropdown .btn:hover img {
+    transform: rotate(15deg);
+}
+
+.header-action .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    min-width: 160px;
+    z-index: 1000;
+    padding: 5px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+}
+
+.header-action .dropdown-menu.show {
+    display: block;
+}
+
+.header-action .dropdown-menu li {
+    list-style: none;
+}
+
+.header-action .dropdown-menu a,
+.header-action .dropdown-menu button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.header-action .dropdown-menu a:hover,
+.header-action .dropdown-menu button:hover {
+    background: #f1f1f1;
+    color: #ff5733;
+}
+
+.header-action .dropdown-menu a i,
+.header-action .dropdown-menu button i {
+    font-size: 14px;
+    color: #ff5733;
+}
+
+.header-action .dropdown-menu button {
+    display: flex;
+    align-items: center;
+}
+
+.navigation .active > a {
+    color: #ff5733;
+    font-weight: 600;
+}
+
+.navigation .active {
+    background: rgba(255, 87, 51, 0.1);
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    .header-action .dropdown .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .header-action .dropdown-menu {
+        min-width: 140px;
+        right: -5px;
+    }
+
+    .header-action .dropdown-menu a,
+    .header-action .dropdown-menu button {
+        font-size: 11px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-action .dropdown .btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+
+    .header-action .dropdown-menu {
+        min-width: 120px;
+    }
+}

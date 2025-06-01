@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'Contact Us - SaveSathwa')
+
 @section('content')
     <!-- breadcrumb-area -->
     <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
