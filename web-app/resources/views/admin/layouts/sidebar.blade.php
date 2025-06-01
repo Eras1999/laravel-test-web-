@@ -20,6 +20,7 @@
                             <a class="nav-link" href="/TestimonialIndex">Testimonial</a>
                             <a class="nav-link" href="/ContactIndex">Contact</a>
                             <a class="nav-link" href="/NewsIndex">Latest News</a>
+                            <a class="nav-link" href="/UserCredentialsIndex">User Credentials</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

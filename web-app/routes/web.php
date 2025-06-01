@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\NewsController;
+use App\Http\Controllers\admin\UserCredentialsController;
 use App\Http\Controllers\FrontendAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::get('/', function () {
     if (Auth::guard('frontend')->check()) {
         return redirect()->route('home.authenticated');
     }
-    return view('frontend.home'); // Show a public home page for unauthenticated users
+    return view('frontend.home');
 })->name('home');
 
 // Homepage route, accessible only to authenticated frontend users
@@ -76,6 +77,10 @@ Route::controller(NewsController::class)->middleware(['auth', 'verified'])->grou
     Route::post('/saveNews', 'store')->name('news.store');
     Route::patch('/updateNews/{id}', 'update')->name('news.update');
     Route::get('/deleteNews/{id}', 'destroy')->name('news.delete');
+});
+
+Route::controller(UserCredentialsController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/UserCredentialsIndex', 'index')->name('user_credentials.index');
 });
 
 Route::get('/privacy-policy', function () {
