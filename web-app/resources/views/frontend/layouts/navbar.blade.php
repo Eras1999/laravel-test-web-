@@ -28,10 +28,30 @@
         <div class="container custom-container">
             <div class="row">
                 <div class="col-12">
-                    <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
                     <div class="menu-wrap">
                         <nav class="menu-nav show">
                             <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a></div>
+                            <div class="mobile-header-action d-block d-lg-none">
+                                @if (Auth::guard('frontend')->check())
+                                    <div class="mobile-user dropdown">
+                                        <a href="#" class="user-btn small-btn" onclick="toggleDropdown(event)">{{ Auth::guard('frontend')->user()->name }}</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ route('profile') }}"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                                            <li>
+                                                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @else
+                                    <div class="mobile-login">
+                                        <a href="{{ route('signin') }}" class="btn small-btn">Login</a>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="mobile-nav-toggler d-block d-lg-none"><i class="fas fa-bars"></i></div>
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
                                     <li class="{{ request()->is('/') || request()->routeIs('home.authenticated') ? 'active' : '' }} menu-item-has-children">
@@ -139,6 +159,22 @@
                     dropdown.classList.remove('show');
                 }
             });
+        });
+
+        // Toggle mobile menu
+        document.querySelector('.mobile-nav-toggler').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('active');
+            document.querySelector('.menu-backdrop').classList.toggle('active');
+        });
+
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.remove('active');
+            document.querySelector('.menu-backdrop').classList.remove('active');
+        });
+
+        document.querySelector('.menu-backdrop').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.remove('active');
+            document.querySelector('.menu-backdrop').classList.remove('active');
         });
     </script>
 </header>

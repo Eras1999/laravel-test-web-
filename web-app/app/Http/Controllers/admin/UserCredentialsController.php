@@ -11,6 +11,6 @@ class UserCredentialsController extends Controller
     public function index()
     {
         $userCredentials = UserCredential::all();
-        return view('admin.user_credentials', compact('userCredentials'));
+        return view('admin.users.user_credentials', compact('userCredentials'));
     }
 }
