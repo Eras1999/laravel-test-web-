@@ -72,6 +72,8 @@
                                     </li>
                                     <li class="menu-item-has-children"><a href="blog.html">Blog</a>
                                         <ul class="submenu">
+                                            <li><a href="social-blogs.html">Official Blogs</a></li>
+                                            <li><a href="user-blogs.html">Community Blogs</a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contacts</a></li>

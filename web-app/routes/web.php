@@ -25,7 +25,7 @@ Route::get('/', function () {
     if (Auth::guard('frontend')->check()) {
         return redirect()->route('home.authenticated');
     }
-    return view('frontend.home');
+    return redirect()->route('signin'); // Redirect to sign-in page instead of rendering frontend.home
 })->name('home');
 
 // Homepage route, accessible only to authenticated frontend users
