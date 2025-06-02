@@ -70,10 +70,11 @@
                                         <ul class="submenu">
                                         </ul>
                                     </li>
-                                    <li class="menu-item-has-children"><a href="blog.html">Blog</a>
+                                    <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') ? 'active' : '' }} menu-item-has-children">
+                                        <a href="#">Blog</a>
                                         <ul class="submenu">
-                                            <li><a href="social-blogs.html">Official Blogs</a></li>
-                                            <li><a href="user-blogs.html">Community Blogs</a></li>
+                                            <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') ? 'active' : '' }}"><a href="{{ route('official-blogs.index') }}">Official Blogs</a></li>
+                                            <li><a href="Community-Blogs">Community Blogs</a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contacts</a></li>

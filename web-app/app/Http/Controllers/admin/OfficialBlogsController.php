@@ -71,4 +71,16 @@ class OfficialBlogsController extends Controller
 
         return redirect()->route('official_blogs.index')->with('success', 'Official blog deleted successfully!');
     }
+
+    public function show()
+    {
+        $blogs = OfficialBlog::orderBy('date', 'desc')->paginate(6);
+        return view('frontend.official-blogs', compact('blogs'));
+    }
+
+    public function showDetail($id)
+    {
+        $blog = OfficialBlog::findOrFail($id);
+        return view('frontend.official-blog-detail', compact('blog'));
+    }
 }

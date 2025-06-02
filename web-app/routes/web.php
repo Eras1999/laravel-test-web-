@@ -26,7 +26,7 @@ Route::get('/', function () {
     if (Auth::guard('frontend')->check()) {
         return redirect()->route('home.authenticated');
     }
-    return redirect()->route('signin'); // Redirect to sign-in page instead of rendering frontend.home
+    return view('frontend.home');
 })->name('home');
 
 // Homepage route, accessible only to authenticated frontend users
@@ -89,6 +89,11 @@ Route::controller(OfficialBlogsController::class)->middleware(['auth', 'verified
     Route::post('/saveOfficialBlog', 'store')->name('official_blogs.store');
     Route::patch('/updateOfficialBlog/{id}', 'update')->name('official_blogs.update');
     Route::get('/deleteOfficialBlog/{id}', 'destroy')->name('official_blogs.delete');
+});
+
+Route::controller(OfficialBlogsController::class)->group(function () {
+    Route::get('/official-blogs', 'show')->name('official-blogs.index');
+    Route::get('/official-blogs/{id}', 'showDetail')->name('official-blogs.show');
 });
 
 Route::get('/privacy-policy', function () {
