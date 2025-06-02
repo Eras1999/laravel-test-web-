@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\UserCredentialsController;
+use App\Http\Controllers\admin\OfficialBlogsController;
 use App\Http\Controllers\FrontendAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +82,13 @@ Route::controller(NewsController::class)->middleware(['auth', 'verified'])->grou
 
 Route::controller(UserCredentialsController::class)->middleware(['auth', 'verified'])->group(function () {
     Route::get('/UserCredentialsIndex', 'index')->name('user_credentials.index');
+});
+
+Route::controller(OfficialBlogsController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/OfficialBlogsIndex', 'index')->name('official_blogs.index');
+    Route::post('/saveOfficialBlog', 'store')->name('official_blogs.store');
+    Route::patch('/updateOfficialBlog/{id}', 'update')->name('official_blogs.update');
+    Route::get('/deleteOfficialBlog/{id}', 'destroy')->name('official_blogs.delete');
 });
 
 Route::get('/privacy-policy', function () {
