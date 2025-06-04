@@ -7,8 +7,9 @@ use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\UserCredentialsController;
 use App\Http\Controllers\admin\OfficialBlogsController;
+use App\Http\Controllers\admin\CommunityBlogsController as AdminCommunityBlogsController;
+use App\Http\Controllers\Frontend\CommunityBlogsController as FrontendCommunityBlogsController;
 use App\Http\Controllers\FrontendAuthController;
-use App\Http\Controllers\Frontend\CommunityBlogsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,9 +98,17 @@ Route::controller(OfficialBlogsController::class)->group(function () {
     Route::get('/official-blogs/{id}', 'showDetail')->name('official-blogs.show');
 });
 
-Route::controller(CommunityBlogsController::class)->group(function () {
+Route::controller(FrontendCommunityBlogsController::class)->group(function () {
     Route::get('/community-blogs', 'index')->name('community-blogs.index');
     Route::get('/community-blogs/submit', 'create')->name('community-blogs.submit');
+    Route::post('/community-blogs/submit', 'store')->name('community-blogs.store');
+    Route::get('/community-blogs/{id}', 'show')->name('community-blogs.show');
+});
+
+Route::controller(AdminCommunityBlogsController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/community-blogs', 'index')->name('admin.community-blogs.index');
+    Route::patch('/admin/community-blogs/{id}', 'update')->name('admin.community-blogs.update');
+    Route::delete('/admin/community-blogs/{id}', 'destroy')->name('admin.community-blogs.delete');
 });
 
 Route::get('/privacy-policy', function () {

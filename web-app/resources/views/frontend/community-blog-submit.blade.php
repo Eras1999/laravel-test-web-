@@ -39,7 +39,7 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('community-blogs.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="author_name" class="form-label">Author Name</label>
@@ -47,14 +47,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="title" class="form-label">Blog Title <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="title" name="title" required>
+                                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="content" class="form-label">Blog Content <span class="text-danger">*</span></label>
-                                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                                <textarea class="form-control" id="content" name="content" rows="5" required>{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

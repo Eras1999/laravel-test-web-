@@ -33,9 +33,24 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-12 text-center">
-                    <p class="text-muted">No community blogs available yet. Be the first to add one!</p>
-                </div>
+                @forelse ($blogs as $blog)
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="blog-post-item">
+                            <div class="blog-post-thumb">
+                                <img src="{{ $blog->image ? asset('storage/' . $blog->image) : asset('frontend/img/placeholder.jpg') }}" alt="{{ $blog->title }}" class="img-fluid">
+                            </div>
+                            <div class="blog-post-content">
+                                <h4 class="title"><a href="{{ route('community-blogs.show', $blog->id) }}">{{ $blog->title }}</a></h4>
+                                <p class="text-truncate">{{ Str::limit($blog->content, 100) }}</p>
+                                <a href="{{ route('community-blogs.show', $blog->id) }}" class="read-more">Read More <img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12 text-center">
+                        <p class="text-muted">No community blogs available yet. Be the first to add one!</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -51,6 +66,43 @@
             font-size: 24px;
             color: #333;
             margin-bottom: 0;
+        }
+        .blog-post-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .blog-post-item:hover {
+            transform: translateY(-5px);
+        }
+        .blog-post-thumb img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .blog-post-content {
+            padding: 15px;
+        }
+        .title a {
+            color: #333;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        .title a:hover {
+            color: #ff5733;
+        }
+        .read-more {
+            color: #ff5733;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .read-more img {
+            margin-left: 5px;
+            width: 15px;
         }
         .btn-primary {
             background: #ff5733;
@@ -72,6 +124,12 @@
             }
             .section-title {
                 font-size: 20px;
+            }
+            .blog-post-thumb img {
+                height: 150px;
+            }
+            .title a {
+                font-size: 16px;
             }
             .btn-primary {
                 padding: 8px 15px;
