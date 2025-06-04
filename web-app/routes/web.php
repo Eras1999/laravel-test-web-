@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\UserCredentialsController;
 use App\Http\Controllers\admin\OfficialBlogsController;
 use App\Http\Controllers\FrontendAuthController;
+use App\Http\Controllers\Frontend\CommunityBlogsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,7 @@ Route::get('/', function () {
     if (Auth::guard('frontend')->check()) {
         return redirect()->route('home.authenticated');
     }
-    return view('frontend.home');
+    return redirect()->route('signin');
 })->name('home');
 
 // Homepage route, accessible only to authenticated frontend users
@@ -94,6 +95,11 @@ Route::controller(OfficialBlogsController::class)->middleware(['auth', 'verified
 Route::controller(OfficialBlogsController::class)->group(function () {
     Route::get('/official-blogs', 'show')->name('official-blogs.index');
     Route::get('/official-blogs/{id}', 'showDetail')->name('official-blogs.show');
+});
+
+Route::controller(CommunityBlogsController::class)->group(function () {
+    Route::get('/community-blogs', 'index')->name('community-blogs.index');
+    Route::get('/community-blogs/submit', 'create')->name('community-blogs.submit');
 });
 
 Route::get('/privacy-policy', function () {
