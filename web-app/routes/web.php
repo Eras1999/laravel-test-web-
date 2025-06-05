@@ -9,7 +9,9 @@ use App\Http\Controllers\admin\UserCredentialsController;
 use App\Http\Controllers\admin\OfficialBlogsController;
 use App\Http\Controllers\admin\CommunityBlogsController as AdminCommunityBlogsController;
 use App\Http\Controllers\Frontend\CommunityBlogsController as FrontendCommunityBlogsController;
+use App\Http\Controllers\Frontend\AdoptionPostsController;
 use App\Http\Controllers\FrontendAuthController;
+use App\Http\Controllers\admin\AdoptionPostsController as AdminAdoptionPostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -109,6 +111,21 @@ Route::controller(AdminCommunityBlogsController::class)->middleware(['auth', 've
     Route::get('/admin/community-blogs', 'index')->name('admin.community-blogs.index');
     Route::patch('/admin/community-blogs/{id}', 'update')->name('admin.community-blogs.update');
     Route::delete('/admin/community-blogs/{id}', 'destroy')->name('admin.community-blogs.delete');
+});
+
+Route::controller(AdoptionPostsController::class)->middleware(['auth:frontend'])->group(function () {
+    Route::get('/adoption-posts/create', 'create')->name('adoption-posts.create');
+    Route::get('/adoption-posts/form', 'form')->name('adoption-posts.form');
+    Route::post('/adoption-posts', 'store')->name('adoption-posts.store');
+    Route::get('/adoption-posts', 'index')->name('adoption-posts.index');
+    Route::patch('/adoption-posts/{id}/adopted', 'adopted')->name('adoption-posts.adopted');
+    Route::patch('/adoption-posts/{id}/repost', 'repost')->name('adoption-posts.repost');
+});
+
+Route::controller(AdminAdoptionPostsController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/adoption-posts', 'index')->name('admin.adoption-posts.index');
+    Route::patch('/admin/adoption-posts/{id}', 'update')->name('admin.adoption-posts.update');
+    Route::delete('/admin/adoption-posts/{id}', 'delete')->name('admin.adoption-posts.delete');
 });
 
 Route::get('/privacy-policy', function () {

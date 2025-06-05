@@ -80,7 +80,7 @@ class FrontendAuthController extends Controller
     // Show User Profile
     public function showProfile()
     {
-        $user = Auth::guard('frontend')->user()->load('blogs');
+        $user = Auth::guard('frontend')->user()->load(['blogs', 'adoptionPosts']);
         return view('frontend.profile', compact('user'));
     }
 }

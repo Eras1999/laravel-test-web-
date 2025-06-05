@@ -120,6 +120,105 @@
             </div>
         </div>
     </section>
+
+    <!-- Adoption Posts Statistics Section -->
+    <section class="adoption-stats-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12">
+                    <div class="stats-card">
+                        <h2 class="section-title">Adoption Posts Statistics</h2>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <i class="fas fa-chart-pie"></i>
+                                <span class="stat-label">Total Posts</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->count() }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span class="stat-label">Pending</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'pending')->count() }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span class="stat-label">Approved</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'approved')->count() }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-times-circle"></i>
+                                <span class="stat-label">Rejected</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'rejected')->count() }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-trash-alt"></i>
+                                <span class="stat-label">Expired</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'expired')->count() }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-paw"></i>
+                                <span class="stat-label">Adopted</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'adopted')->count() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Adoption Posts Section -->
+    <section class="my-adoption-posts-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12">
+                    <div class="adoption-card">
+                        <h2 class="section-title">My Adoption Posts</h2>
+                        <div class="adoption-grid">
+                            @forelse ($user->adoptionPosts as $post)
+                                <div class="adoption-item">
+                                    <div class="adoption-content">
+                                        @if ($post->image)
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="adoption-image">
+                                        @else
+                                            <div class="adoption-placeholder">
+                                                <i class="fas fa-image"></i>
+                                            </div>
+                                        @endif
+                                        <h5 class="adoption-title">{{ $post->title }}</h5>
+                                        <p class="adoption-meta"><strong>Category:</strong> {{ ucfirst($post->category) }}</p>
+                                        <p class="adoption-meta"><strong>Location:</strong> {{ $post->city }}, {{ $post->district }}</p>
+                                        <p class="adoption-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
+                                        <p class="adoption-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
+                                        <p class="adoption-excerpt">{{ Str::limit($post->description, 100) }}</p>
+                                        <div class="adoption-actions mt-2">
+                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
+                                                <form action="{{ route('adoption-posts.adopted', $post->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are you sure this pet has been adopted?')">Adopted</button>
+                                                </form>
+                                            @endif
+                                            @if ($post->status == 'expired')
+                                                <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to repost this?')">Repost</button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="no-posts">
+                                    <p class="text-muted">You have not uploaded any adoption posts yet.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 @endsection
 

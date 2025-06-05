@@ -31,4 +31,9 @@ class UserCredential extends Authenticatable
     {
         return $this->hasMany(CommunityBlog::class, 'user_id');
     }
+
+    public function adoptionPosts()
+    {
+        return $this->hasMany(AdoptionPost::class, 'author_name', 'name');
+    }
 }

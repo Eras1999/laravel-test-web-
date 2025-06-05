@@ -61,8 +61,11 @@
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('about-us') ? 'active' : '' }}"><a href="{{ route('about-us') }}">About Us</a></li>
-                                    <li class="menu-item-has-children"><a href="rescue.html">Rescue</a>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Adopt Animals</a>
                                         <ul class="submenu">
+                                            <li class="{{ request()->routeIs('adoption-posts.create') ? 'active' : '' }}"><a href="{{ route('adoption-posts.create') }}">Create Post</a></li>
+                                            <li class="{{ request()->routeIs('adoption-posts.index') ? 'active' : '' }}"><a href="{{ route('adoption-posts.index') }}">View Posts</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="adoption.html">Report</a></li>
