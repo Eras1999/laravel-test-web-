@@ -26,4 +26,9 @@ class UserCredential extends Authenticatable
     protected $casts = [
         'terms_accepted' => 'boolean',
     ];
+
+    public function blogs()
+    {
+        return $this->hasMany(CommunityBlog::class, 'user_id');
+    }
 }
