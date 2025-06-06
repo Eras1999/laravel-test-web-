@@ -1,25 +1,26 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-<main>
-    <!-- Hero Section with Image and Title -->
-    <section class="about-hero">
-        <div class="about-hero-image">
-            <img src="{{ asset('frontend/img/about/about-hero.webp') }}" alt="About Us">
-            <div class="about-hero-overlay">
-                <div class="hero-content">
-                    <h1 class="hero-title">About Us</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">About Us</li>
-                        </ol>
-                    </nav>
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/about1.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">About Us</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
+    <!-- breadcrumb-area-end -->
+    <main>
     <!-- Our Mission Section -->
     <section class="about-section">
         <div class="container">

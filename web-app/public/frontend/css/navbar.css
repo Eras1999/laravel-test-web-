@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     padding: 8px 15px;
-    background: #ff5733;
+    background: #46ac0b;
     color: white;
     border-radius: 20px;
     text-transform: uppercase;
@@ -17,7 +17,7 @@
 }
 
 .header-action .dropdown .btn:hover {
-    background: #e04e2b;
+    background: #46ac0b;
     transform: scale(1.05);
 }
 
@@ -72,13 +72,13 @@
 .header-action .dropdown-menu a:hover,
 .header-action .dropdown-menu button:hover {
     background: #f1f1f1;
-    color: #ff5733;
+    color: #46ac0b;
 }
 
 .header-action .dropdown-menu a i,
 .header-action .dropdown-menu button i {
     font-size: 14px;
-    color: #ff5733;
+    color: #46ac0b;
 }
 
 .header-action .dropdown-menu button {
@@ -87,7 +87,7 @@
 }
 
 .navigation .active > a {
-    color: #ff5733;
+    color: #46ac0b;
     font-weight: 600;
 }
 
@@ -169,7 +169,7 @@
 }
 
 .social-links ul li a:hover {
-    color: #ff5733;
+    color: #46ac0b;
 }
 
 /* Mobile Header Action */
@@ -194,7 +194,7 @@
     align-items: center;
     /* Increased padding for larger button */
     padding: 10px 20px; /* Adjusted from 6px 12px to 10px 20px */
-    background: #ff5733;
+    background: #46ac0b;
     color: white;
     border-radius: 20px;
     font-family: 'Arial', sans-serif;
@@ -210,7 +210,7 @@
 }
 
 .small-btn:hover {
-    background: #e04e2b;
+    background: #46ac0b;
 }
 
 .mobile-user.dropdown {
@@ -295,7 +295,7 @@
     background: none;
     border: none;
     font-size: 18px;
-    color: #ff5733;
+    color: #46ac0b;
 }
 
 /* Responsive Design */
