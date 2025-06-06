@@ -8,10 +8,39 @@
                 <div class="col-lg-10 col-md-12">
                     <div class="adoption-card">
                         <h2 class="section-title">Adopt a Pet</h2>
+
+                        <!-- Filtering System -->
+                        <div class="filter-section mb-4">
+                            <form id="filter-form" method="GET" action="{{ route('adoption-posts.index') }}">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="district" class="form-label">Filter by District</label>
+                                        <select name="district" id="district" class="form-select">
+                                            <option value="">All Districts</option>
+                                            @foreach ($posts->pluck('district')->unique() as $district)
+                                                <option value="{{ $district }}" {{ request('district') == $district ? 'selected' : '' }}>{{ $district }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="category" class="form-label">Filter by Category</label>
+                                        <select name="category" id="category" class="form-select">
+                                            <option value="">All Categories</option>
+                                            <option value="dog" {{ request('category') == 'dog' ? 'selected' : '' }}>Dog</option>
+                                            <option value="cat" {{ request('category') == 'cat' ? 'selected' : '' }}>Cat</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                                <a href="{{ route('adoption-posts.index') }}" class="btn btn-secondary">Reset Filters</a>
+                            </form>
+                        </div>
+
+                        <!-- Adoption Posts -->
                         <div class="adoption-grid">
                             @forelse ($posts as $post)
                                 <div class="adoption-item">
-                                    <div class="adoption-content">
+                                    <div class="adoption-image-container">
                                         @if ($post->image)
                                             <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="adoption-image">
                                         @else
@@ -19,22 +48,26 @@
                                                 <i class="fas fa-image"></i>
                                             </div>
                                         @endif
+                                    </div>
+                                    <div class="adoption-content">
                                         <h5 class="adoption-title">{{ $post->title }}</h5>
-                                        <p class="adoption-meta"><strong>Category:</strong> {{ ucfirst($post->category) }}</p>
-                                        <p class="adoption-meta"><strong>Location:</strong> {{ $post->nearby_city }}, {{ $post->city }}, {{ $post->district }}</p>
-                                        <p class="adoption-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
-                                        <p class="adoption-meta"><strong>Posted by:</strong> {{ $post->author_name }}</p>
-                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
-                                            <p class="adoption-meta"><strong>Time Remaining:</strong>
-                                                @php
-                                                    $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
-                                                    $hours = floor($remainingMinutes / 60);
-                                                    $minutes = $remainingMinutes % 60;
-                                                @endphp
-                                                {{ $hours }}h {{ $minutes }}m
-                                            </p>
-                                        @endif
-                                        <p class="adoption-excerpt">{{ Str::limit($post->description, 100) }}</p>
+                                        <div class="adoption-meta mb-2">
+                                            <span class="badge bg-primary">{{ ucfirst($post->category) }}</span>
+                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
+                                                <span class="badge bg-success">
+                                                    @php
+                                                        $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
+                                                        $hours = floor($remainingMinutes / 60);
+                                                        $minutes = $remainingMinutes % 60;
+                                                    @endphp
+                                                    Time Left: {{ $hours }}h {{ $minutes }}m
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <p class="adoption-meta"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ $post->nearby_city }}, {{ $post->city }}, {{ $post->district }}</p>
+                                        <p class="adoption-meta"><i class="fas fa-phone"></i> <strong>Contact:</strong> {{ $post->mobile_number }}</p>
+                                        <p class="adoption-meta"><i class="fas fa-user"></i> <strong>Posted by:</strong> {{ $post->author_name }}</p>
+                                        <p class="adoption-description"><strong>Description:</strong> {{ $post->description }}</p>
                                     </div>
                                 </div>
                             @empty
@@ -87,9 +120,41 @@
         text-align: center;
     }
 
+    .filter-section {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .filter-section .form-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .filter-section .form-select {
+        border-radius: 8px;
+        padding: 8px;
+    }
+
+    .filter-section .btn-primary {
+        background-color: #007bff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+    }
+
+    .filter-section .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        margin-left: 10px;
+    }
+
     .adoption-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
     }
 
@@ -99,26 +164,30 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         overflow: hidden;
         transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
     }
 
     .adoption-item:hover {
         transform: translateY(-5px);
     }
 
-    .adoption-content {
-        padding: 15px;
+    .adoption-image-container {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
     }
 
     .adoption-image {
         width: 100%;
-        height: 150px;
+        height: 100%;
         object-fit: cover;
         border-radius: 10px 10px 0 0;
     }
 
     .adoption-placeholder {
         width: 100%;
-        height: 150px;
+        height: 200px;
         background: #f0f0f0;
         display: flex;
         align-items: center;
@@ -127,26 +196,44 @@
     }
 
     .adoption-placeholder i {
-        font-size: 2rem;
+        font-size: 2.5rem;
         color: #ccc;
     }
 
+    .adoption-content {
+        padding: 20px;
+        flex-grow: 1;
+    }
+
     .adoption-title {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         color: #333;
-        margin: 10px 0;
+        margin-bottom: 10px;
     }
 
     .adoption-meta {
-        font-size: 0.85rem;
-        color: #666;
-        margin-bottom: 5px;
-    }
-
-    .adoption-excerpt {
         font-size: 0.9rem;
         color: #666;
-        line-height: 1.5;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    .adoption-meta i {
+        margin-right: 8px;
+        color: #007bff;
+    }
+
+    .adoption-description {
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.6;
+        margin-top: 10px;
+    }
+
+    .adoption-meta .badge {
+        margin-right: 5px;
+        font-size: 0.85rem;
     }
 
     .no-posts {
@@ -166,7 +253,7 @@
         }
 
         .adoption-grid {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
     }
 
@@ -183,16 +270,16 @@
             font-size: 1.6rem;
         }
 
-        .adoption-image, .adoption-placeholder {
-            height: 120px;
+        .adoption-image-container, .adoption-placeholder {
+            height: 150px;
         }
 
         .adoption-title {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
         }
 
-        .adoption-excerpt {
-            font-size: 0.85rem;
+        .adoption-description {
+            font-size: 0.9rem;
         }
     }
 
@@ -206,11 +293,11 @@
         }
 
         .adoption-title {
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
 
-        .adoption-meta, .adoption-excerpt {
-            font-size: 0.8rem;
+        .adoption-meta, .adoption-description {
+            font-size: 0.85rem;
         }
     }
 </style>

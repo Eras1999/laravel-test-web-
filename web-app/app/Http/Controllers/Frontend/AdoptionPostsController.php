@@ -51,11 +51,22 @@ class AdoptionPostsController extends Controller
         return redirect()->route('adoption-posts.index')->with('success', 'Adoption post submitted successfully and is awaiting approval.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = AdoptionPost::where('status', 'approved')
-            ->where('approved_at', '>=', now()->subHours(24))
-            ->get();
+        $query = AdoptionPost::where('status', 'approved')
+            ->where('approved_at', '>=', now()->subHours(24));
+
+        // Apply district filter if provided
+        if ($request->filled('district')) {
+            $query->where('district', $request->district);
+        }
+
+        // Apply category filter if provided
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        $posts = $query->get();
 
         return view('frontend.adoption_posts.index', compact('posts'));
     }
