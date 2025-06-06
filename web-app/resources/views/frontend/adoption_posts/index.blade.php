@@ -21,9 +21,19 @@
                                         @endif
                                         <h5 class="adoption-title">{{ $post->title }}</h5>
                                         <p class="adoption-meta"><strong>Category:</strong> {{ ucfirst($post->category) }}</p>
-                                        <p class="adoption-meta"><strong>Location:</strong> {{ $post->city }}, {{ $post->district }}</p>
+                                        <p class="adoption-meta"><strong>Location:</strong> {{ $post->nearby_city }}, {{ $post->city }}, {{ $post->district }}</p>
                                         <p class="adoption-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
                                         <p class="adoption-meta"><strong>Posted by:</strong> {{ $post->author_name }}</p>
+                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
+                                            <p class="adoption-meta"><strong>Time Remaining:</strong>
+                                                @php
+                                                    $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
+                                                    $hours = floor($remainingMinutes / 60);
+                                                    $minutes = $remainingMinutes % 60;
+                                                @endphp
+                                                {{ $hours }}h {{ $minutes }}m
+                                            </p>
+                                        @endif
                                         <p class="adoption-excerpt">{{ Str::limit($post->description, 100) }}</p>
                                     </div>
                                 </div>

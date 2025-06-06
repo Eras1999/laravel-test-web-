@@ -157,7 +157,7 @@
                             <div class="stat-item">
                                 <i class="fas fa-paw"></i>
                                 <span class="stat-label">Adopted</span>
-                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'adopted')->count() }}</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'rejected')->where('approved_at', '<', now()->subHours(24))->count() }}</span>
                             </div>
                         </div>
                     </div>
@@ -171,25 +171,34 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12">
-                    <div class="adoption-card">
+                    <div class="blog-card">
                         <h2 class="section-title">My Adoption Posts</h2>
-                        <div class="adoption-grid">
+                        <div class="blog-grid">
                             @forelse ($user->adoptionPosts as $post)
-                                <div class="adoption-item">
-                                    <div class="adoption-content">
+                                <div class="blog-item">
+                                    <div class="blog-content">
                                         @if ($post->image)
-                                            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="adoption-image">
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="blog-image">
                                         @else
-                                            <div class="adoption-placeholder">
+                                            <div class="blog-placeholder">
                                                 <i class="fas fa-image"></i>
                                             </div>
                                         @endif
-                                        <h5 class="adoption-title">{{ $post->title }}</h5>
-                                        <p class="adoption-meta"><strong>Category:</strong> {{ ucfirst($post->category) }}</p>
-                                        <p class="adoption-meta"><strong>Location:</strong> {{ $post->city }}, {{ $post->district }}</p>
-                                        <p class="adoption-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
-                                        <p class="adoption-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
-                                        <p class="adoption-excerpt">{{ Str::limit($post->description, 100) }}</p>
+                                        <h5 class="blog-title">{{ $post->title }}</h5>
+                                        <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
+                                        <p class="blog-meta"><strong>Location:</strong> {{ $post->city }}, {{ $post->district }}</p>
+                                        <p class="blog-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
+                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
+                                            <p class="blog-meta"><strong>Time Remaining:</strong>
+                                                @php
+                                                    $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
+                                                    $hours = floor($remainingMinutes / 60);
+                                                    $minutes = $remainingMinutes % 60;
+                                                @endphp
+                                                {{ $hours }}h {{ $minutes }}m
+                                            </p>
+                                        @endif
+                                        <p class="blog-excerpt">{{ Str::limit($post->description, 100) }}</p>
                                         <div class="adoption-actions mt-2">
                                             @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
                                                 <form action="{{ route('adoption-posts.adopted', $post->id) }}" method="POST" style="display:inline;">
@@ -209,7 +218,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="no-posts">
+                                <div class="no-blogs">
                                     <p class="text-muted">You have not uploaded any adoption posts yet.</p>
                                 </div>
                             @endforelse
@@ -224,4 +233,85 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('frontend/css/profile.css') }}">
+<style>
+    .my-adoption-posts-section .blog-item {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .my-adoption-posts-section .blog-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .my-adoption-posts-section .blog-content {
+        padding: 15px;
+    }
+
+    .my-adoption-posts-section .blog-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .my-adoption-posts-section .blog-placeholder {
+        width: 100%;
+        height: 150px;
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .my-adoption-posts-section .blog-placeholder i {
+        font-size: 2rem;
+        color: #ccc;
+    }
+
+    .my-adoption-posts-section .blog-title {
+        font-size: 1.2rem;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .my-adoption-posts-section .blog-meta {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .my-adoption-posts-section .blog-excerpt {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 767px) {
+        .my-adoption-posts-section .blog-image, .my-adoption-posts-section .blog-placeholder {
+            height: 120px;
+        }
+
+        .my-adoption-posts-section .blog-title {
+            font-size: 1.1rem;
+        }
+
+        .my-adoption-posts-section .blog-excerpt {
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .my-adoption-posts-section .blog-title {
+            font-size: 1rem;
+        }
+
+        .my-adoption-posts-section .blog-meta, .my-adoption-posts-section .blog-excerpt {
+            font-size: 0.8rem;
+        }
+    }
+</style>
 @endsection
