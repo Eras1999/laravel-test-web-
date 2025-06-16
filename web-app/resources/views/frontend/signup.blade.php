@@ -14,6 +14,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-7 col-sm-9">
                         <div class="auth-card">
+                            <img src="{{ asset('frontend/img/logo/save sathwa.png') }}" alt="SaveSathwa Logo" class="logo">
                             <div class="auth-header">
                                 <h2>Sign Up</h2>
                                 <p>Create an account to join our community!</p>

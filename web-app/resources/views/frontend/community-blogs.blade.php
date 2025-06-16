@@ -28,9 +28,11 @@
                 <div class="col-auto">
                     <h3 class="section-title">Community Blogs</h3>
                 </div>
-                <div class="col-auto">
-                    <a href="{{ route('community-blogs.submit') }}" class="btn btn-primary">Add Blog</a>
-                </div>
+                @if(auth('frontend')->check())
+                    <div class="col-auto">
+                        <a href="{{ route('community-blogs.submit') }}" class="btn btn-primary">Add Blog</a>
+                    </div>
+                @endif
             </div>
             <div class="row justify-content-center">
                 @forelse ($blogs as $blog)

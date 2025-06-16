@@ -56,12 +56,10 @@ class AdoptionPostsController extends Controller
         $query = AdoptionPost::where('status', 'approved')
             ->where('approved_at', '>=', now()->subHours(24));
 
-        // Apply district filter if provided
         if ($request->filled('district')) {
             $query->where('district', $request->district);
         }
 
-        // Apply category filter if provided
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }

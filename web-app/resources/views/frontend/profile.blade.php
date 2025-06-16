@@ -206,8 +206,7 @@
                                                     @method('PATCH')
                                                     <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are you sure this pet has been adopted?')">Adopted</button>
                                                 </form>
-                                            @endif
-                                            @if ($post->status == 'expired')
+                                            @elseif ($post->status == 'expired')
                                                 <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')

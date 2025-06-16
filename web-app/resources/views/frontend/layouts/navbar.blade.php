@@ -5,8 +5,8 @@
                 <div class="col-md-7">
                     <div class="header-top-left">
                         <ul>
-                            <li>Call us: 747-800-9880</li>
-                            <li><i class="far fa-clock"></i>Opening Hours: 7:00 am - 9:00 pm (Mon - Sun)</li>
+                            <li>Call us:011 1234567</li>
+                            <li><i class="far fa-clock"></i>SaveSathwa@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <div class="menu-wrap">
                         <nav class="menu-nav show">
-                            <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a></div>
+                            <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo/logo.jpg') }}" alt=""></a></div>
                             <div class="mobile-header-action d-block d-lg-none">
                                 @if (Auth::guard('frontend')->check())
                                     <div class="mobile-user dropdown">
