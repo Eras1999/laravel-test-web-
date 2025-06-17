@@ -174,7 +174,11 @@
                     <div class="blog-card">
                         <h2 class="section-title">My Adoption Posts</h2>
                         <div class="blog-grid">
-                            @forelse ($user->adoptionPosts as $post)
+                            @php
+                                // Sort posts by creation date in descending order
+                                $sortedPosts = $user->adoptionPosts->sortByDesc('created_at');
+                            @endphp
+                            @forelse ($sortedPosts as $post)
                                 <div class="blog-item">
                                     <div class="blog-content">
                                         @if ($post->image)
@@ -185,19 +189,30 @@
                                             </div>
                                         @endif
                                         <h5 class="blog-title">{{ $post->title }}</h5>
-                                        <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
+                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) >= 24)
+                                            <div class="adoption-actions mt-2">
+                                                <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to repost this?')">Repost</button>
+                                                </form>
+                                            </div>
+                                            <p class="blog-meta"><strong>Status:</strong> <span class="status-expired">Expired</span></p>
+                                        @else
+                                            <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
+                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
+                                                <p class="blog-meta"><strong>Time Remaining:</strong>
+                                                    @php
+                                                        $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
+                                                        $hours = floor($remainingMinutes / 60);
+                                                        $minutes = $remainingMinutes % 60;
+                                                    @endphp
+                                                    {{ $hours }}h {{ $minutes }}m
+                                                </p>
+                                            @endif
+                                        @endif
                                         <p class="blog-meta"><strong>Location:</strong> {{ $post->city }}, {{ $post->district }}</p>
                                         <p class="blog-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
-                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
-                                            <p class="blog-meta"><strong>Time Remaining:</strong>
-                                                @php
-                                                    $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
-                                                    $hours = floor($remainingMinutes / 60);
-                                                    $minutes = $remainingMinutes % 60;
-                                                @endphp
-                                                {{ $hours }}h {{ $minutes }}m
-                                            </p>
-                                        @endif
                                         <p class="blog-excerpt">{{ Str::limit($post->description, 100) }}</p>
                                         <div class="adoption-actions mt-2">
                                             @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
@@ -287,6 +302,11 @@
         font-size: 0.9rem;
         color: #666;
         line-height: 1.5;
+    }
+
+    .my-adoption-posts-section .status-expired {
+        color: #dc3545;
+        font-weight: bold;
     }
 
     @media (max-width: 767px) {
