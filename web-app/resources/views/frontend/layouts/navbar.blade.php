@@ -5,7 +5,7 @@
                 <div class="col-md-7">
                     <div class="header-top-left">
                         <ul>
-                            <li>Call us:011 1234567</li>
+                            <li>Call us: 011 1234567</li>
                             <li><i class="far fa-clock"></i>SaveSathwa@gmail.com</li>
                         </ul>
                     </div>
@@ -69,8 +69,10 @@
                                         </ul>
                                     </li>
                                     <li><a href="adoption.html">Report</a></li>
-                                    <li class="menu-item-has-children"><a href="snakeID.html">SnakeID</a>
+                                    <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }} menu-item-has-children">
+                                        <a href="snakeID.html">SnakeID</a>
                                         <ul class="submenu">
+                                            <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }}"><a href="{{ route('snake-catchers.index') }}">Snake Catchers</a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') || request()->routeIs('community-blogs.index') || request()->routeIs('community-blogs.submit') ? 'active' : '' }} menu-item-has-children">

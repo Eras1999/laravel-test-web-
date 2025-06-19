@@ -53,6 +53,16 @@
                             <a class="nav-link" href="{{ route('admin.adoption-posts.index') }}">Adoption Posts</a>
                         </nav>
                     </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSnakeCatchers" aria-expanded="false" aria-controls="collapseSnakeCatchers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-snake"></i></div>
+                        Snake Catchers
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseSnakeCatchers" aria-labelledby="headingSix" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('admin.snake-catchers.index') }}">Manage Catchers</a>
+                        </nav>
+                    </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Pages
