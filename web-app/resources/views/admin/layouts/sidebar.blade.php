@@ -63,6 +63,16 @@
                             <a class="nav-link" href="{{ route('admin.snake-catchers.index') }}">Manage Catchers</a>
                         </nav>
                     </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRescue" aria-expanded="false" aria-controls="collapseRescue">
+                        <div class="sb-nav-link-icon"><i class="fas fa-ambulance"></i></div>
+                        Rescue
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseRescue" aria-labelledby="headingSeven" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('admin.rescue-posts.index') }}">Manage Rescue Posts</a>
+                        </nav>
+                    </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Pages

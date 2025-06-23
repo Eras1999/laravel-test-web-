@@ -68,7 +68,7 @@
                                             <li class="{{ request()->routeIs('adoption-posts.index') ? 'active' : '' }}"><a href="{{ route('adoption-posts.index') }}">View Posts</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="adoption.html">Report</a></li>
+                                    <li class="{{ request()->routeIs('rescue-posts.index') ? 'active' : '' }}"><a href="{{ route('rescue-posts.index') }}">Rescue</a></li>
                                     <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }} menu-item-has-children">
                                         <a href="snakeID.html">SnakeID</a>
                                         <ul class="submenu">

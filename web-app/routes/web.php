@@ -14,6 +14,8 @@ use App\Http\Controllers\FrontendAuthController;
 use App\Http\Controllers\admin\AdoptionPostsController as AdminAdoptionPostsController;
 use App\Http\Controllers\Frontend\SnakeCatcherController;
 use App\Http\Controllers\admin\SnakeCatcherController as AdminSnakeCatcherController;
+use App\Http\Controllers\Frontend\RescuePostsController;
+use App\Http\Controllers\admin\RescuePostsController as AdminRescuePostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -140,6 +142,19 @@ Route::controller(AdminSnakeCatcherController::class)->middleware(['auth', 'veri
     Route::post('/admin/snake-catchers', 'store')->name('admin.snake-catchers.store');
     Route::patch('/admin/snake-catchers/{id}', 'update')->name('admin.snake-catchers.update');
     Route::delete('/admin/snake-catchers/{id}', 'delete')->name('admin.snake-catchers.delete');
+});
+
+Route::controller(RescuePostsController::class)->middleware(['auth:frontend'])->group(function () {
+    Route::get('/rescue-posts', 'index')->name('rescue-posts.index');
+    Route::post('/rescue-posts', 'store')->name('rescue-posts.store');
+    Route::get('/rescue-posts/{id}', 'show')->name('rescue-posts.show');
+    Route::post('/rescue-posts/{id}/comment', 'comment')->name('rescue-posts.comment');
+});
+
+Route::controller(AdminRescuePostsController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/rescue-posts', 'index')->name('admin.rescue-posts.index');
+    Route::delete('/admin/rescue-posts/{id}', 'delete')->name('admin.rescue-posts.delete');
+    Route::patch('/admin/rescue-posts/{id}/rescued', 'rescued')->name('admin.rescue-posts.rescued');
 });
 
 Route::get('/privacy-policy', function () {
