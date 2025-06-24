@@ -88,4 +88,16 @@ class RescuePostsController extends Controller
 
         return redirect()->back()->with('success', 'Comment added successfully.');
     }
+
+    public function profile()
+    {
+        $user = Auth::guard('frontend')->user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please login to view your profile.');
+        }
+
+        $rescuePosts = RescuePost::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+
+        return view('frontend.profile', compact('user', 'rescuePosts'));
+    }
 }

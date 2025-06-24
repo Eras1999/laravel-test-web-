@@ -188,4 +188,6 @@ Route::get('/forgot-password', function () {
     return view('frontend.forgot-password');
 })->name('forgot-password');
 Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
-Route::get('/my-profile', [FrontendAuthController::class, 'showProfile'])->name('profile')->middleware('auth:frontend');
+
+// Update the profile route to use RescuePostsController@profile
+Route::get('/my-profile', [RescuePostsController::class, 'profile'])->name('profile')->middleware('auth:frontend');

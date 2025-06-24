@@ -45,6 +45,71 @@
         </div>
     </section>
 
+    <!-- Rescue Posts Statistics Section -->
+    <section class="rescue-stats-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12">
+                    <div class="stats-card">
+                        <h2 class="section-title">Rescue Posts Statistics</h2>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <i class="fas fa-chart-pie"></i>
+                                <span class="stat-label">Total Posts</span>
+                                <span class="stat-value">{{ $rescuePosts->count() }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span class="stat-label">Rescued</span>
+                                <span class="stat-value">{{ $rescuePosts->where('rescued', true)->count() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Rescue Posts Section -->
+    <section class="my-rescue-posts-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12">
+                    <div class="blog-card">
+                        <h2 class="section-title">My Rescue Posts</h2>
+                        <div class="blog-grid">
+                            @forelse ($rescuePosts as $post)
+                                <div class="blog-item">
+                                    <div class="blog-content">
+                                        @if ($post->image)
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="Rescue Image" class="blog-image">
+                                        @else
+                                            <div class="blog-placeholder">
+                                                <i class="fas fa-image"></i>
+                                            </div>
+                                        @endif
+                                        <h5 class="blog-title">Type: {{ $post->animal_type }}</h5>
+                                        @if ($post->rescued)
+                                            <p class="blog-meta"><strong>Status:</strong> <span class="status-rescued">Rescued</span></p>
+                                        @endif
+                                        <p class="blog-meta"><strong>Location:</strong> {{ $post->place ?? 'N/A' }}, {{ $post->district }}</p>
+                                        <p class="blog-meta"><strong>Date:</strong> {{ $post->created_at->format('d M Y H:i') }}</p>
+                                        <p class="blog-excerpt">{{ Str::limit($post->description, 100) }}</p>
+                                        <a href="{{ route('rescue-posts.show', $post->id) }}" class="btn btn-primary btn-sm mt-2">View Details</a>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="no-blogs">
+                                    <p class="text-muted">You have not uploaded any rescue posts yet.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Blog Statistics Section -->
     <section class="blog-stats-section">
         <div class="container">
@@ -248,7 +313,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('frontend/css/profile.css') }}">
 <style>
-    .my-adoption-posts-section .blog-item {
+    .my-rescue-posts-section .blog-item {
         background: #fff;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -256,22 +321,22 @@
         transition: transform 0.3s ease;
     }
 
-    .my-adoption-posts-section .blog-item:hover {
+    .my-rescue-posts-section .blog-item:hover {
         transform: translateY(-5px);
     }
 
-    .my-adoption-posts-section .blog-content {
+    .my-rescue-posts-section .blog-content {
         padding: 15px;
     }
 
-    .my-adoption-posts-section .blog-image {
+    .my-rescue-posts-section .blog-image {
         width: 100%;
         height: 150px;
         object-fit: cover;
         border-radius: 10px 10px 0 0;
     }
 
-    .my-adoption-posts-section .blog-placeholder {
+    .my-rescue-posts-section .blog-placeholder {
         width: 100%;
         height: 150px;
         background: #f0f0f0;
@@ -281,54 +346,56 @@
         border-radius: 10px 10px 0 0;
     }
 
-    .my-adoption-posts-section .blog-placeholder i {
+    .my-rescue-posts-section .blog-placeholder i {
         font-size: 2rem;
         color: #ccc;
     }
 
-    .my-adoption-posts-section .blog-title {
+    .my-rescue-posts-section .blog-title {
         font-size: 1.2rem;
         color: #333;
         margin: 10px 0;
     }
 
-    .my-adoption-posts-section .blog-meta {
+    .my-rescue-posts-section .blog-meta {
         font-size: 0.85rem;
         color: #666;
         margin-bottom: 5px;
     }
 
-    .my-adoption-posts-section .blog-excerpt {
+    .my-rescue-posts-section .blog-excerpt {
         font-size: 0.9rem;
         color: #666;
         line-height: 1.5;
     }
 
-    .my-adoption-posts-section .status-expired {
-        color: #dc3545;
+    .my-rescue-posts-section .status-rescued {
+        color: #28a745;
         font-weight: bold;
     }
 
     @media (max-width: 767px) {
-        .my-adoption-posts-section .blog-image, .my-adoption-posts-section .blog-placeholder {
+        .my-rescue-posts-section .blog-image,
+        .my-rescue-posts-section .blog-placeholder {
             height: 120px;
         }
 
-        .my-adoption-posts-section .blog-title {
+        .my-rescue-posts-section .blog-title {
             font-size: 1.1rem;
         }
 
-        .my-adoption-posts-section .blog-excerpt {
+        .my-rescue-posts-section .blog-excerpt {
             font-size: 0.85rem;
         }
     }
 
     @media (max-width: 576px) {
-        .my-adoption-posts-section .blog-title {
+        .my-rescue-posts-section .blog-title {
             font-size: 1rem;
         }
 
-        .my-adoption-posts-section .blog-meta, .my-adoption-posts-section .blog-excerpt {
+        .my-rescue-posts-section .blog-meta,
+        .my-rescue-posts-section .blog-excerpt {
             font-size: 0.8rem;
         }
     }
