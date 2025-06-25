@@ -2,6 +2,14 @@
 
 @section('content')
 <main class="profile-page">
+
+    <!-- Success Message -->
+    @if (session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <!-- User Profile Section -->
     <section class="profile-section">
         <div class="container">
@@ -91,6 +99,12 @@
                                         <h5 class="blog-title">Type: {{ $post->animal_type }}</h5>
                                         @if ($post->rescued)
                                             <p class="blog-meta"><strong>Status:</strong> <span class="status-rescued">Rescued</span></p>
+                                        @else
+                                            <form action="{{ route('rescue-posts.markAsRescued', $post->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-warning btn-sm mt-2" onclick="return confirm('Are you sure this rescue has been completed?')">Rescued</button>
+                                            </form>
                                         @endif
                                         <p class="blog-meta"><strong>Location:</strong> {{ $post->place ?? 'N/A' }}, {{ $post->district }}</p>
                                         <p class="blog-meta"><strong>Date:</strong> {{ $post->created_at->format('d M Y H:i') }}</p>
@@ -109,7 +123,6 @@
             </div>
         </div>
     </section>
-
     <!-- Blog Statistics Section -->
     <section class="blog-stats-section">
         <div class="container">

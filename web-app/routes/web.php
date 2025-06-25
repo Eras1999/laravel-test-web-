@@ -149,6 +149,10 @@ Route::controller(RescuePostsController::class)->middleware(['auth:frontend'])->
     Route::post('/rescue-posts', 'store')->name('rescue-posts.store');
     Route::get('/rescue-posts/{id}', 'show')->name('rescue-posts.show');
     Route::post('/rescue-posts/{id}/comment', 'comment')->name('rescue-posts.comment');
+    Route::patch('/rescue-posts/{id}/mark-rescued', [\App\Http\Controllers\Frontend\RescuePostsController::class, 'markAsRescued'])
+    ->name('rescue-posts.markAsRescued')
+    ->middleware('auth:frontend');
+
 });
 
 Route::controller(AdminRescuePostsController::class)->middleware(['auth', 'verified'])->group(function () {

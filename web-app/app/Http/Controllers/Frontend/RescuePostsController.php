@@ -100,4 +100,14 @@ class RescuePostsController extends Controller
 
         return view('frontend.profile', compact('user', 'rescuePosts'));
     }
+
+    public function markAsRescued($id)
+{
+    $post = RescuePost::where('user_id', auth()->id())->findOrFail($id);
+    $post->rescued = true;
+    $post->save();
+
+    return redirect()->route('profile')->with('success', 'Marked as rescued successfully!');
+}
+
 }
