@@ -172,13 +172,13 @@
     }
 
     .form-control:focus, .form-select:focus {
-        border-color: #ff5733;
+        border-color: #46ac0b;
         box-shadow: none;
         outline: none;
     }
 
     .submit-btn {
-        background: #ff5733;
+        background: #46ac0b;
         color: white;
         padding: 12px 30px;
         border-radius: 25px;
@@ -189,7 +189,7 @@
     }
 
     .submit-btn:hover {
-        background: #e04e2b;
+        background: #46ac0b;
         transform: scale(1.05);
     }
 

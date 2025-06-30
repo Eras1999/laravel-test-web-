@@ -25,7 +25,7 @@
 }
 
 .hero-content .hero-title {
-    background: linear-gradient(45deg,  #ff5733); /* Colorful gradient */
+    background: linear-gradient(45deg,  #46ac0b); /* Colorful gradient */
     color: white;
     padding: 15px 30px;
     border-radius: 20px; /* Square with rounded corners */
@@ -63,7 +63,7 @@
 .about-section h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #333;
+    color: #0a303a;
 }
 
 .about-section p {
@@ -215,7 +215,7 @@
 .our-partnerships .partner-logo img {
     max-width: 150px;
     height: auto;
-    filter: grayscale(100%);
+    filter: grayscale(30%);
     transition: filter 0.3s ease;
 }
 
@@ -231,7 +231,7 @@
 
 .our-impact .impact-stat h3 {
     font-size: 2.5rem;
-    color: #ff5733;
+    color: #46ac0b;
     margin-bottom: 10px;
 }
 
@@ -257,7 +257,7 @@
 }
 
 .cta-section .btn {
-    background: #ff5733;
+    background: #46ac0b;
     color: white;
     padding: 10px 30px;
     border-radius: 25px;

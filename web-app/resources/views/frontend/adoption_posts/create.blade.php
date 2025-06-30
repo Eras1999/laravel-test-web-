@@ -1,6 +1,10 @@
 @extends('frontend.layouts.master')
 
 @section('content')
+
+
+
+
 <main class="adoption-create-page">
     <section class="adoption-create-section">
         <div class="container">
@@ -67,7 +71,7 @@
     }
 
     .create-btn {
-        background: #ff5733;
+        background: #46ac0b;
         color: white;
         padding: 12px 30px;
         border-radius: 25px;
@@ -81,7 +85,7 @@
     }
 
     .create-btn:hover {
-        background: #e04e2b;
+        background: #46ac0b;
         transform: scale(1.05);
     }
 

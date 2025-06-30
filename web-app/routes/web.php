@@ -73,6 +73,7 @@ Route::get('/contact', function () {
     return view('frontend.contact');
 })->name('contact');
 
+
 Route::post('/submit-contact', [App\Http\Controllers\admin\ContactController::class, 'store'])->name('contact.submit');
 
 Route::controller(ContactController::class)->middleware(['auth', 'verified'])->group(function () {

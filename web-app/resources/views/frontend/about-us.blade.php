@@ -24,10 +24,11 @@
     <!-- Our Mission Section -->
     <section class="about-section">
         <div class="container">
+            
             <div class="row">
                 <div class="col-12 text-center">
                     <h2>Our Mission</h2>
-                    <p>At SaveSathwa, our mission is to rescue, rehabilitate, and rehome animals in need, ensuring they find loving families and a safe haven.</p>
+                    <p>At Savesathwa, we are driven by a simple yet powerful goal: to create a world where no animal suffers unnoticed or unaided. Through our AI-Powered Animal Rescue and Assistance Platform, we bridge the gap between animals in distress and the compassionate individuals who can help them. By combining cutting-edge technology with community collaboration, we empower users to report, identify, and respond to animal emergencies swiftly and effectively.<br>Our mission is to reduce suffering, save lives, and foster a culture of empathy and action. Whether it’s an injured stray, an abandoned pet, or a snake in need of safe relocation, Savesathwa ensures that every animal receives the care they deserve. Together, we can build a future where technology and human kindness unite to protect the voiceless and create a safer, more compassionate world for all living beings.</p>
                 </div>
             </div>
         </div>
@@ -42,7 +43,7 @@
                 </div>
                 <div class="col-lg-6">
                     <h2>Our Story</h2>
-                    <p>Founded in 2020, SaveSathwa began as a small group of animal lovers in Colombo, Sri Lanka. Today, we’ve grown into a community-driven platform, having rescued over 5,000 animals and facilitated countless adoptions.</p>
+                    <p>Every day, countless animals face suffering—abandoned on streets, injured in accidents, or struggling to survive in harsh environments. Too often, their cries for help go unheard. Savesathwa was born from a simple question: What if technology could give these voiceless beings a voice?<br><br>Founded by a team of animal lovers and tech innovators, our journey began with a shared vision: to harness the power of artificial intelligence and community action to transform animal rescue. Inspired by real-life stories of animals left helpless due to gaps in existing systems, we set out to build a platform where every report matters, every image can save a life, and every volunteer can make a difference.<br><br>From the first prototype to the AI-powered platform today, Savesathwa has grown into a movement. We’ve witnessed communities rally to rescue snakes, reunite lost pets, and nurse injured strays—all because our platform made it possible. But this is just the beginning.</p>
                 </div>
             </div>
         </div>
@@ -73,7 +74,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="about-card">
-                        <img src="{{ asset('frontend/img/icon/about/community.jpg') }}" alt="Community">
+                        <img src="{{ asset('frontend/img/icon/about/community.png') }}" alt="Community">
                         <h3>Community</h3>
                         <p>We foster a supportive community of animal lovers, encouraging involvement through events and volunteering.</p>
                     </div>
@@ -130,22 +131,22 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="partner-logo">
-                        <img src="{{ asset('frontend/img/about/partner1.png') }}" alt="Partner 1">
+                        <img src="{{ asset('frontend/img/about/partner.jpeg') }}" alt="Partner 1">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="partner-logo">
-                        <img src="{{ asset('frontend/img/about/partner1.png') }}" alt="Partner 2">
+                        <img src="{{ asset('frontend/img/about/volunteer_logo.png') }}" alt="Partner 2">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="partner-logo">
-                        <img src="{{ asset('frontend/img/about/partner1.png') }}" alt="Partner 3">
+                        <img src="{{ asset('frontend/img/about/Rescue-Animals-Logo-NEW-768x768.jpeg') }}" alt="Partner 3">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="partner-logo">
-                        <img src="{{ asset('frontend/img/about/partner1.png') }}" alt="Partner 4">
+                        <img src="{{ asset('frontend/img/about/WhatsApp Image 2025-06-08 at 11.57.43_d543d219.jpg') }}" alt="Partner 4">
                     </div>
                 </div>
                 
@@ -191,7 +192,7 @@
                 <div class="col-12 text-center">
                     <h2>Join Our Mission</h2>
                     <p>Be a part of our journey to save more animals. Adopt, donate, or volunteer today!</p>
-                    <a href="adoption.html" class="btn">Get Involved</a>
+                    <a href="{{ route('rescue-posts.index') }}" class="btn">Get Involved</a>
                 </div>
             </div>
         </div>
