@@ -54,7 +54,7 @@ class AdoptionPostsController extends Controller
     public function index(Request $request)
     {
         $query = AdoptionPost::where('status', 'approved')
-            ->where('approved_at', '>=', now()->subHours(24));
+            ->where('approved_at', '>=', now()->subDays(7));
 
         if ($request->filled('district')) {
             $query->where('district', $request->district);
@@ -72,7 +72,7 @@ class AdoptionPostsController extends Controller
     public function adopted(Request $request, $id)
     {
         $post = AdoptionPost::findOrFail($id);
-        if ($post->status === 'approved' && now()->diffInHours($post->approved_at) < 24) {
+        if ($post->status === 'approved' && now()->diffInDays($post->approved_at) < 7) {
             $post->update(['status' => 'rejected']);
             return redirect()->route('profile')->with('success', 'Post marked as adopted and moved to rejected status in admin panel. Adopted count updated.');
         }
@@ -82,7 +82,7 @@ class AdoptionPostsController extends Controller
     public function repost(Request $request, $id)
     {
         $post = AdoptionPost::findOrFail($id);
-        if ($post->status === 'expired' || ($post->status === 'approved' && now()->diffInHours($post->approved_at) >= 24)) {
+        if ($post->status === 'expired' || ($post->status === 'approved' && now()->diffInDays($post->approved_at) >= 7)) {
             $post->update(['status' => 'pending', 'approved_at' => null]);
             return redirect()->route('profile')->with('success', 'Post marked for reposting and awaiting approval. Pending count updated.');
         }

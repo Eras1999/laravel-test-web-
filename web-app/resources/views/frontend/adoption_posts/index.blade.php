@@ -2,12 +2,32 @@
 
 @section('content')
 <main class="adoption-index-page">
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/about1.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">Adopt a Pet</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Adopt a Pet</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+
     <section class="adoption-index-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12">
                     <div class="adoption-card">
-                        <h2 class="section-title">Adopt a Pet</h2>
+                        <h2 class="section-title">Find Your Perfect Companion</h2>
 
                         <!-- Filtering System -->
                         <div class="filter-section mb-4">
@@ -31,8 +51,16 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Apply Filters</button>
-                                <a href="{{ route('adoption-posts.index') }}" class="btn btn-secondary">Reset Filters</a>
+                                <div class="filter-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i>
+                                        Apply Filters
+                                    </button>
+                                    <a href="{{ route('adoption-posts.index') }}" class="btn btn-outline">
+                                        <i class="fas fa-refresh"></i>
+                                        Reset
+                                    </a>
+                                </div>
                             </form>
                         </div>
 
@@ -40,39 +68,81 @@
                         <div class="adoption-grid">
                             @forelse ($posts as $post)
                                 <div class="adoption-item">
-                                    <div class="adoption-image-container">
+                                    <div class="adoption-image-container" onclick="openImageModal('{{ $post->image ? asset('storage/' . $post->image) : '' }}', '{{ $post->title }}')">
                                         @if ($post->image)
                                             <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="adoption-image">
+                                            <div class="image-zoom-hint">
+                                                <i class="fas fa-search-plus"></i>
+                                            </div>
                                         @else
                                             <div class="adoption-placeholder">
-                                                <i class="fas fa-image"></i>
+                                                <i class="fas fa-paw"></i>
                                             </div>
                                         @endif
+                                        <div class="adoption-overlay">
+                                            <div class="adoption-badges">
+                                                <span class="badge category-badge">{{ ucfirst($post->category) }}</span>
+                                                @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < (7 * 24))
+                                                    <span class="badge time-badge">
+                                                        @php
+                                                            $remainingMinutes = now()->diffInMinutes($post->approved_at->addDays(7));
+                                                            $days = floor($remainingMinutes / (60 * 24));
+                                                            $hours = floor(($remainingMinutes % (60 * 24)) / 60);
+                                                            $minutes = $remainingMinutes % 60;
+                                                        @endphp
+                                                        {{ $days }}d {{ $hours }}h left
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="adoption-content">
                                         <h5 class="adoption-title">{{ $post->title }}</h5>
-                                        <div class="adoption-meta mb-2">
-                                            <span class="badge bg-primary">{{ ucfirst($post->category) }}</span>
-                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
-                                                <span class="badge bg-success">
-                                                    @php
-                                                        $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
-                                                        $hours = floor($remainingMinutes / 60);
-                                                        $minutes = $remainingMinutes % 60;
-                                                    @endphp
-                                                    Time Left: {{ $hours }}h {{ $minutes }}m
-                                                </span>
-                                            @endif
+                                        
+                                        <div class="adoption-details">
+                                            <div class="detail-item">
+                                                <div class="detail-icon">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </div>
+                                                <div class="detail-text">
+                                                    <span class="detail-label">Location</span>
+                                                    <span class="detail-value">{{ $post->nearby_city }}, {{ $post->city }}</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="detail-item">
+                                                <div class="detail-icon">
+                                                    <i class="fas fa-phone"></i>
+                                                </div>
+                                                <div class="detail-text">
+                                                    <span class="detail-label">Contact</span>
+                                                    <span class="detail-value">{{ $post->mobile_number }}</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="detail-item">
+                                                <div class="detail-icon">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div class="detail-text">
+                                                    <span class="detail-label">Posted by</span>
+                                                    <span class="detail-value">{{ $post->author_name }}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <p class="adoption-meta"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ $post->nearby_city }}, {{ $post->city }}, {{ $post->district }}</p>
-                                        <p class="adoption-meta"><i class="fas fa-phone"></i> <strong>Contact:</strong> {{ $post->mobile_number }}</p>
-                                        <p class="adoption-meta"><i class="fas fa-user"></i> <strong>Posted by:</strong> {{ $post->author_name }}</p>
-                                        <p class="adoption-description"><strong>Description:</strong> {{ $post->description }}</p>
+                                        
+                                        <div class="adoption-description">
+                                            <p>{{ $post->description }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             @empty
                                 <div class="no-posts">
-                                    <p class="text-muted">No adoption posts available at the moment.</p>
+                                    <div class="no-posts-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <h3>No pets found</h3>
+                                    <p>Try adjusting your filters to see more adoption posts.</p>
                                 </div>
                             @endforelse
                         </div>
@@ -81,224 +151,710 @@
             </div>
         </div>
     </section>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeImageModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-caption">
+                <h4 id="modalTitle"></h4>
+            </div>
+        </div>
+    </div>
 </main>
 @endsection
 
 @section('styles')
 <style>
     .adoption-index-page {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        font-family: 'Poppins', sans-serif;
-        padding: 40px 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        padding: 60px 0;
         min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    .adoption-index-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.8" fill="rgba(255,255,255,0.04)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        pointer-events: none;
+        z-index: 0;
     }
 
     .adoption-index-section {
-        width: 100%;
+        position: relative;
+        z-index: 1;
     }
 
     .adoption-card {
         background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-        backdrop-filter: blur(10px);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 24px;
+        box-shadow: 
+            0 32px 64px rgba(0, 0, 0, 0.12),
+            0 0 0 1px rgba(255, 255, 255, 0.05);
+        padding: 48px;
+        backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
     }
 
-    .adoption-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    .adoption-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+        background-size: 300% 100%;
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
 
     .section-title {
-        font-size: 2rem;
-        color: #333;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 30px;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-align: center;
+        margin-bottom: 48px;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
     }
 
     .filter-section {
-        background: #f9f9f9;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+        border-radius: 20px;
+        padding: 32px;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
     }
 
     .filter-section .form-label {
         font-weight: 600;
-        color: #333;
+        color: #374151;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
     }
 
     .filter-section .form-select {
-        border-radius: 8px;
-        padding: 8px;
+        border: 2px solid rgba(102, 126, 234, 0.1);
+        border-radius: 12px;
+        padding: 14px 16px;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .filter-section .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        outline: none;
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .filter-actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+    }
+
+    .filter-section .btn {
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
     }
 
     .filter-section .btn-primary {
-        background-color: #007bff;
-        border: none;
-        padding: 8px 20px;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
     }
 
-    .filter-section .btn-secondary {
-        background-color: #6c757d;
-        border: none;
-        padding: 8px 20px;
-        border-radius: 8px;
-        margin-left: 10px;
+    .filter-section .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
+    }
+
+    .filter-section .btn-outline {
+        background: rgba(255, 255, 255, 0.8);
+        color: #667eea;
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        backdrop-filter: blur(10px);
+    }
+
+    .filter-section .btn-outline:hover {
+        background: rgba(102, 126, 234, 0.1);
+        border-color: #667eea;
+        color: #667eea;
+        transform: translateY(-1px);
     }
 
     .adoption-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 32px;
     }
 
     .adoption-item {
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 24px;
         overflow: hidden;
-        transition: transform 0.3s ease;
-        display: flex;
-        flex-direction: column;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 
+            0 10px 40px rgba(0, 0, 0, 0.1),
+            0 0 0 1px rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        position: relative;
     }
 
     .adoption-item:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.15),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
     }
 
     .adoption-image-container {
+        position: relative;
         width: 100%;
-        height: 200px;
+        height: 280px;
         overflow: hidden;
+        cursor: pointer;
+    }
+
+    .image-zoom-hint {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        z-index: 2;
+    }
+
+    .adoption-image-container:hover .image-zoom-hint {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
     }
 
     .adoption-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 10px 10px 0 0;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .adoption-item:hover .adoption-image {
+        transform: scale(1.1);
     }
 
     .adoption-placeholder {
         width: 100%;
-        height: 200px;
-        background: #f0f0f0;
+        height: 280px;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 10px 10px 0 0;
+        position: relative;
     }
 
     .adoption-placeholder i {
-        font-size: 2.5rem;
-        color: #ccc;
+        font-size: 4rem;
+        color: #cbd5e1;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
+    }
+
+    .adoption-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.4) 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .adoption-item:hover .adoption-overlay {
+        opacity: 1;
+    }
+
+    .adoption-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .adoption-badges .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .category-badge {
+        background: rgba(102, 126, 234, 0.9);
+        color: white;
+    }
+
+    .time-badge {
+        background: rgba(16, 185, 129, 0.9);
+        color: white;
     }
 
     .adoption-content {
-        padding: 20px;
-        flex-grow: 1;
+        padding: 32px;
     }
 
     .adoption-title {
         font-size: 1.5rem;
-        color: #333;
-        margin-bottom: 10px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 24px;
+        line-height: 1.3;
     }
 
-    .adoption-meta {
-        font-size: 0.9rem;
-        color: #666;
-        margin-bottom: 8px;
+    .adoption-details {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .detail-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .detail-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
     }
 
-    .adoption-meta i {
-        margin-right: 8px;
-        color: #007bff;
+    .detail-icon i {
+        color: #667eea;
+        font-size: 1rem;
+    }
+
+    .detail-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .detail-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .detail-value {
+        font-size: 0.95rem;
+        color: #374151;
+        font-weight: 500;
     }
 
     .adoption-description {
-        font-size: 0.95rem;
-        color: #666;
-        line-height: 1.6;
-        margin-top: 10px;
+        background: rgba(102, 126, 234, 0.05);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 24px;
+        border-left: 4px solid #667eea;
     }
 
-    .adoption-meta .badge {
-        margin-right: 5px;
-        font-size: 0.85rem;
+    .adoption-description p {
+        color: #4b5563;
+        line-height: 1.6;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    /* Image Modal Styles */
+    .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .image-modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .modal-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal-close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(245, 87, 108, 0.4);
+        transition: all 0.3s ease;
+        z-index: 10001;
+    }
+
+    .modal-close:hover {
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 8px 24px rgba(245, 87, 108, 0.6);
+    }
+
+    #modalImage {
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-caption {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .modal-caption h4 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes modalSlideIn {
+        from { 
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+        }
+        to { 
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    /* Modal Responsive Design */
+    @media (max-width: 768px) {
+        .modal-content {
+            margin: 10px;
+            padding: 15px;
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        #modalImage {
+            max-height: 60vh;
+        }
+
+        .modal-caption h4 {
+            font-size: 1.2rem;
+        }
+
+        .modal-close {
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .modal-content {
+            margin: 5px;
+            padding: 10px;
+        }
+
+        #modalImage {
+            max-height: 50vh;
+        }
+
+        .modal-caption h4 {
+            font-size: 1.1rem;
+        }
     }
 
     .no-posts {
         grid-column: 1 / -1;
         text-align: center;
-        padding: 20px;
+        padding: 80px 40px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 24px;
+        backdrop-filter: blur(10px);
     }
 
+    .no-posts-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+    }
+
+    .no-posts-icon i {
+        font-size: 2rem;
+        color: #667eea;
+    }
+
+    .no-posts h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 8px;
+    }
+
+    .no-posts p {
+        color: #6b7280;
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    /* Responsive Design */
     @media (max-width: 991px) {
-        .section-title {
-            font-size: 1.8rem;
+        .adoption-card {
+            padding: 32px;
         }
-
-        .col-lg-10 {
-            flex: 0 0 90%;
-            max-width: 90%;
-        }
-
+        
         .adoption-grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
     }
 
     @media (max-width: 767px) {
-        .adoption-index-section {
-            padding: 30px 15px;
+        .adoption-index-page {
+            padding: 40px 0;
         }
-
+        
         .adoption-card {
-            padding: 20px;
+            padding: 24px;
         }
-
-        .section-title {
-            font-size: 1.6rem;
+        
+        .filter-section {
+            padding: 24px;
         }
-
-        .adoption-image-container, .adoption-placeholder {
-            height: 150px;
+        
+        .filter-actions {
+            flex-direction: column;
         }
-
-        .adoption-title {
-            font-size: 1.3rem;
+        
+        .filter-section .btn {
+            width: 100%;
+            justify-content: center;
         }
-
-        .adoption-description {
-            font-size: 0.9rem;
+        
+        .adoption-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .adoption-content {
+            padding: 24px;
         }
     }
 
     @media (max-width: 576px) {
-        .section-title {
-            font-size: 1.4rem;
+        .adoption-image-container,
+        .adoption-placeholder {
+            height: 220px;
         }
-
-        .adoption-grid {
-            grid-template-columns: 1fr;
-        }
-
+        
         .adoption-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
+        
+        .no-posts {
+            padding: 60px 20px;
+        }
+    }
 
-        .adoption-meta, .adoption-description {
-            font-size: 0.85rem;
+    /* Breadcrumb Styles - UNCHANGED */
+    .breadcrumb-area {
+        background-size: cover;
+        background-position: center;
+        padding: 100px 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    .breadcrumb-area::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+
+    .breadcrumb-content .title {
+        color: #fff;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .breadcrumb .breadcrumb-item a {
+        color: #ddd;
+        text-decoration: none;
+    }
+
+    .breadcrumb .breadcrumb-item a:hover {
+        color: #fff;
+    }
+
+    .breadcrumb .breadcrumb-item.active {
+        color: #fff;
+    }
+
+    @media (max-width: 767px) {
+        .breadcrumb-content .title {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .breadcrumb-content .title {
+            font-size: 1.5rem;
         }
     }
 </style>
+
+<script>
+function openImageModal(imageSrc, title) {
+    if (!imageSrc) return; // Don't open modal for placeholder images
+    
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    modalImage.src = imageSrc;
+    modalTitle.textContent = title;
+    modal.classList.add('show');
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('show');
+    
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal on Escape key press
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeImageModal();
+    }
+});
+
+// Prevent modal from closing when clicking on the image
+document.getElementById('modalImage').addEventListener('click', function(event) {
+    event.stopPropagation();
+});
+</script>
 @endsection

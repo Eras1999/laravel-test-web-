@@ -123,6 +123,7 @@
             </div>
         </div>
     </section>
+
     <!-- Blog Statistics Section -->
     <section class="blog-stats-section">
         <div class="container">
@@ -235,7 +236,7 @@
                             <div class="stat-item">
                                 <i class="fas fa-paw"></i>
                                 <span class="stat-label">Adopted</span>
-                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'rejected')->where('approved_at', '<', now()->subHours(24))->count() }}</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'rejected')->where('approved_at', '<', now()->subDays(7))->count() }}</span>
                             </div>
                         </div>
                     </div>
@@ -267,7 +268,7 @@
                                             </div>
                                         @endif
                                         <h5 class="blog-title">{{ $post->title }}</h5>
-                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) >= 24)
+                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) >= (7 * 24))
                                             <div class="adoption-actions mt-2">
                                                 <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
@@ -278,14 +279,15 @@
                                             <p class="blog-meta"><strong>Status:</strong> <span class="status-expired">Expired</span></p>
                                         @else
                                             <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
-                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
+                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < (7 * 24))
                                                 <p class="blog-meta"><strong>Time Remaining:</strong>
                                                     @php
-                                                        $remainingMinutes = now()->diffInMinutes($post->approved_at->addHours(24));
-                                                        $hours = floor($remainingMinutes / 60);
+                                                        $remainingMinutes = now()->diffInMinutes($post->approved_at->addDays(7));
+                                                        $days = floor($remainingMinutes / (60 * 24));
+                                                        $hours = floor(($remainingMinutes % (60 * 24)) / 60);
                                                         $minutes = $remainingMinutes % 60;
                                                     @endphp
-                                                    {{ $hours }}h {{ $minutes }}m
+                                                    {{ $days }}d {{ $hours }}h {{ $minutes }}m
                                                 </p>
                                             @endif
                                         @endif
@@ -293,7 +295,7 @@
                                         <p class="blog-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
                                         <p class="blog-excerpt">{{ Str::limit($post->description, 100) }}</p>
                                         <div class="adoption-actions mt-2">
-                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < 24)
+                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < (7 * 24))
                                                 <form action="{{ route('adoption-posts.adopted', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')
