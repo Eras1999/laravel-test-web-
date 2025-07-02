@@ -146,6 +146,64 @@
                                 </div>
                             @endforelse
                         </div>
+
+                        <!-- Pagination -->
+                        @if($posts->hasPages())
+                            <div class="pagination-wrapper">
+                                <div class="pagination-info">
+                                    <span class="pagination-text">
+                                        Showing {{ $posts->firstItem() }} to {{ $posts->lastItem() }} of {{ $posts->total() }} results
+                                    </span>
+                                </div>
+                                
+                                <nav class="pagination-nav" aria-label="Pagination Navigation">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($posts->onFirstPage())
+                                            <li class="page-item disabled">
+                                                <span class="page-link">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                </span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $posts->previousPageUrl() }}" rel="prev">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                        {{-- Pagination Elements --}}
+                                        @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
+                                            @if ($page == $posts->currentPage())
+                                                <li class="page-item active">
+                                                    <span class="page-link">{{ $page }}</span>
+                                                </li>
+                                            @else
+                                                <li class="page-item">
+                                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+
+                                        {{-- Next Page Link --}}
+                                        @if ($posts->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $posts->nextPageUrl() }}" rel="next">
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled">
+                                                <span class="page-link">
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -654,6 +712,191 @@
             width: 35px;
             height: 35px;
             font-size: 18px;
+        }
+    }
+
+    /* Pagination Styles */
+    .pagination-wrapper {
+        margin-top: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .pagination-info {
+        text-align: center;
+    }
+
+    .pagination-text {
+        color: #6b7280;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 8px 16px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .pagination-nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .page-item {
+        display: flex;
+    }
+
+    .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 48px;
+        height: 48px;
+        padding: 0 16px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(102, 126, 234, 0.1);
+        border-radius: 16px;
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .page-link:hover::before {
+        left: 100%;
+    }
+
+    .page-link:hover {
+        transform: translateY(-2px) scale(1.05);
+        border-color: #667eea;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .page-item.active .page-link {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: transparent;
+        box-shadow: 
+            0 8px 24px rgba(102, 126, 234, 0.4),
+            0 0 0 3px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .page-item.active .page-link:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 
+            0 12px 32px rgba(102, 126, 234, 0.5),
+            0 0 0 3px rgba(102, 126, 234, 0.15);
+    }
+
+    .page-item.disabled .page-link {
+        background: rgba(255, 255, 255, 0.5);
+        color: #d1d5db;
+        border-color: rgba(209, 213, 219, 0.3);
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    .page-item.disabled .page-link:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .page-link i {
+        font-size: 0.9rem;
+    }
+
+    /* Pagination Animation */
+    @keyframes pageSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pagination-wrapper {
+        animation: pageSlideIn 0.6s ease-out;
+    }
+
+    /* Pagination Responsive Design */
+    @media (max-width: 768px) {
+        .pagination-wrapper {
+            margin-top: 40px;
+            gap: 16px;
+        }
+
+        .pagination {
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .page-link {
+            min-width: 44px;
+            height: 44px;
+            padding: 0 12px;
+            font-size: 0.9rem;
+            border-radius: 14px;
+        }
+
+        .pagination-text {
+            font-size: 0.85rem;
+            padding: 6px 12px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pagination {
+            gap: 4px;
+        }
+
+        .page-link {
+            min-width: 40px;
+            height: 40px;
+            padding: 0 10px;
+            font-size: 0.85rem;
+            border-radius: 12px;
+        }
+
+        .pagination-text {
+            font-size: 0.8rem;
+        }
+
+        /* Hide some page numbers on very small screens */
+        .page-item:not(.active):not(:first-child):not(:last-child):not(:nth-child(2)):not(:nth-last-child(2)) {
+            display: none;
         }
     }
 

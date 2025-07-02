@@ -53,18 +53,26 @@ class AdoptionPostsController extends Controller
 
     public function index(Request $request)
     {
+        // Build the query for approved posts within the last 7 days
         $query = AdoptionPost::where('status', 'approved')
-            ->where('approved_at', '>=', now()->subDays(7));
+            ->where('approved_at', '>=', now()->subDays(7))
+            ->orderBy('approved_at', 'desc');
 
+        // Apply district filter if provided
         if ($request->filled('district')) {
             $query->where('district', $request->district);
         }
 
+        // Apply category filter if provided
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
 
-        $posts = $query->get();
+        // Paginate the results (6 posts per page)
+        $posts = $query->paginate(6);
+
+        // Append query parameters to pagination links to maintain filters
+        $posts->appends($request->query());
 
         return view('frontend.adoption_posts.index', compact('posts'));
     }
