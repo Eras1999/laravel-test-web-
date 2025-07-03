@@ -12,10 +12,10 @@ use Carbon\Carbon;
 class RescuePostsController extends Controller
 {
     public function index()
-    {
-        $rescuePosts = RescuePost::orderBy('created_at', 'desc')->get();
-        return view('frontend.rescue_posts.index', compact('rescuePosts'));
-    }
+{
+    $rescuePosts = RescuePost::orderBy('created_at', 'desc')->paginate(6);
+    return view('frontend.rescue_posts.index', compact('rescuePosts'));
+}
 
     public function store(Request $request)
     {
