@@ -11,6 +11,7 @@
                             <h2 class="section-title">🐾 Rescue Posts</h2>
                             <p class="section-subtitle">Help save lives, one paw at a time</p>
                         </div>
+                        
                         <button class="btn btn-primary mb-4 upload-btn" id="upload-post-btn">
                             <i class="fas fa-plus"></i> Upload Rescue Post
                         </button>
@@ -20,7 +21,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="author_name" class="form-label">👤 Author Name</label>
-                                        <input type="text" name="author_name" id="author_name" class="form-control modern-input" value="{{ Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->name : old('author_name') }}" required>
+                                        <input type="text" name="author_name" id="author_name" class="form-control modern-input" value="{{ Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->name : old('author_name') }}" readonly required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="animal_type" class="form-label">🐾 Animal Type</label>
@@ -85,6 +86,86 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- Modern Filter Section -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h4 class="filter-title">
+                                    <i class="fas fa-filter"></i> Find Rescue Posts
+                                </h4>
+                                <button type="button" class="btn btn-outline-secondary btn-sm toggle-filter" id="toggle-filter">
+                                    <i class="fas fa-chevron-down"></i> Filters
+                                </button>
+                            </div>
+                            
+                            <div class="filter-content" id="filter-content">
+                                <form method="GET" action="{{ route('rescue-posts.index') }}" id="filter-form">
+                                    <div class="row g-3">
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="filter-group">
+                                                <label class="filter-label">
+                                                    <i class="fas fa-paw"></i> Animal Type
+                                                </label>
+                                                <select name="animal_type" id="animal_type_filter" class="form-select modern-filter-select">
+                                                    <option value="">All Animals</option>
+                                                    <option value="Dog" {{ request('animal_type') == 'Dog' ? 'selected' : '' }}>🐕 Dog</option>
+                                                    <option value="Cat" {{ request('animal_type') == 'Cat' ? 'selected' : '' }}>🐱 Cat</option>
+                                                    <option value="Bird" {{ request('animal_type') == 'Bird' ? 'selected' : '' }}>🐦 Bird</option>
+                                                    <option value="Snake" {{ request('animal_type') == 'Snake' ? 'selected' : '' }}>🐍 Snake</option>
+                                                    <option value="Other" {{ request('animal_type') == 'Other' ? 'selected' : '' }}>🦎 Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="filter-group">
+                                                <label class="filter-label">
+                                                    <i class="fas fa-map-marker-alt"></i> District
+                                                </label>
+                                                <select name="district" id="district_filter" class="form-select modern-filter-select">
+                                                    <option value="">All Districts</option>
+                                                    @foreach ($rescuePosts->pluck('district')->unique()->filter()->values() as $district)
+                                                        <option value="{{ $district }}" {{ request('district') == $district ? 'selected' : '' }}>
+                                                            {{ $district }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="filter-group">
+                                                <label class="filter-label">
+                                                    <i class="fas fa-heartbeat"></i> Health Status
+                                                </label>
+                                                <select name="healthy_status" id="healthy_status_filter" class="form-select modern-filter-select">
+                                                    <option value="">All Statuses</option>
+                                                    <option value="Healthy but Abandoned" {{ request('healthy_status') == 'Healthy but Abandoned' ? 'selected' : '' }}>💚 Healthy but Abandoned</option>
+                                                    <option value="Injured" {{ request('healthy_status') == 'Injured' ? 'selected' : '' }}>🩹 Injured</option>
+                                                    <option value="Sick or Weak" {{ request('healthy_status') == 'Sick or Weak' ? 'selected' : '' }}>😷 Sick or Weak</option>
+                                                    <option value="In Critical Condition" {{ request('healthy_status') == 'In Critical Condition' ? 'selected' : '' }}>🚨 In Critical Condition</option>
+                                                    <option value="Unknown / Not Sure" {{ request('healthy_status') == 'Unknown / Not Sure' ? 'selected' : '' }}>❓ Unknown / Not Sure</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="filter-actions">
+                                        <button type="submit" class="btn btn-primary filter-apply-btn">
+                                            <i class="fas fa-search"></i> Apply Filters
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary filter-clear-btn" id="clear-filters">
+                                            <i class="fas fa-times"></i> Clear All
+                                        </button>
+                                        <div class="filter-count">
+                                            <span class="badge bg-info">{{ $rescuePosts->total() }} {{ Str::plural('result', $rescuePosts->total()) }}</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        
+                        
                         <div class="rescue-posts-grid" id="rescue-posts-container">
                             @forelse ($rescuePosts as $index => $post)
                                 <div class="rescue-post-item" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
@@ -141,52 +222,49 @@
                         </div>
                         
                         <!-- Pagination -->
-@if($rescuePosts->hasPages())
-<div class="pagination-wrapper">
-    <nav aria-label="Rescue posts pagination">
-        <ul class="pagination modern-pagination">
-            {{-- Previous Page Link --}}
-            @if ($rescuePosts->onFirstPage())
-                <li class="page-item disabled">
-                    <span class="page-link" aria-label="Previous">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                </li>
-            @else
-                <li class="page-item">
-                    <a class="page-link" href="{{ $rescuePosts->previousPageUrl() }}" aria-label="Previous">
-                        <i class="fas fa-chevron-left"></i>
-                    </a>
-                </li>
-            @endif
+                        @if($rescuePosts->hasPages())
+                        <div class="pagination-wrapper">
+                            <nav aria-label="Rescue posts pagination">
+                                <ul class="pagination modern-pagination">
+                                    @if ($rescuePosts->onFirstPage())
+                                        <li class="page-item disabled">
+                                            <span class="page-link" aria-label="Previous">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </span>
+                                        </li>
+                                    @else
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $rescuePosts->previousPageUrl() }}" aria-label="Previous">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                    @endif
 
-            {{-- Pagination Elements --}}
-            @foreach ($rescuePosts->getUrlRange(1, $rescuePosts->lastPage()) as $page => $url)
-                @if ($page == $rescuePosts->currentPage())
-                    <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
-                @else
-                    <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                @endif
-            @endforeach
+                                    @foreach ($rescuePosts->getUrlRange(1, $rescuePosts->lastPage()) as $page => $url)
+                                        @if ($page == $rescuePosts->currentPage())
+                                            <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                        @else
+                                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                        @endif
+                                    @endforeach
 
-            {{-- Next Page Link --}}
-            @if ($rescuePosts->hasMorePages())
-                <li class="page-item">
-                    <a class="page-link" href="{{ $rescuePosts->nextPageUrl() }}" aria-label="Next">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-            @else
-                <li class="page-item disabled">
-                    <span class="page-link" aria-label="Next">
-                        <i class="fas fa-chevron-right"></i>
-                    </span>
-                </li>
-            @endif
-        </ul>
-    </nav>
-</div>
-@endif
+                                    @if ($rescuePosts->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $rescuePosts->nextPageUrl() }}" aria-label="Next">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li class="page-item disabled">
+                                            <span class="page-link" aria-label="Next">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </span>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </nav>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -285,6 +363,7 @@
         box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
     }
 
+    /* Updated Form Styles - Responsive */
     .upload-form-container {
         display: none;
         background: linear-gradient(135deg, #f8f9ff, #e6e9ff);
@@ -318,6 +397,8 @@
         font-size: 14px;
         transition: all 0.3s ease;
         background: white;
+        width: 100%;
+        min-height: 48px;
     }
 
     .modern-input:focus, .modern-select:focus, .modern-textarea:focus {
@@ -332,6 +413,7 @@
         overflow: hidden;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         margin-top: 15px;
+        width: 100%;
     }
 
     .map-info {
@@ -341,6 +423,7 @@
         margin-top: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         font-size: 14px;
+        word-wrap: break-word;
     }
 
     .modern-btn {
@@ -349,10 +432,190 @@
         font-weight: 600;
         transition: all 0.3s ease;
         margin-right: 10px;
+        min-width: 120px;
     }
 
     .modern-btn:hover {
         transform: translateY(-2px);
+    }
+
+    .location-options {
+        width: 100%;
+    }
+
+    .location-options .row {
+        margin: 0;
+    }
+
+    .location-options .col-md-4,
+    .location-options .col-md-8 {
+        padding: 0 7.5px;
+    }
+
+    /* Responsive Filter Section Styles */
+    .filter-section {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .filter-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filter-title i {
+        color: #667eea;
+        font-size: 1.1rem;
+    }
+
+    .toggle-filter {
+        border: 2px solid #667eea;
+        color: #667eea;
+        border-radius: 25px;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+        background: white;
+        white-space: nowrap;
+    }
+
+    .toggle-filter:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .filter-content {
+        opacity: 1;
+        max-height: 500px;
+        overflow: hidden;
+        transition: all 0.5s ease;
+    }
+
+    .filter-content.hidden {
+        opacity: 0;
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .filter-group {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .filter-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+
+    .filter-label i {
+        color: #667eea;
+        font-size: 0.85rem;
+    }
+
+    .modern-filter-select {
+        border: 2px solid #e1e5e9;
+        border-radius: 15px;
+        padding: 12px 18px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background: white;
+        height: 50px;
+        width: 100%;
+    }
+
+    .modern-filter-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        outline: none;
+    }
+
+    .modern-filter-select:hover {
+        border-color: #667eea;
+    }
+
+    .filter-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(102, 126, 234, 0.1);
+        flex-wrap: wrap;
+    }
+
+    .filter-apply-btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        white-space: nowrap;
+    }
+
+    .filter-apply-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .filter-clear-btn {
+        border: 2px solid #6c757d;
+        color: #6c757d;
+        background: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .filter-clear-btn:hover {
+        background: #6c757d;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .filter-count {
+        margin-left: auto;
+    }
+
+    .filter-count .badge {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #17a2b8, #138496);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
     }
 
     .rescue-posts-grid {
@@ -433,12 +696,6 @@
         animation: pulse 2s infinite;
     }
 
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-
     .read-more-btn {
         background: linear-gradient(135deg, #667eea, #764ba2);
         border: none;
@@ -515,6 +772,96 @@
         color: white;
     }
 
+    /* Responsive Styles for Form */
+    @media (max-width: 1199px) {
+        .upload-form-container {
+            padding: 25px;
+        }
+        
+        .modern-input, .modern-select, .modern-textarea {
+            padding: 10px 15px;
+            font-size: 13px;
+        }
+        
+        .modern-map {
+            height: 280px;
+        }
+        
+        .filter-section {
+            padding: 20px;
+        }
+        
+        .filter-title {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .upload-form-container {
+            padding: 20px;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        
+        .modern-input, .modern-select, .modern-textarea {
+            padding: 10px 14px;
+            font-size: 13px;
+            border-radius: 12px;
+            min-height: 45px;
+        }
+        
+        .modern-map {
+            height: 260px;
+        }
+        
+        .map-info {
+            padding: 12px;
+            font-size: 13px;
+        }
+        
+        .modern-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            margin-right: 8px;
+            min-width: 110px;
+        }
+        
+        .location-options .col-md-4,
+        .location-options .col-md-8 {
+            padding: 0 5px;
+        }
+        
+        .filter-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .filter-title {
+            font-size: 1.1rem;
+        }
+        
+        .toggle-filter {
+            align-self: flex-end;
+            padding: 10px 20px;
+        }
+        
+        .filter-actions {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        
+        .filter-count {
+            margin-left: 0;
+            align-self: center;
+            margin-top: 10px;
+        }
+    }
+
     @media (max-width: 767px) {
         .section-title {
             font-size: 2rem;
@@ -529,12 +876,388 @@
             gap: 20px;
         }
         
-        .modern-map {
-            height: 250px;
-        }
-        
         .rescue-image, .rescue-placeholder {
             height: 200px;
+        }
+        
+        .upload-form-container {
+            padding: 15px;
+            border-radius: 15px;
+        }
+        
+        .form-label {
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .modern-input, .modern-select, .modern-textarea {
+            padding: 8px 12px;
+            font-size: 12px;
+            border-radius: 10px;
+            min-height: 42px;
+        }
+        
+        .modern-textarea {
+            min-height: 80px;
+        }
+        
+        .modern-map {
+            height: 240px;
+            border-radius: 12px;
+        }
+        
+        .map-info {
+            padding: 10px;
+            font-size: 12px;
+            border-radius: 8px;
+        }
+        
+        .modern-btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            margin-right: 5px;
+            margin-bottom: 8px;
+            min-width: 100px;
+            border-radius: 20px;
+        }
+        
+        .location-options .row {
+            margin: 0 -5px;
+        }
+        
+        .location-options .col-md-4,
+        .location-options .col-md-8 {
+            padding: 0 5px;
+            margin-bottom: 10px;
+        }
+        
+        .location-options .col-md-4 {
+            margin-bottom: 10px;
+        }
+        
+        .location-options .col-md-8 {
+            margin-bottom: 15px;
+        }
+        
+        .filter-section {
+            padding: 15px;
+            border-radius: 15px;
+        }
+        
+        .filter-header {
+            margin-bottom: 15px;
+        }
+        
+        .filter-title {
+            font-size: 1rem;
+            gap: 8px;
+        }
+        
+        .filter-title i {
+            font-size: 0.9rem;
+        }
+        
+        .toggle-filter {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-label {
+            font-size: 0.85rem;
+            gap: 6px;
+        }
+        
+        .modern-filter-select {
+            padding: 10px 15px;
+            font-size: 13px;
+            height: 45px;
+            border-radius: 12px;
+        }
+        
+        .filter-actions {
+            margin-top: 15px;
+            padding-top: 15px;
+            gap: 10px;
+        }
+        
+        .filter-apply-btn,
+        .filter-clear-btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .filter-count .badge {
+            font-size: 0.85rem;
+            padding: 8px 14px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .upload-form-container {
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .form-label {
+            font-size: 12px;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .modern-input, .modern-select, .modern-textarea {
+            padding: 6px 10px;
+            font-size: 11px;
+            border-radius: 8px;
+            min-height: 38px;
+        }
+        
+        .modern-textarea {
+            min-height: 70px;
+        }
+        
+        .modern-map {
+            height: 220px;
+            border-radius: 10px;
+        }
+        
+        .map-info {
+            padding: 8px;
+            font-size: 11px;
+            border-radius: 6px;
+        }
+        
+        .modern-btn {
+            padding: 6px 14px;
+            font-size: 12px;
+            margin-right: 4px;
+            margin-bottom: 6px;
+            min-width: 90px;
+            border-radius: 18px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .location-options .row {
+            margin: 0 -3px;
+        }
+        
+        .location-options .col-md-4,
+        .location-options .col-md-8 {
+            padding: 0 3px;
+            margin-bottom: 8px;
+            width: 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        
+        .col-12 {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .col-12 .modern-btn {
+            margin-right: 0;
+            margin-bottom: 0;
+        }
+        
+        .filter-section {
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-title {
+            font-size: 0.95rem;
+        }
+        
+        .toggle-filter {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 12px;
+        }
+        
+        .filter-label {
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+        
+        .modern-filter-select {
+            padding: 8px 12px;
+            font-size: 12px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .filter-actions {
+            margin-top: 12px;
+            padding-top: 12px;
+            gap: 8px;
+        }
+        
+        .filter-apply-btn,
+        .filter-clear-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        
+        .filter-count .badge {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .upload-form-container {
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .form-label {
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+        
+        .modern-input, .modern-select, .modern-textarea {
+            padding: 5px 8px;
+            font-size: 10px;
+            border-radius: 6px;
+            min-height: 35px;
+        }
+        
+        .modern-textarea {
+            min-height: 60px;
+        }
+        
+        .modern-map {
+            height: 200px;
+            border-radius: 8px;
+        }
+        
+        .map-info {
+            padding: 6px;
+            font-size: 10px;
+            border-radius: 5px;
+        }
+        
+        .modern-btn {
+            padding: 5px 12px;
+            font-size: 11px;
+            min-width: 80px;
+            border-radius: 15px;
+        }
+        
+        .location-options .row {
+            margin: 0 -2px;
+        }
+        
+        .location-options .col-md-4,
+        .location-options .col-md-8 {
+            padding: 0 2px;
+            margin-bottom: 6px;
+        }
+    }
+
+    /* Ensure form elements don't overflow */
+    .upload-form-container * {
+        box-sizing: border-box;
+    }
+
+    /* Fix for Bootstrap grid system in form */
+    .upload-form-container .row {
+        margin-left: -7.5px;
+        margin-right: -7.5px;
+    }
+
+    .upload-form-container .col-md-6,
+    .upload-form-container .col-md-12 {
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+    }
+
+    @media (max-width: 767px) {
+        .upload-form-container .row {
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+        
+        .upload-form-container .col-md-6,
+        .upload-form-container .col-md-12 {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .upload-form-container .row {
+            margin-left: -3px;
+            margin-right: -3px;
+        }
+        
+        .upload-form-container .col-md-6,
+        .upload-form-container .col-md-12 {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        
+        .modern-select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px 12px;
+            padding-right: 35px;
+        }
+        
+        .modern-input[type="file"] {
+            padding: 4px 8px;
+            font-size: 10px;
+        }
+        
+        .modern-textarea {
+            resize: vertical;
+            min-height: 60px;
+            max-height: 120px;
+        }
+    }
+
+    /* Responsive fixes for all content */
+    @media (max-width: 767px) {
+        .filter-content .row {
+            margin: 0;
+        }
+        
+        .filter-content .col-lg-4,
+        .filter-content .col-md-6 {
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        
+        .filter-content .col-lg-4:last-child,
+        .filter-content .col-md-6:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .filter-content .g-3 {
+            --bs-gutter-x: 1rem;
+            --bs-gutter-y: 1rem;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .filter-content .g-3 {
+            --bs-gutter-x: 0.5rem;
+            --bs-gutter-y: 0.5rem;
         }
     }
 </style>
@@ -561,6 +1284,24 @@
     document.getElementById('cancel-upload-btn').addEventListener('click', function() {
         document.getElementById('upload-post-form').style.display = 'none';
         document.getElementById('upload-post-btn').style.display = 'block';
+    });
+
+    // Toggle filter visibility
+    document.getElementById('toggle-filter').addEventListener('click', function() {
+        const filterContent = document.getElementById('filter-content');
+        filterContent.classList.toggle('hidden');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+    });
+
+    // Clear filters functionality
+    document.getElementById('clear-filters').addEventListener('click', function() {
+        const form = document.getElementById('filter-form');
+        document.getElementById('animal_type_filter').value = '';
+        document.getElementById('district_filter').value = '';
+        document.getElementById('healthy_status_filter').value = '';
+        form.submit();
     });
 
     function initMap() {

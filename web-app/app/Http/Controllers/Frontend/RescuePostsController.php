@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Frontend;
 
@@ -11,11 +11,26 @@ use Carbon\Carbon;
 
 class RescuePostsController extends Controller
 {
-    public function index()
-{
-    $rescuePosts = RescuePost::orderBy('created_at', 'desc')->paginate(6);
-    return view('frontend.rescue_posts.index', compact('rescuePosts'));
-}
+    public function index(Request $request)
+    {
+        $query = RescuePost::query();
+
+        if ($request->filled('animal_type')) {
+            $query->where('animal_type', $request->animal_type);
+        }
+
+        if ($request->filled('district')) {
+            $query->where('district', $request->district);
+        }
+
+        if ($request->filled('healthy_status')) {
+            $query->where('healthy_status', $request->healthy_status);
+        }
+
+        $rescuePosts = $query->orderBy('created_at', 'desc')->paginate(6);
+
+        return view('frontend.rescue_posts.index', compact('rescuePosts'));
+    }
 
     public function store(Request $request)
     {
@@ -55,11 +70,12 @@ class RescuePostsController extends Controller
     {
         $rescuePost = RescuePost::findOrFail($id);
         $comments = $rescuePost->comments ?? [];
-        // Convert string timestamps to Carbon instances if needed
+
         $comments = array_map(function ($comment) {
             $comment['created_at'] = $comment['created_at'] instanceof Carbon ? $comment['created_at'] : Carbon::parse($comment['created_at']);
             return $comment;
         }, $comments);
+
         return view('frontend.rescue_posts.show', compact('rescuePost', 'comments'));
     }
 
@@ -71,18 +87,14 @@ class RescuePostsController extends Controller
 
         $rescuePost = RescuePost::findOrFail($id);
 
-        // Initialize comments as an array if null
         $comments = $rescuePost->comments ?? [];
         $newComment = [
             'user_name' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->name : 'Anonymous',
             'comment' => $request->comment,
-            'created_at' => now(), // Carbon instance
+            'created_at' => now(),
         ];
 
-        // Append the new comment
         $comments[] = $newComment;
-
-        // Update the comments attribute
         $rescuePost->comments = $comments;
         $rescuePost->save();
 
@@ -102,12 +114,11 @@ class RescuePostsController extends Controller
     }
 
     public function markAsRescued($id)
-{
-    $post = RescuePost::where('user_id', auth()->id())->findOrFail($id);
-    $post->rescued = true;
-    $post->save();
+    {
+        $post = RescuePost::where('user_id', auth()->id())->findOrFail($id);
+        $post->rescued = true;
+        $post->save();
 
-    return redirect()->route('profile')->with('success', 'Marked as rescued successfully!');
-}
-
+        return redirect()->route('profile')->with('success', 'Marked as rescued successfully!');
+    }
 }
