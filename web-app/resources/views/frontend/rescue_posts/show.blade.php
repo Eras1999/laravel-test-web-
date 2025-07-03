@@ -164,7 +164,8 @@
                                 </div>
                                 <button type="submit" class="submit-btn">
                                     <i class="fas fa-paper-plane"></i> Post Comment
-                                </button>
+                                </button><br>
+                                <a href="{{ route('rescue-posts.index') }}" class="btn back-btn">Back</a>
                             </form>
                         </div>
                     </div>

@@ -63,7 +63,7 @@ class RescuePostsController extends Controller
             'user_id' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->id : null,
         ]);
 
-        return redirect()->route('rescue-posts.index')->with('success', 'Rescue post uploaded successfully.');
+        return redirect()->route('rescue-posts.index')->with('success', '✅ Rescue post uploaded successfully!');
     }
 
     public function show($id)
@@ -98,14 +98,14 @@ class RescuePostsController extends Controller
         $rescuePost->comments = $comments;
         $rescuePost->save();
 
-        return redirect()->back()->with('success', 'Comment added successfully.');
+        return redirect()->back()->with('success', '💬 Comment added successfully.');
     }
 
     public function profile()
     {
         $user = Auth::guard('frontend')->user();
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Please login to view your profile.');
+            return redirect()->route('login')->with('error', '🔐 Please login to view your profile.');
         }
 
         $rescuePosts = RescuePost::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
@@ -119,6 +119,6 @@ class RescuePostsController extends Controller
         $post->rescued = true;
         $post->save();
 
-        return redirect()->route('profile')->with('success', 'Marked as rescued successfully!');
+        return redirect()->route('profile')->with('success', '✅ Marked as rescued successfully!');
     }
 }
