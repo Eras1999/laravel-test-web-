@@ -95,6 +95,16 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="info-content">
+                                    <span class="info-label">Contact Number</span>
+                                    <span class="info-value">{{ $rescuePost->contact_number ?? 'N/A' }}</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="description-section">

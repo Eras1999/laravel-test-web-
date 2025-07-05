@@ -17,6 +17,7 @@ class RescuePost extends Model
         'latitude',
         'longitude',
         'description',
+        'contact_number',
         'rescued',
         'user_id',
     ];

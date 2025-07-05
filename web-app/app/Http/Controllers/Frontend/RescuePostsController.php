@@ -33,38 +33,40 @@ class RescuePostsController extends Controller
     }
 
     public function store(Request $request)
-    {
-        \Log::info('Rescue Post Submission Data:', $request->all());
+{
+    \Log::info('Rescue Post Submission Data:', $request->all());
 
-        $request->validate([
-            'author_name' => 'required|string|max:255',
-            'animal_type' => 'required|in:Dog,Cat,Bird,Snake,Other',
-            'image' => 'nullable|image|max:2048',
-            'healthy_status' => 'required|in:Healthy but Abandoned,Injured,Sick or Weak,In Critical Condition,Unknown / Not Sure',
-            'district' => 'required|in:Colombo,Gampaha,Kalutara,Kandy,Matale,Nuwara Eliya,Galle,Matara,Hambantota,Jaffna,Kilinochchi,Mannar,Vavuniya,Mullaitivu,Batticaloa,Ampara,Trincomalee,Kurunegala,Puttalam,Anuradhapura,Polonnaruwa,Badulla,Moneragala,Ratnapura,Kegalle',
-            'place' => 'nullable|string|max:255',
-            'latitude' => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
-            'description' => 'required|string',
-        ]);
+    $request->validate([
+        'author_name' => 'required|string|max:255',
+        'animal_type' => 'required|in:Dog,Cat,Bird,Snake,Other',
+        'image' => 'nullable|image|max:2048',
+        'healthy_status' => 'required|in:Healthy but Abandoned,Injured,Sick or Weak,In Critical Condition,Unknown / Not Sure',
+        'district' => 'required|in:Colombo,Gampaha,Kalutara,Kandy,Matale,Nuwara Eliya,Galle,Matara,Hambantota,Jaffna,Kilinochchi,Mannar,Vavuniya,Mullaitivu,Batticaloa,Ampara,Trincomalee,Kurunegala,Puttalam,Anuradhapura,Polonnaruwa,Badulla,Moneragala,Ratnapura,Kegalle',
+        'place' => 'nullable|string|max:255',
+        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric',
+        'description' => 'required|string',
+        'contact_number' => ['required', 'regex:/^(?:\+94|0)(?:7[0-8])[0-9]{7}$/'],
+    ]);
 
-        $imagePath = $request->file('image') ? $request->file('image')->store('rescue_posts', 'public') : null;
+    $imagePath = $request->file('image') ? $request->file('image')->store('rescue_posts', 'public') : null;
 
-        RescuePost::create([
-            'author_name' => $request->author_name,
-            'animal_type' => $request->animal_type,
-            'image' => $imagePath,
-            'healthy_status' => $request->healthy_status,
-            'district' => $request->district,
-            'place' => $request->place,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'description' => $request->description,
-            'user_id' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->id : null,
-        ]);
+    RescuePost::create([
+        'author_name' => $request->author_name,
+        'animal_type' => $request->animal_type,
+        'image' => $imagePath,
+        'healthy_status' => $request->healthy_status,
+        'district' => $request->district,
+        'place' => $request->place,
+        'latitude' => $request->latitude,
+        'longitude' => $request->longitude,
+        'description' => $request->description,
+        'contact_number' => $request->contact_number,
+        'user_id' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->id : null,
+    ]);
 
-        return redirect()->route('rescue-posts.index')->with('success', '✅ Rescue post uploaded successfully!');
-    }
+    return redirect()->route('rescue-posts.index')->with('success', '✅ Rescue post uploaded successfully!');
+}
 
     public function show($id)
     {

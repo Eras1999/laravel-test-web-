@@ -75,6 +75,13 @@
                                         <label for="description" class="form-label">📝 Description</label>
                                         <textarea name="description" id="description" class="form-control modern-textarea" rows="3" required placeholder="Tell us about this animal's situation..."></textarea>
                                     </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="contact_number" class="form-label">📞 Contact Number</label>
+                                        <input type="text" name="contact_number" id="contact_number" class="form-control modern-input" placeholder="Enter a valid Sri Lankan phone number (e.g., +94712345678 or 0712345678)" required>
+                                        @error('contact_number')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                     <div class="col-12 mb-3">
                                         <button type="submit" class="btn btn-success modern-btn">
                                             <i class="fas fa-heart"></i> Submit Rescue Post

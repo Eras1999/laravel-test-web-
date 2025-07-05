@@ -19,6 +19,7 @@
                                 <th>Animal Type</th>
                                 <th>Status</th>
                                 <th>Location</th>
+                                <th>Contact Number</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -30,6 +31,7 @@
                                     <td>{{ $post->animal_type }}</td>
                                     <td>{{ $post->rescued ? 'Rescued' : 'Not Rescued' }}</td>
                                     <td>{{ $post->place ?? $post->city }}, {{ $post->district }}</td>
+                                    <td>{{ $post->contact_number ?? 'N/A' }}</td>
                                     <td>
                                         <form action="{{ route('admin.rescue-posts.delete', $post->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this post?')">
                                             @csrf
@@ -47,7 +49,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6">No rescue posts found.</td>
+                                    <td colspan="7">No rescue posts found.</td>
                                 </tr>
                             @endforelse
                         </tbody>
