@@ -60,55 +60,134 @@ function initMap() {
     }).addTo(map);
 
     let districtCircle;
+    let selectedDistrict = null;
+    let districtBounds = null;
+
+    // Initially disable map clicks
+    map.off('click');
+
+    // Add initial message to place input
+    placeInput.placeholder = "First select a district to enable map selection";
+    placeNameSpan.textContent = "Select district first";
 
     districtSelect.addEventListener('change', function() {
         const district = this.value;
+        
+        // Clear previous selections
+        placeInput.value = '';
+        placeNameSpan.textContent = 'Select district first';
+        latitudeInput.value = '';
+        longitudeInput.value = '';
+        
         if (district && districtCoords[district]) {
             const coords = districtCoords[district];
             map.setView(coords, 10);
+            selectedDistrict = district;
 
-            if (districtCircle) map.removeLayer(districtCircle);
+            // Remove previous circle
+            if (districtCircle) {
+                map.removeLayer(districtCircle);
+            }
 
+            // Create district circle with 15km radius
             districtCircle = L.circle(coords, {
                 radius: 15000,
                 color: '#667eea',
                 fillColor: '#764ba2',
-                fillOpacity: 0.3
+                fillOpacity: 0.3,
+                weight: 3
             }).addTo(map);
+
+            // Calculate district bounds (circle bounds)
+            districtBounds = districtCircle.getBounds();
+
+            // Update placeholder and info
+            placeInput.placeholder = "📌 Click inside the highlighted area to select place";
+            placeNameSpan.textContent = `Click inside ${district} district area on the map`;
+
+            // Enable map clicks
+            enableMapClicks();
         } else {
+            // Reset map view
             map.setView([7.8731, 80.7718], 8);
-            if (districtCircle) map.removeLayer(districtCircle);
+            selectedDistrict = null;
+            districtBounds = null;
+            
+            // Remove circle
+            if (districtCircle) {
+                map.removeLayer(districtCircle);
+                districtCircle = null;
+            }
+            
+            // Disable map clicks
+            map.off('click');
+            
+            // Reset placeholder
+            placeInput.placeholder = "First select a district to enable map selection";
+            placeNameSpan.textContent = "Select district first";
         }
     });
 
-    map.on('click', function(e) {
-        const lat = e.latlng.lat;
-        const lon = e.latlng.lng;
+    function enableMapClicks() {
+        // Remove any existing click handlers
+        map.off('click');
+        
+        // Add new click handler with district restriction
+        map.on('click', function(e) {
+            const lat = e.latlng.lat;
+            const lon = e.latlng.lng;
+            const clickedPoint = L.latLng(lat, lon);
 
-        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`)
-            .then(response => response.json())
-            .then(data => {
-                const fullPlace = data.display_name || 'Unknown location';
-                placeInput.value = fullPlace;
-                placeNameSpan.textContent = fullPlace;
-                latitudeInput.value = lat;
-                longitudeInput.value = lon;
-
+            // Check if clicked point is within district bounds
+            if (!selectedDistrict || !districtBounds || !districtBounds.contains(clickedPoint)) {
+                // Show error message for clicks outside district
                 L.popup()
                     .setLatLng([lat, lon])
-                    .setContent(`<b>📍 Place:</b><br>${fullPlace}`)
+                    .setContent(`<div style="color: red; font-weight: bold;">❌ Please click inside ${selectedDistrict || 'selected'} district area only!</div>`)
                     .openOn(map);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                placeNameSpan.textContent = 'Failed to get location';
-                placeInput.value = '';
-                latitudeInput.value = '';
-                longitudeInput.value = '';
-            });
-    });
+                return;
+            }
 
+            // Additional check: calculate distance from district center
+            const districtCenter = districtCoords[selectedDistrict];
+            const distanceFromCenter = map.distance([lat, lon], districtCenter);
+            
+            // 15km radius check (same as circle radius)
+            if (distanceFromCenter > 15000) {
+                L.popup()
+                    .setLatLng([lat, lon])
+                    .setContent(`<div style="color: red; font-weight: bold;">❌ Please click inside ${selectedDistrict} district area only!</div>`)
+                    .openOn(map);
+                return;
+            }
 
-    
+            // Valid click within district - proceed with location lookup
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`)
+                .then(response => response.json())
+                .then(data => {
+                    const fullPlace = data.display_name || 'Unknown location';
+                    placeInput.value = fullPlace;
+                    placeNameSpan.textContent = fullPlace;
+                    latitudeInput.value = lat;
+                    longitudeInput.value = lon;
+
+                    L.popup()
+                        .setLatLng([lat, lon])
+                        .setContent(`<div style="color: green; font-weight: bold;">✅ Selected Location:</div><br>${fullPlace}`)
+                        .openOn(map);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    placeNameSpan.textContent = 'Failed to get location';
+                    placeInput.value = '';
+                    latitudeInput.value = '';
+                    longitudeInput.value = '';
+                    
+                    L.popup()
+                        .setLatLng([lat, lon])
+                        .setContent(`<div style="color: red; font-weight: bold;">❌ Failed to get location details</div>`)
+                        .openOn(map);
+                });
+        });
+    }
 }
-

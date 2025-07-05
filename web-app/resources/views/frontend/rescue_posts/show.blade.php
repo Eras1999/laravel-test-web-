@@ -205,6 +205,7 @@
 @section('scripts')
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{{ asset('frontend/js/rescue-posts-show.js') }}"></script>
+<script>
 let map = null;
 
 function initializeMap() {
@@ -237,5 +238,5 @@ function showMapPopup() {
         });
     }
 }
-
+</script>
 @endsection
