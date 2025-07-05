@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Frontend;
 
@@ -90,6 +90,7 @@ class RescuePostsController extends Controller
         $comments = $rescuePost->comments ?? [];
         $newComment = [
             'user_name' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->name : 'Anonymous',
+            'user_id' => Auth::guard('frontend')->check() ? Auth::guard('frontend')->user()->id : null,
             'comment' => $request->comment,
             'created_at' => now(),
         ];
@@ -99,6 +100,27 @@ class RescuePostsController extends Controller
         $rescuePost->save();
 
         return redirect()->back()->with('success', '💬 Comment added successfully.');
+    }
+
+    public function deleteComment(Request $request, $id, $commentIndex)
+    {
+        $rescuePost = RescuePost::findOrFail($id);
+        $comments = $rescuePost->comments ?? [];
+
+        if (!isset($comments[$commentIndex])) {
+            return redirect()->back()->with('error', '❌ Comment not found.');
+        }
+
+        $comment = $comments[$commentIndex];
+        if (!Auth::guard('frontend')->check() || $comment['user_id'] !== Auth::guard('frontend')->user()->id) {
+            return redirect()->back()->with('error', '❌ You are not authorized to delete this comment.');
+        }
+
+        array_splice($comments, $commentIndex, 1);
+        $rescuePost->comments = $comments;
+        $rescuePost->save();
+
+        return redirect()->back()->with('success', '🗑️ Comment deleted successfully.');
     }
 
     public function profile()

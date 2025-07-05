@@ -73,7 +73,6 @@ Route::get('/contact', function () {
     return view('frontend.contact');
 })->name('contact');
 
-
 Route::post('/submit-contact', [App\Http\Controllers\admin\ContactController::class, 'store'])->name('contact.submit');
 
 Route::controller(ContactController::class)->middleware(['auth', 'verified'])->group(function () {
@@ -150,10 +149,10 @@ Route::controller(RescuePostsController::class)->middleware(['auth:frontend'])->
     Route::post('/rescue-posts', 'store')->name('rescue-posts.store');
     Route::get('/rescue-posts/{id}', 'show')->name('rescue-posts.show');
     Route::post('/rescue-posts/{id}/comment', 'comment')->name('rescue-posts.comment');
+    Route::delete('/rescue-posts/{id}/comment/{commentIndex}', 'deleteComment')->name('rescue-posts.delete-comment');
     Route::patch('/rescue-posts/{id}/mark-rescued', [\App\Http\Controllers\Frontend\RescuePostsController::class, 'markAsRescued'])
     ->name('rescue-posts.markAsRescued')
     ->middleware('auth:frontend');
-
 });
 
 Route::controller(AdminRescuePostsController::class)->middleware(['auth', 'verified'])->group(function () {
