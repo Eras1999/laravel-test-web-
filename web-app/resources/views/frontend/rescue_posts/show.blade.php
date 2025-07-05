@@ -167,6 +167,16 @@
                                                 </div>
                                             </div>
                                             <p class="comment-text">{{ $comment['comment'] }}</p>
+                                            @if (isset($comment['image']) && $comment['image'])
+                                                <div class="comment-image-container">
+                                                    <img src="{{ asset('storage/' . $comment['image']) }}" alt="Comment Image" class="comment-image">
+                                                    <div class="image-overlay">
+                                                        <button class="zoom-btn" onclick="openCommentImageModal('{{ asset('storage/' . $comment['image']) }}')">
+                                                            <i class="fas fa-expand"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @empty
@@ -177,17 +187,31 @@
                                 @endforelse
                             </div>
 
-                            <form action="{{ route('rescue-posts.comment', $rescuePost->id) }}" method="POST" class="comment-form">
+                            <form action="{{ route('rescue-posts.comment', $rescuePost->id) }}" method="POST" class="comment-form" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <textarea name="comment" class="comment-input" rows="3" 
                                               placeholder="Share your thoughts or offer help..." required></textarea>
+                                    <input type="file" name="comment_image" class="form-control modern-input" accept="image/*">
+                                    @error('comment_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="submit-btn">
                                     <i class="fas fa-paper-plane"></i> Post Comment
                                 </button><br>
                                 <a href="{{ route('rescue-posts.index') }}" class="btn back-btn">Back</a>
                             </form>
+
+                            <!-- Comment Image Modal -->
+                            <div id="commentImageModal" class="modal-overlay">
+                                <div class="image-modal-content">
+                                    <button class="close-btn" onclick="closeCommentImageModal()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <img id="commentModalImage" src="" alt="Comment Image" class="modal-image">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,6 +224,18 @@
 @section('styles')
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <link rel="stylesheet" href="{{ asset('frontend/css/rescue-posts-show.css') }}">
+<style>
+.comment-image-container {
+    position: relative;
+    margin-top: 10px;
+    max-width: 200px;
+}
+.comment-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+</style>
 @endsection
 
 @section('scripts')
@@ -237,6 +273,15 @@ function showMapPopup() {
             }
         });
     }
+}
+
+function openCommentImageModal(imageSrc) {
+    document.getElementById('commentImageModal').style.display = 'block';
+    document.getElementById('commentModalImage').src = imageSrc;
+}
+
+function closeCommentImageModal() {
+    document.getElementById('commentImageModal').style.display = 'none';
 }
 </script>
 @endsection
