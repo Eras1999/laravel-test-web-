@@ -153,13 +153,16 @@
                                         <div class="comment-content">
                                             <div class="comment-header">
                                                 <span class="comment-author">{{ $comment['user_name'] }}</span>
+                                                @if ($comment['user_name'] === $rescuePost->author_name)
+                                                    <span class="badge badge-reported">Reported by</span>
+                                                @endif
                                                 <div class="comment-meta">
                                                     <span class="comment-time">{{ $comment['created_at']->format('d M Y H:i') }}</span>
                                                     @if (Auth::guard('frontend')->check() && isset($comment['user_id']) && $comment['user_id'] === Auth::guard('frontend')->user()->id)
-                                                        <form action="{{ route('rescue-posts.delete-comment', ['id' => $rescuePost->id, 'commentIndex' => $index]) }}" method="POST" class="delete-comment-form" onsubmit="return confirmDeleteComment()">
+                                                        <form action="{{ route('rescue-posts.delete-comment', ['id' => $rescuePost->id, 'commentIndex' => $index]) }}" method="POST" class="delete-comment-form" id="delete-comment-form-{{ $index }}">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="delete-comment-btn">
+                                                            <button type="submit" class="delete-comment-btn" data-comment-index="{{ $index }}">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>
@@ -235,12 +238,22 @@
     height: auto;
     border-radius: 8px;
 }
+.badge-reported {
+    background-color: #28a745;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 5px;
+    font-size: 0.8em;
+}
 </style>
 @endsection
 
 @section('scripts')
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{{ asset('frontend/js/rescue-posts-show.js') }}"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 let map = null;
 
@@ -283,5 +296,29 @@ function openCommentImageModal(imageSrc) {
 function closeCommentImageModal() {
     document.getElementById('commentImageModal').style.display = 'none';
 }
+
+// SweetAlert2 for delete confirmation
+document.querySelectorAll('.delete-comment-btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const form = this.closest('form');
+        const commentIndex = this.getAttribute('data-comment-index');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action cannot be undone. Do you want to delete this comment?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
 </script>
 @endsection
