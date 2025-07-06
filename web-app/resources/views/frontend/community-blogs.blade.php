@@ -54,6 +54,16 @@
                     </div>
                 @endforelse
             </div>
+            <!-- Pagination -->
+            @if ($blogs->hasPages())
+                <div class="row">
+                    <div class="col-12">
+                        <div class="pagination-wrap mt-5">
+                            {{ $blogs->links('pagination::bootstrap-5') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
     <!-- blog-area-end -->
@@ -118,6 +128,25 @@
         }
         .btn-primary:hover {
             background: #e04e2b;
+        }
+        .pagination-wrap .pagination {
+            justify-content: center;
+        }
+        .pagination-wrap .page-link {
+            color: #ff5733;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .pagination-wrap .page-item.active .page-link {
+            background: #ff5733;
+            color: #fff;
+        }
+        .pagination-wrap .page-link:hover {
+            background: #ff5733;
+            color: #fff;
         }
 
         @media (max-width: 767px) {

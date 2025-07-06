@@ -11,7 +11,7 @@ class CommunityBlogsController extends Controller
 {
     public function index()
     {
-        $blogs = CommunityBlog::where('status', 'approved')->get();
+        $blogs = CommunityBlog::where('status', 'approved')->paginate(6); // Adjust the number (9) to how many blogs per page you want
         return view('frontend.community-blogs', compact('blogs'));
     }
 
