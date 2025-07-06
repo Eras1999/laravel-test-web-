@@ -29,17 +29,7 @@
                 <div class="col-lg-8">
                     <div class="submit-blog-wrap">
                         <h3 class="title mb-4">Submit Your Blog</h3>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-                        <form action="{{ route('community-blogs.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('community-blogs.store') }}" method="POST" enctype="multipart/form-data" id="blogSubmitForm">
                             @csrf
                             <div class="mb-3">
                                 <label for="author_name" class="form-label">Author Name</label>
@@ -60,8 +50,8 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="image" class="form-label">Upload Image (Optional)</label>
-                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                <label for="image" class="form-label">Upload Image <span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
                                 @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -137,5 +127,120 @@
                 font-size: 13px;
             }
         }
+
+        /* SweetAlert custom styles */
+        .swal-wide {
+            width: 600px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .swal-wide {
+                width: 95% !important;
+            }
+        }
     </style>
+@endsection
+
+@section('scripts')
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        // SweetAlert for success messages
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ff5733'
+            });
+        @endif
+
+        // SweetAlert for error messages
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ff5733'
+            });
+        @endif
+
+        // Form submission with SweetAlert confirmation
+        document.getElementById('blogSubmitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check if all required fields are filled
+            const title = document.getElementById('title').value.trim();
+            const content = document.getElementById('content').value.trim();
+            const image = document.getElementById('image').files[0];
+            
+            if (!title || !content || !image) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Missing Information',
+                    text: 'Please fill in all required fields including uploading an image.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff5733'
+                });
+                return;
+            }
+            
+            // Show confirmation dialog
+            Swal.fire({
+                title: 'Submit Blog Post?',
+                html: `
+                    <div style="text-align: left; margin: 20px 0;">
+                        <p><strong>📝 Your blog post will be:</strong></p>
+                        <ul style="text-align: left; margin: 10px 0;">
+                            <li>✅ Reviewed by our admin team</li>
+                            <li>📋 Checked for quality and guidelines</li>
+                            <li>🚀 Published once approved</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><em>You'll be notified when your blog is live!</em></p>
+                    </div>
+                `,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#ff5733',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, Submit for Review!',
+                cancelButtonText: 'Cancel',
+                customClass: {
+                    popup: 'swal-wide'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Show thank you message and then submit
+                    Swal.fire({
+                        title: 'Thank You! 🎉',
+                        html: `
+                            <div style="text-align: center; margin: 20px 0;">
+                                <p><strong>Your blog post has been submitted successfully!</strong></p>
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                                    <p>📧 <strong>What's Next?</strong></p>
+                                    <p>• Our admin team will review your content</p>
+                                  <p>• You'll receive an email notification</p>
+                                    <p>• Approved blogs go live within 24-48 hours</p>
+                                </div>
+                                <p style="color: #28a745; font-weight: 600;">Keep creating amazing content! 💪</p>
+                            </div>
+                        `,
+                        icon: 'success',
+                        confirmButtonText: 'Got it!',
+                        confirmButtonColor: '#ff5733',
+                        allowOutsideClick: false,
+                        customClass: {
+                            popup: 'swal-wide'
+                        }
+                    }).then(() => {
+                        // Submit the form after user acknowledges
+                        this.submit();
+                    });
+                }
+            });
+        });
+    </script>
 @endsection
