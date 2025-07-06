@@ -47,7 +47,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form action="{{ route('contact.submit') }}" method="POST" class="contact-form">
+                            <form action="{{ route('contact.submit') }}" method="POST" class="contact-form" id="contact-form">
                                 @csrf
                                 <div class="form-grp">
                                     <label for="name">Your Name <span>*</span></label>
@@ -71,30 +71,28 @@
                     </div>
                     <div class="col-xl-5 col-lg-6 col-md-8">
                         <div class="contact-info-wrap">
-                            <div class="contact-img">
-                                <img src="{{ asset('frontend/img/images/contact_img.png') }}" alt="">
-                            </div>
-                            <div class="contact-info-list">
-                                <ul>
-                                    <li>
-                                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                                        <div class="content">
-                                            <p>W84 New Park Lan, New York, NY 4586 United States</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
-                                        <div class="content">
-                                            <p>+9 (256) 254 9568</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon"><i class="fas fa-envelope-open"></i></div>
-                                        <div class="content">
-                                            <p>Contact@ info.com</p>
-                                        </div>
-                                    </li>
-                                </ul>
+                            <div class="contact-cards">
+                                <div class="contact-card">
+                                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="content">
+                                        <h4>Location</h4>
+                                        <p>W84 New Park Lan, New York, NY 4586 United States</p>
+                                    </div>
+                                </div>
+                                <div class="contact-card">
+                                    <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                                    <div class="content">
+                                        <h4>Phone</h4>
+                                        <p>+9 (256) 254 9568</p>
+                                    </div>
+                                </div>
+                                <div class="contact-card">
+                                    <div class="icon"><i class="fas fa-envelope-open"></i></div>
+                                    <div class="content">
+                                        <h4>Email</h4>
+                                        <p>Contact@ info.com</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="contact-social">
                                 <ul>
@@ -111,28 +109,49 @@
     </section>
     <!-- contact-area-end -->
 
-    <!-- newsletter-area -->
-    <div class="newsletter-area pb-110">
+    <!-- map-area -->
+    <section class="map-area">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="newsletter-wrap">
-                        <div class="newsletter-content">
-                            <h2 class="title">Newsletter For</h2>
-                            <p><span>*</span> Do Not Show Your Email.</p>
-                        </div>
-                        <div class="newsletter-form">
-                            <form action="#">
-                                <input type="email" placeholder="Enter Your Email...">
-                                <button type="submit" class="btn">Subscribe</button>
-                            </form>
-                        </div>
-                        <div class="newsletter-shape"><img src="{{ asset('frontend/img/images/newsletter_shape01.png') }}" alt=""></div>
-                        <div class="newsletter-shape shape-two"><img src="{{ asset('frontend/img/images/newsletter_shape02.png') }}" alt=""></div>
-                    </div>
-                </div>
+            <div class="map-wrap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.142462771345!2d-73.93524268461462!3d40.73089997932587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a27e2f641f1%3A0x8dd2e7ba7e8ca4c!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2slk!4v1623456789!5m2!1sen!2slk" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
-    </div>
-    <!-- newsletter-area-end -->
+    </section>
+    <!-- map-area-end -->
+
+
+@endsection
+
+@section('styles')
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="{{ asset('frontend/css/rescue-posts-show.css') }}">
+<style>
+
+</style>
+@endsection
+
+@section('scripts')
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="{{ asset('frontend/js/rescue-posts-show.js') }}"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to submit your message?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#46ac0b',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, send it!',
+        cancelButtonText: 'No, cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit();
+        }
+    });
+});
+</script>
 @endsection
