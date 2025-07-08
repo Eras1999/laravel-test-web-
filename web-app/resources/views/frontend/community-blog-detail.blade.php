@@ -41,6 +41,9 @@
                             <h2 class="title">{{ $blog->title }}</h2>
                             <p>{{ $blog->content }}</p>
                             <div class="mt-4">
+                                @if (request()->query('from') === 'profile')
+                                    <a href="{{ route('profile') }}" class="btn btn-primary mr-2">Back to Profile</a>
+                                @endif
                                 <a href="{{ route('community-blogs.index') }}" class="btn btn-primary">Back to Blogs</a>
                             </div>
                         </div>
@@ -109,6 +112,9 @@
         }
         .btn-primary:hover {
             background: #e04e2b;
+        }
+        .mr-2 {
+            margin-right: 10px;
         }
 
         @media (max-width: 767px) {

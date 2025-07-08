@@ -11,7 +11,7 @@ class CommunityBlogsController extends Controller
 {
     public function index()
     {
-        $blogs = CommunityBlog::where('status', 'approved')->paginate(6); // Adjust the number (9) to how many blogs per page you want
+        $blogs = CommunityBlog::where('status', 'approved')->paginate(6); // Adjust the number (6) to how many blogs per page you want
         return view('frontend.community-blogs', compact('blogs'));
     }
 
@@ -51,7 +51,19 @@ class CommunityBlogsController extends Controller
 
     public function show($id)
     {
-        $blog = CommunityBlog::where('id', $id)->where('status', 'approved')->firstOrFail();
+        $user = Auth::guard('frontend')->user();
+        $query = CommunityBlog::where('id', $id);
+
+        // Allow users to view their own blogs regardless of status, but restrict others to approved blogs only
+        if ($user) {
+            $query->where(function ($q) use ($user) {
+                $q->where('status', 'approved')->orWhere('user_id', $user->id);
+            });
+        } else {
+            $query->where('status', 'approved');
+        }
+
+        $blog = $query->firstOrFail();
         return view('frontend.community-blog-detail', compact('blog'));
     }
 }

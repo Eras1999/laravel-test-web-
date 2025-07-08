@@ -195,3 +195,5 @@ Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout'
 
 // Update the profile route to use RescuePostsController@profile
 Route::get('/my-profile', [RescuePostsController::class, 'profile'])->name('profile')->middleware('auth:frontend');
+
+

@@ -173,21 +173,23 @@
                         <h2 class="section-title">My Blogs</h2>
                         <div class="blog-grid">
                             @forelse ($user->blogs as $blog)
-                                <div class="blog-item">
-                                    <div class="blog-content">
-                                        @if ($blog->image)
-                                            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="blog-image">
-                                        @else
-                                            <div class="blog-placeholder">
-                                                <i class="fas fa-image"></i>
-                                            </div>
-                                        @endif
-                                        <h5 class="blog-title">{{ $blog->title }}</h5>
-                                        <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $blog->status }}">{{ ucfirst($blog->status) }}</span></p>
-                                        <p class="blog-meta"><strong>Date:</strong> {{ $blog->date }}</p>
-                                        <p class="blog-excerpt">{{ Str::limit($blog->content, 100) }}</p>
+                                <a href="{{ route('community-blogs.show', $blog->id) }}?from=profile" class="blog-item-link">
+                                    <div class="blog-item">
+                                        <div class="blog-content">
+                                            @if ($blog->image)
+                                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="blog-image">
+                                            @else
+                                                <div class="blog-placeholder">
+                                                    <i class="fas fa-image"></i>
+                                                </div>
+                                            @endif
+                                            <h5 class="blog-title">{{ $blog->title }}</h5>
+                                            <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $blog->status }}">{{ ucfirst($blog->status) }}</span></p>
+                                            <p class="blog-meta"><strong>Date:</strong> {{ $blog->date }}</p>
+                                            <p class="blog-excerpt">{{ Str::limit($blog->content, 100) }}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             @empty
                                 <div class="no-blogs">
                                     <p class="text-muted">You have not uploaded any blogs yet.</p>
@@ -361,7 +363,7 @@
         border-radius: 10px 10px 0 0;
     }
 
-    .my-rescue-posts-section .blog-placeholder i {
+    .my-resuce-posts-section .blog-placeholder i {
         font-size: 2rem;
         color: #ccc;
     }
@@ -389,28 +391,99 @@
         font-weight: bold;
     }
 
+    /* Styles for blog items */
+    .my-blogs-section .blog-item {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .my-blogs-section .blog-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .my-blogs-section .blog-item-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    .my-blogs-section .blog-content {
+        padding: 15px;
+    }
+
+    .my-blogs-section .blog-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .my-blogs-section .blog-placeholder {
+        width: 100%;
+        height: 150px;
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .my-blogs-section .blog-placeholder i {
+        font-size: 2rem;
+        color: #ccc;
+    }
+
+    .my-blogs-section .blog-title {
+        font-size: 1.2rem;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .my-blogs-section .blog-meta {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .my-blogs-section .blog-excerpt {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.5;
+    }
+
     @media (max-width: 767px) {
         .my-rescue-posts-section .blog-image,
-        .my-rescue-posts-section .blog-placeholder {
+        .my-rescue-posts-section .blog-placeholder,
+        .my-blogs-section .blog-image,
+        .my-blogs-section .blog-placeholder {
             height: 120px;
         }
 
-        .my-rescue-posts-section .blog-title {
+        .my-rescue-posts-section .blog-title,
+        .my-blogs-section .blog-title {
             font-size: 1.1rem;
         }
 
-        .my-rescue-posts-section .blog-excerpt {
+        .my-rescue-posts-section .blog-excerpt,
+        .my-blogs-section .blog-excerpt {
             font-size: 0.85rem;
         }
     }
 
     @media (max-width: 576px) {
-        .my-rescue-posts-section .blog-title {
+        .my-rescue-posts-section .blog-title,
+        .my-blogs-section .blog-title {
             font-size: 1rem;
         }
 
         .my-rescue-posts-section .blog-meta,
-        .my-rescue-posts-section .blog-excerpt {
+        .my-rescue-posts-section .blog-excerpt,
+        .my-blogs-section .blog-meta,
+        .my-blogs-section .blog-excerpt {
             font-size: 0.8rem;
         }
     }
