@@ -152,11 +152,7 @@
                                 <span class="stat-label">Rejected</span>
                                 <span class="stat-value">{{ $user->blogs->where('status', 'rejected')->count() }}</span>
                             </div>
-                            <div class="stat-item">
-                                <i class="fas fa-trash-alt"></i>
-                                <span class="stat-label">Deleted</span>
-                                <span class="stat-value">{{ $user->blogs->where('status', 'deleted')->count() }}</span>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
