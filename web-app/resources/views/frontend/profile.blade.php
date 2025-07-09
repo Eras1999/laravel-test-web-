@@ -270,13 +270,6 @@
                                         @endif
                                         <h5 class="blog-title">{{ $post->title }}</h5>
                                         @if ($post->status == 'approved' && $post->approved_at && now()->diffInHours($post->approved_at) >= (7 * 24) || $post->status == 'expired')
-                                            <div class="adoption-actions mt-2">
-                                                <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to repost this?')">Repost</button>
-                                                </form>
-                                            </div>
                                             <p class="blog-meta"><strong>Status:</strong> <span class="status-expired">Expired</span></p>
                                         @else
                                             <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
@@ -305,7 +298,7 @@
                                                     @method('PATCH')
                                                     <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are you sure this pet has been adopted?')">Adopted</button>
                                                 </form>
-                                            @elseif ($post->status == 'expired')
+                                            @elseif ($post->status == 'expired' || ($post->status == 'approved' && $post->approved_at && now()->diffInHours($post->approved_at) >= (7 * 24)))
                                                 <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')
