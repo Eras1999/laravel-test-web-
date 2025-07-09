@@ -83,9 +83,6 @@
                                     <span class="info-label">Location</span>
                                     <span class="info-value">{{ $rescuePost->place ?? 'N/A' }}, {{ $rescuePost->district }}</span>
                                     <div class="location-actions">
-                                        <button class="btn-map" onclick="showMapPopup()">
-                                            <i class="fas fa-eye"></i> View Map
-                                        </button>
                                         @if ($rescuePost->latitude && $rescuePost->longitude)
                                             <a href="https://www.google.com/maps?q={{ $rescuePost->latitude }},{{ $rescuePost->longitude }}" 
                                                class="btn-directions" target="_blank">
@@ -110,19 +107,6 @@
                         <div class="description-section">
                             <h3><i class="fas fa-file-alt"></i> Description</h3>
                             <p class="description-text">{{ $rescuePost->description }}</p>
-                        </div>
-
-                        <!-- Map Modal -->
-                        <div id="mapModal" class="modal-overlay">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5><i class="fas fa-map"></i> Location Map</h5>
-                                    <button class="close-btn" onclick="closeMapPopup()">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <div id="modalMap"></div>
-                            </div>
                         </div>
 
                         <!-- Image Modal -->
@@ -225,7 +209,6 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <link rel="stylesheet" href="{{ asset('frontend/css/rescue-posts-show.css') }}">
 <style>
 .comment-image-container {
@@ -250,44 +233,10 @@
 @endsection
 
 @section('scripts')
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{{ asset('frontend/js/rescue-posts-show.js') }}"></script>
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-let map = null;
-
-function initializeMap() {
-    const lat = {{ $rescuePost->latitude ?? '7.8731' }};
-    const lon = {{ $rescuePost->longitude ?? '80.7718' }};
-    map = L.map('modalMap').setView([lat, lon], 14);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-    }).addTo(map);
-
-    L.marker([lat, lon])
-        .addTo(map)
-        .bindPopup(`{{ $rescuePost->place ?? 'Unknown Place' }}, {{ $rescuePost->district ?? '' }}`)
-        .openPopup();
-}
-
-function showMapPopup() {
-    document.getElementById("mapModal").style.display = "block";
-    if (!map) {
-        initializeMap();
-    } else {
-        const lat = {{ $rescuePost->latitude ?? '7.8731' }};
-        const lon = {{ $rescuePost->longitude ?? '80.7718' }};
-        map.setView([lat, lon], 14);
-        map.eachLayer(layer => {
-            if (layer instanceof L.Marker) {
-                layer.setLatLng([lat, lon]).bindPopup(`{{ $rescuePost->place ?? 'Unknown Place' }}, {{ $rescuePost->district ?? '' }}`).openPopup();
-            }
-        });
-    }
-}
-
 function openCommentImageModal(imageSrc) {
     document.getElementById('commentImageModal').style.display = 'block';
     document.getElementById('commentModalImage').src = imageSrc;
