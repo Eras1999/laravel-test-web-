@@ -152,7 +152,6 @@
                                 <span class="stat-label">Rejected</span>
                                 <span class="stat-value">{{ $user->blogs->where('status', 'rejected')->count() }}</span>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -291,7 +290,10 @@
                                         @endif
                                         <p class="blog-meta"><strong>Location:</strong> {{ $post->city }}, {{ $post->district }}</p>
                                         <p class="blog-meta"><strong>Mobile:</strong> {{ $post->mobile_number }}</p>
-                                        <p class="blog-excerpt">{{ Str::limit($post->description, 100) }}</p>
+                                        <p class="blog-meta"><strong>Category:</strong> {{ ucfirst($post->category) }}</p>
+                                        <p class="blog-excerpt" id="excerpt-{{ $post->id }}">{{ Str::limit($post->description, 100) }}</p>
+                                        <p class="blog-full-description" id="full-{{ $post->id }}" style="display: none;">{{ $post->description }}</p>
+                                        <button class="btn btn-primary btn-sm mt-2 read-more-btn" data-post-id="{{ $post->id }}">Read More</button>
                                         <div class="adoption-actions mt-2">
                                             @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < (7 * 24))
                                                 <form action="{{ route('adoption-posts.adopted', $post->id) }}" method="POST" style="display:inline;">
@@ -359,7 +361,7 @@
         border-radius: 10px 10px 0 0;
     }
 
-    .my-resuce-posts-section .blog-placeholder i {
+    .my-rescue-posts-section .blog-placeholder i {
         font-size: 2rem;
         color: #ccc;
     }
@@ -451,37 +453,145 @@
         line-height: 1.5;
     }
 
+    /* Styles for adoption posts */
+    .my-adoption-posts-section .blog-item {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .my-adoption-posts-section .blog-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .my-adoption-posts-section .blog-content {
+        padding: 15px;
+    }
+
+    .my-adoption-posts-section .blog-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .my-adoption-posts-section .blog-placeholder {
+        width: 100%;
+        height: 150px;
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .my-adoption-posts-section .blog-placeholder i {
+        font-size: 2rem;
+        color: #ccc;
+    }
+
+    .my-adoption-posts-section .blog-title {
+        font-size: 1.2rem;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .my-adoption-posts-section .blog-meta {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .my-adoption-posts-section .blog-excerpt,
+    .my-adoption-posts-section .blog-full-description {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    .my-adoption-posts-section .read-more-btn {
+        background: #ff5733;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: background 0.3s ease;
+    }
+
+    .my-adoption-posts-section .read-more-btn:hover {
+        background: #e04e2b;
+    }
+
     @media (max-width: 767px) {
         .my-rescue-posts-section .blog-image,
         .my-rescue-posts-section .blog-placeholder,
         .my-blogs-section .blog-image,
-        .my-blogs-section .blog-placeholder {
+        .my-blogs-section .blog-placeholder,
+        .my-adoption-posts-section .blog-image,
+        .my-adoption-posts-section .blog-placeholder {
             height: 120px;
         }
 
         .my-rescue-posts-section .blog-title,
-        .my-blogs-section .blog-title {
+        .my-blogs-section .blog-title,
+        .my-adoption-posts-section .blog-title {
             font-size: 1.1rem;
         }
 
         .my-rescue-posts-section .blog-excerpt,
-        .my-blogs-section .blog-excerpt {
+        .my-blogs-section .blog-excerpt,
+        .my-adoption-posts-section .blog-excerpt,
+        .my-adoption-posts-section .blog-full-description {
             font-size: 0.85rem;
         }
     }
 
     @media (max-width: 576px) {
         .my-rescue-posts-section .blog-title,
-        .my-blogs-section .blog-title {
+        .my-blogs-section .blog-title,
+        .my-adoption-posts-section .blog-title {
             font-size: 1rem;
         }
 
         .my-rescue-posts-section .blog-meta,
         .my-rescue-posts-section .blog-excerpt,
         .my-blogs-section .blog-meta,
-        .my-blogs-section .blog-excerpt {
+        .my-blogs-section .blog-excerpt,
+        .my-adoption-posts-section .blog-meta,
+        .my-adoption-posts-section .blog-excerpt,
+        .my-adoption-posts-section .blog-full-description {
             font-size: 0.8rem;
         }
     }
 </style>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const readMoreButtons = document.querySelectorAll('.read-more-btn');
+
+        readMoreButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const postId = this.getAttribute('data-post-id');
+                const excerpt = document.getElementById(`excerpt-${postId}`);
+                const fullDescription = document.getElementById(`full-${postId}`);
+
+                if (excerpt.style.display === 'none') {
+                    excerpt.style.display = 'block';
+                    fullDescription.style.display = 'none';
+                    this.textContent = 'Read More';
+                } else {
+                    excerpt.style.display = 'none';
+                    fullDescription.style.display = 'block';
+                    this.textContent = 'Read Less';
+                }
+            });
+        });
+    });
+</script>
 @endsection
