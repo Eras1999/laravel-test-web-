@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="profile-actions">
-                                <a href="{{ route('logout') }}" class="btn logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a href="{{ route('logout') }}" class="btn logout-btn" id="logout-btn">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -103,13 +103,13 @@
                                             <form action="{{ route('rescue-posts.markAsRescued', $post->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-warning btn-sm mt-2" onclick="return confirm('Are you sure this rescue has been completed?')">Rescued</button>
+                                                <button type="submit" class="btn btn-warning btn-sm mt-2 rescued-btn" data-post-id="{{ $post->id }}">Rescued</button>
                                             </form>
                                         @endif
                                         <p class="blog-meta"><strong>Location:</strong> {{ $post->place ?? 'N/A' }}, {{ $post->district }}</p>
                                         <p class="blog-meta"><strong>Date:</strong> {{ $post->created_at->format('d M Y H:i') }}</p>
                                         <p class="blog-excerpt">{{ Str::limit($post->description, 100) }}</p>
-                                        <a href="{{ route('rescue-posts.show', $post->id) }}" class="btn btn-primary btn-sm mt-2">View Details</a>
+                                        <a href="{{ route('rescue-posts.show', $post->id) }}" class="view-details-btn">View Details</a>
                                     </div>
                                 </div>
                             @empty
@@ -296,13 +296,13 @@
                                                 <form action="{{ route('adoption-posts.adopted', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are you sure this pet has been adopted?')">Adopted</button>
+                                                    <button type="submit" class="btn btn-success btn-sm adopted-btn" data-post-id="{{ $post->id }}">Adopted</button>
                                                 </form>
                                             @elseif ($post->status == 'expired' || ($post->status == 'approved' && $post->approved_at && now()->diffInHours($post->approved_at) >= (7 * 24)))
                                                 <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to repost this?')">Repost</button>
+                                                    <button type="submit" class="btn btn-primary btn-sm repost-btn" data-post-id="{{ $post->id }}">Repost</button>
                                                 </form>
                                             @endif
                                         </div>
@@ -324,6 +324,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('frontend/css/profile.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <style>
     .my-rescue-posts-section .blog-item {
         background: #fff;
@@ -508,7 +509,8 @@
         line-height: 1.5;
     }
 
-    .my-adoption-posts-section .read-more-btn {
+    .my-adoption-posts-section .read-more-btn,
+    .my-rescue-posts-section .view-details-btn {
         background: #ff5733;
         border: none;
         padding: 8px 15px;
@@ -517,9 +519,14 @@
         font-weight: 600;
         text-transform: uppercase;
         transition: background 0.3s ease;
+        margin-top: 10px;
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
     }
 
-    .my-adoption-posts-section .read-more-btn:hover {
+    .my-adoption-posts-section .read-more-btn:hover,
+    .my-rescue-posts-section .view-details-btn:hover {
         background: #e04e2b;
     }
 
@@ -578,10 +585,16 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const readMoreButtons = document.querySelectorAll('.read-more-btn');
+        const rescuedButtons = document.querySelectorAll('.rescued-btn');
+        const adoptedButtons = document.querySelectorAll('.adopted-btn');
+        const repostButtons = document.querySelectorAll('.repost-btn');
+        const logoutButton = document.getElementById('logout-btn');
 
+        // Handle Read More/Less
         readMoreButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const postId = this.getAttribute('data-post-id');
@@ -596,6 +609,189 @@
                     excerpt.style.display = 'none';
                     fullDescription.style.display = 'block';
                     this.textContent = 'Read Less';
+                }
+            });
+        });
+
+        // Handle Rescued Button
+        rescuedButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const form = this.closest('form');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Are you sure this rescue has been completed?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, mark as rescued!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(form.action, {
+                            method: 'POST',
+                            body: new FormData(form),
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Post marked as rescued successfully.',
+                                    icon: 'success',
+                                    confirmButtonColor: '#28a745'
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: data.message || 'Failed to mark as rescued.',
+                                    icon: 'error',
+                                    confirmButtonColor: '#d33'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'An error occurred. Please try again.',
+                                icon: 'error',
+                                confirmButtonColor: '#d33'
+                            });
+                        });
+                    }
+                });
+            });
+        });
+
+        // Handle Adopted Button
+        adoptedButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const form = this.closest('form');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Are you sure this pet has been adopted?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, mark as adopted!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(form.action, {
+                            method: 'POST',
+                            body: new FormData(form),
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Post marked as adopted successfully.',
+                                    icon: 'success',
+                                    confirmButtonColor: '#28a745'
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: data.message || 'Failed to mark as adopted.',
+                                    icon: 'error',
+                                    confirmButtonColor: '#d33'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'An error occurred. Please try again.',
+                                icon: 'error',
+                                confirmButtonColor: '#d33'
+                            });
+                        });
+                    }
+                });
+            });
+        });
+
+        // Handle Repost Button
+        repostButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const form = this.closest('form');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Are you sure you want to repost this?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, repost it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(form.action, {
+                            method: 'POST',
+                            body: new FormData(form),
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Post marked for reposting and awaiting approval.',
+                                    icon: 'success',
+                                    confirmButtonColor: '#28a745'
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: data.message || 'Failed to repost.',
+                                    icon: 'error',
+                                    confirmButtonColor: '#d33'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'An error occurred. Please try again.',
+                                icon: 'error',
+                                confirmButtonColor: '#d33'
+                            });
+                        });
+                    }
+                });
+            });
+        });
+
+        // Handle Logout Button
+        logoutButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Are you sure you want to logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, logout!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
                 }
             });
         });

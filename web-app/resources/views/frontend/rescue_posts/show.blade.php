@@ -203,7 +203,7 @@
                                 <button type="submit" class="submit-btn">
                                     <i class="fas fa-paper-plane"></i> Post Comment
                                 </button><br>
-                                <a href="{{ route('rescue-posts.index') }}" class="btn back-btn">Back</a>
+                                <a href="{{ session()->has('_from_profile') ? route('profile') : route('rescue-posts.index') }}" class="btn back-btn">Back</a>
                             </form>
 
                             <!-- Comment Image Modal -->

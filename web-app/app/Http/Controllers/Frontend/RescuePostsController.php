@@ -78,6 +78,13 @@ class RescuePostsController extends Controller
             return $comment;
         }, $comments);
 
+        // Check if the referer is the profile page and set session variable
+        if (request()->header('referer') && strpos(request()->header('referer'), route('profile')) !== false) {
+            session(['_from_profile' => true]);
+        } else {
+            session()->forget('_from_profile');
+        }
+
         return view('frontend.rescue_posts.show', compact('rescuePost', 'comments'));
     }
 
