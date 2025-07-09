@@ -1,29 +1,25 @@
-
-function closeMapPopup() {
-    if (map) {
-        map.remove();
-        map = null;
-    }
-    document.getElementById("mapModal").style.display = "none";
+function closeImageModal() {
+    document.getElementById("imageModal").style.display = "none";
 }
 
 function openImageModal() {
     document.getElementById("imageModal").style.display = "block";
 }
 
-function closeImageModal() {
-    document.getElementById("imageModal").style.display = "none";
+function closeCommentImageModal() {
+    document.getElementById("commentImageModal").style.display = "none";
 }
 
-function confirmDeleteComment() {
-    return confirm('Are you sure you want to delete this comment?');
+function openCommentImageModal(imageSrc) {
+    document.getElementById('commentImageModal').style.display = 'block';
+    document.getElementById('commentModalImage').src = imageSrc;
 }
 
 // Close modals when clicking outside
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('modal-overlay')) {
-        closeMapPopup();
         closeImageModal();
+        closeCommentImageModal();
     }
 });
 

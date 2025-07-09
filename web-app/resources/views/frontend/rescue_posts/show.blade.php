@@ -14,18 +14,6 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10">
                     <div class="rescue-detail-card">
-                        <div class="status-badge-container">
-                            @if ($rescuePost->rescued)
-                                <span class="status-badge rescued">
-                                    <i class="fas fa-heart"></i> Successfully Rescued
-                                </span>
-                            @else
-                                <span class="status-badge urgent">
-                                    <i class="fas fa-exclamation-circle"></i> Needs Help
-                                </span>
-                            @endif
-                        </div>
-
                         <div class="image-container">
                             @if ($rescuePost->image)
                                 <img src="{{ asset('storage/' . $rescuePost->image) }}" alt="Rescue Image" class="rescue-detail-image">
@@ -40,6 +28,24 @@
                                     <p>No image available</p>
                                 </div>
                             @endif
+                        </div>
+
+                        <div class="action-container">
+                            @if ($rescuePost->rescued)
+                                <span class="status-badge rescued">
+                                    <i class="fas fa-heart"></i> Successfully Rescued
+                                </span>
+                            @else
+                                <span class="status-badge urgent">
+                                    <i class="fas fa-exclamation-circle"></i> Needs Help
+                                </span>
+                            @endif
+                            <a href="#" id="whatsapp-share-btn" class="btn-share" aria-label="Share this rescue post on WhatsApp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Share
+                            </a>
+                            <button id="download-image-btn" class="btn-download" aria-label="Download this rescue post as an image">
+                                <i class="fas fa-download"></i> Download Image
+                            </button>
                         </div>
 
                         <div class="rescue-info-grid">
@@ -85,9 +91,11 @@
                                     <div class="location-actions">
                                         @if ($rescuePost->latitude && $rescuePost->longitude)
                                             <a href="https://www.google.com/maps?q={{ $rescuePost->latitude }},{{ $rescuePost->longitude }}" 
-                                               class="btn-directions" target="_blank">
+                                               class="btn-directions" target="_blank" aria-label="Get directions to {{ $rescuePost->place ?? 'rescue location' }}">
                                                 <i class="fas fa-directions"></i> Get Directions
                                             </a>
+                                        @else
+                                            <span class="text-muted">No coordinates available</span>
                                         @endif
                                     </div>
                                 </div>
@@ -229,21 +237,298 @@
     margin-left: 5px;
     font-size: 0.8em;
 }
+.btn-download {
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.btn-download:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* New styles for action container */
+.action-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-container .status-badge {
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.action-container .btn-share,
+.action-container .btn-download {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .image-container .rescue-detail-image {
+        width: 100%;
+        height: auto;
+        max-height: 300px; /* Ensure image scales well on mobile */
+        object-fit: cover;
+    }
+    .action-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .action-container .status-badge,
+    .action-container .btn-share,
+    .action-container .btn-download {
+        width: 100%;
+        text-align: center;
+    }
+}
 </style>
 @endsection
 
 @section('scripts')
-<script src="{{ asset('frontend/js/rescue-posts-show.js') }}"></script>
-<!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('frontend/js/rescue-posts-show.js') }}"></script>
 <script>
-function openCommentImageModal(imageSrc) {
-    document.getElementById('commentImageModal').style.display = 'block';
-    document.getElementById('commentModalImage').src = imageSrc;
-}
+// WhatsApp Share Button
+document.addEventListener('DOMContentLoaded', function() {
+    const shareBtn = document.getElementById('whatsapp-share-btn');
+    const postUrl = "{{ route('rescue-posts.show', $rescuePost->id) }}";
+    const animalType = "{{ $rescuePost->animal_type }}";
+    const location = "{{ $rescuePost->place ?? 'N/A' }}, {{ $rescuePost->district }}";
+    const healthStatus = "{{ $rescuePost->healthy_status }}";
+    const contact = "{{ $rescuePost->contact_number ?? 'N/A' }}";
+    const description = "{{ Str::limit($rescuePost->description, 100) }}";
+    const mapsUrl = "{{ $rescuePost->latitude && $rescuePost->longitude ? 'https://www.google.com/maps?q=' . $rescuePost->latitude . ',' . $rescuePost->longitude : 'N/A' }}";
+    const shareText = encodeURIComponent(
+        `🚨 URGENT RESCUE ALERT 🚨\n\n` +
+        `🐾 ${animalType} needs immediate help!\n` +
+        `📍 Location: ${location}\n` +
+        `🏥 Condition: ${healthStatus}\n` +
+        `📞 Contact: ${contact}\n` +
+        `📝 Details: ${description}\n` +
+        `${mapsUrl !== 'N/A' ? `🗺 Location: ${mapsUrl}\n` : ''}` +
+        `📱 Full Post: ${postUrl}\n\n` +
+        `Please share to help save this animal! 🙏\n` +
+        `#SaveSathwa #AnimalRescue #SriLanka`
+    );
+    shareBtn.href = `https://api.whatsapp.com/send?text=${shareText}`;
+});
 
-function closeCommentImageModal() {
-    document.getElementById('commentImageModal').style.display = 'none';
+// Enhanced Download Image Button - Updated for better clarity and spacing
+document.addEventListener('DOMContentLoaded', function () {
+    const downloadBtn = document.getElementById('download-image-btn');
+
+    downloadBtn.addEventListener('click', async function () {
+        const postImageUrl = "{{ $rescuePost->image ? asset('storage/' . $rescuePost->image) : '' }}";
+        const animalType = "{{ $rescuePost->animal_type }}";
+        const location = "{{ $rescuePost->place ?? 'N/A' }}, {{ $rescuePost->district }}";
+        const healthStatus = "{{ $rescuePost->healthy_status }}";
+        const contact = "{{ $rescuePost->contact_number ?? 'N/A' }}";
+        const description = "{{ $rescuePost->description }}";
+        // const author = "{{ $rescuePost->author_name }}"; // Reporter name removed
+        const postUrl = "{{ route('rescue-posts.show', $rescuePost->id) }}";
+
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 700; // Standard width for social media sharing
+        canvas.height = 1000; // Increased height to accommodate more content
+
+        // Create gradient background (purple to blue)
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, '#8B5CF6'); // Purple
+        gradient.addColorStop(1, '#6366F1'); // Blue
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Header section - SaveSathwa.com
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 38px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('SaveSathwa.com', canvas.width / 2, 60);
+
+        ctx.font = '20px Arial';
+        ctx.fillText('Animal Rescue Platform', canvas.width / 2, 90);
+
+        // White content card with more space
+        const cardX = 40;
+        const cardY = 130;
+        const cardWidth = canvas.width - 80;
+        const cardHeight = 840; // Increased card height
+        const cardRadius = 20; // Rounded corners
+
+        // Draw white rounded rectangle
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.roundRect(cardX, cardY, cardWidth, cardHeight, cardRadius);
+        ctx.fill();
+
+        // Add subtle shadow (apply only once for the card)
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
+        ctx.shadowBlur = 15;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 8;
+        ctx.fill(); // Re-fill to apply shadow properly after path is closed
+
+        // Reset shadow for subsequent drawing operations
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        // Function to draw all text content
+        function drawTextContent(startYForText) {
+            let currentY = startYForText;
+            const leftMargin = cardX + 50; // Increased left margin for content
+            const contentWidth = cardWidth - 100; // Adjusted content width
+            const lineHeight = 28; // Consistent line height
+
+            // Section Header: URGENT RESCUE ALERT
+            ctx.fillStyle = '#DC2626'; // Red color
+            ctx.font = 'bold 30px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🚨 URGENT RESCUE ALERT 🚨', canvas.width / 2, currentY);
+            currentY += 45; // Space after alert
+
+            // Animal type
+            ctx.fillStyle = '#EF4444'; // Slightly lighter red
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(`${animalType} needs immediate help!`, canvas.width / 2, currentY);
+            currentY += 60; // More space before details
+
+            ctx.textAlign = 'left'; // Align subsequent text to the left
+
+            // Helper for labeled sections with icons
+            function drawLabel(label, value, icon) {
+                ctx.fillStyle = '#1F2937'; // Dark gray for labels
+                ctx.font = 'bold 18px Arial';
+                ctx.fillText(`${icon} ${label}`, leftMargin, currentY);
+                currentY += 5; // Small gap between label and value
+
+                ctx.font = '17px Arial';
+                ctx.fillStyle = '#374151'; // Medium gray for values
+                // Wrap text and update Y position
+                const linesDrawn = wrapText(ctx, value, leftMargin + 25, currentY + 15, contentWidth - 25, lineHeight);
+                currentY += 15 + (linesDrawn * lineHeight) + 20; // Adjust Y based on lines drawn + extra spacing
+            }
+
+            // Content Blocks
+            drawLabel('LOCATION:', location, '📍');
+            drawLabel('HEALTH STATUS:', healthStatus, '🏥');
+            drawLabel('CONTACT:', contact, '📞');
+            drawLabel('DESCRIPTION:', description, '📝'); // Reporter name removed
+
+            // Call to action
+            ctx.fillStyle = '#22C55E'; // Green color
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            currentY += 20; // Extra space before CTA, adjust as needed for total height
+            ctx.fillText('Please share to help save this animal! 🙏', canvas.width / 2, currentY);
+
+            // Removed the hashtags line, so the next sentence moves up
+            currentY += 30; // Reduced gap here (from 35)
+
+            ctx.fillStyle = '#4F46E5'; // Indigo for website link
+            ctx.font = 'bold 17px Arial';
+            ctx.fillText('Visit: SaveSathwa.com for more details', canvas.width / 2, currentY); // Moved up to align with reduced gap
+
+            // Trigger download
+            const link = document.createElement('a');
+            link.download = `rescue-alert-${animalType.toLowerCase().replace(/\s+/g, '-')}.png`;
+            link.href = canvas.toDataURL('image/png', 1.0);
+            link.click();
+        }
+
+        // Load and draw rescue image if available
+        if (postImageUrl) {
+            const image = new Image();
+            image.crossOrigin = 'anonymous'; // Required for loading images from different origins
+            image.src = postImageUrl;
+
+            image.onload = function () {
+                const imgX = cardX + 35;
+                const imgY = cardY + 35;
+                const imgWidth = cardWidth - 70;
+                const imgHeight = 250; // Fixed height for image
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.roundRect(imgX, imgY, imgWidth, imgHeight, 15); // Rounded corners for image
+                ctx.clip();
+                ctx.drawImage(image, imgX, imgY, imgWidth, imgHeight);
+                ctx.restore();
+
+                drawTextContent(imgY + imgHeight + 40); // Start text below the image + padding
+            };
+
+            image.onerror = function () {
+                // If image fails to load, draw text content higher up in the card
+                console.error("Failed to load image for download:", postImageUrl);
+                drawTextContent(cardY + 30); // Start text near the top of the card if no image
+            };
+        } else {
+            // If no image is provided at all
+            drawTextContent(cardY + 30); // Start text near the top of the card
+        }
+    });
+
+    // Helper function to wrap text. Returns the number of lines drawn.
+    function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+        let lines = 0;
+        let tempY = y;
+
+        for (let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            const metrics = context.measureText(testLine);
+            const testWidth = metrics.width;
+            if (testWidth > maxWidth && n > 0) {
+                context.fillText(line.trim(), x, tempY); // Trim trailing space for current line
+                line = words[n] + ' ';
+                tempY += lineHeight;
+                lines++;
+            } else {
+                line = testLine;
+            }
+        }
+        context.fillText(line.trim(), x, tempY); // Draw the last line
+        lines++; // Count the last line
+        return lines;
+    }
+});
+
+// Helper function for rounded rectangles (if not natively supported by browser)
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
+        this.beginPath();
+        this.moveTo(x + radius, y);
+        this.lineTo(x + width - radius, y);
+        this.quadraticCurveTo(x + width, y, x + width, y + radius);
+        this.lineTo(x + width, y + height - radius);
+        this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        this.lineTo(x + radius, y + height);
+        this.quadraticCurveTo(x, y + height, x, y + height - radius);
+        this.lineTo(x, y + radius);
+        this.quadraticCurveTo(x, y, x + radius, y);
+        this.closePath();
+    };
 }
 
 // SweetAlert2 for delete confirmation
