@@ -19,11 +19,8 @@ class AdoptionPostsController extends Controller
         $post = AdoptionPost::findOrFail($id);
         $status = $request->input('status');
 
-        if ($status === 'approved' && $post->status !== 'approved') {
-            $post->update(['status' => 'approved', 'approved_at' => now()]);
-            return redirect()->route('admin.adoption-posts.index')->with('success', 'Post approved successfully.');
-        } elseif (in_array($status, ['rejected', 'pending'])) {
-            $post->update(['status' => $status, 'approved_at' => null]);
+        if (in_array($status, ['pending', 'approved', 'rejected', 'expired', 'adopted'])) {
+            $post->update(['status' => $status, 'approved_at' => $status === 'approved' ? now() : null]);
             return redirect()->route('admin.adoption-posts.index')->with('success', "Post status updated to $status.");
         }
         return redirect()->route('admin.adoption-posts.index')->with('error', 'Invalid status update.');

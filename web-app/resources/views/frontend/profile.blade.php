@@ -218,7 +218,9 @@
                             <div class="stat-item">
                                 <i class="fas fa-check-circle"></i>
                                 <span class="stat-label">Approved</span>
-                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'approved')->count() }}</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'approved')->where(function ($post) {
+                                    return $post->approved_at && $post->approved_at >= now()->subDays(7);
+                                })->count() }}</span>
                             </div>
                             <div class="stat-item">
                                 <i class="fas fa-times-circle"></i>
@@ -228,12 +230,14 @@
                             <div class="stat-item">
                                 <i class="fas fa-trash-alt"></i>
                                 <span class="stat-label">Expired</span>
-                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'expired')->count() }}</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'expired')->count() + $user->adoptionPosts->where('status', 'approved')->where(function ($post) {
+                                    return $post->approved_at && $post->approved_at < now()->subDays(7);
+                                })->count() }}</span>
                             </div>
                             <div class="stat-item">
                                 <i class="fas fa-paw"></i>
                                 <span class="stat-label">Adopted</span>
-                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'rejected')->where('approved_at', '<', now()->subDays(7))->count() }}</span>
+                                <span class="stat-value">{{ $user->adoptionPosts->where('status', 'adopted')->count() }}</span>
                             </div>
                         </div>
                     </div>
@@ -265,7 +269,7 @@
                                             </div>
                                         @endif
                                         <h5 class="blog-title">{{ $post->title }}</h5>
-                                        @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) >= (7 * 24))
+                                        @if ($post->status == 'approved' && $post->approved_at && now()->diffInHours($post->approved_at) >= (7 * 24) || $post->status == 'expired')
                                             <div class="adoption-actions mt-2">
                                                 <form action="{{ route('adoption-posts.repost', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
@@ -276,7 +280,7 @@
                                             <p class="blog-meta"><strong>Status:</strong> <span class="status-expired">Expired</span></p>
                                         @else
                                             <p class="blog-meta"><strong>Status:</strong> <span class="status-{{ $post->status }}">{{ ucfirst($post->status) }}</span></p>
-                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < (7 * 24))
+                                            @if ($post->status == 'approved' && $post->approved_at && now()->diffInHours($post->approved_at) < (7 * 24))
                                                 <p class="blog-meta"><strong>Time Remaining:</strong>
                                                     @php
                                                         $remainingMinutes = now()->diffInMinutes($post->approved_at->addDays(7));
@@ -295,7 +299,7 @@
                                         <p class="blog-full-description" id="full-{{ $post->id }}" style="display: none;">{{ $post->description }}</p>
                                         <button class="btn btn-primary btn-sm mt-2 read-more-btn" data-post-id="{{ $post->id }}">Read More</button>
                                         <div class="adoption-actions mt-2">
-                                            @if ($post->status == 'approved' && now()->diffInHours($post->approved_at) < (7 * 24))
+                                            @if ($post->status == 'approved' && $post->approved_at && now()->diffInHours($post->approved_at) < (7 * 24))
                                                 <form action="{{ route('adoption-posts.adopted', $post->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('PATCH')
@@ -524,6 +528,16 @@
 
     .my-adoption-posts-section .read-more-btn:hover {
         background: #e04e2b;
+    }
+
+    .my-adoption-posts-section .status-adopted {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .my-adoption-posts-section .status-expired {
+        color: #6c757d;
+        font-weight: bold;
     }
 
     @media (max-width: 767px) {

@@ -81,8 +81,8 @@ class AdoptionPostsController extends Controller
     {
         $post = AdoptionPost::findOrFail($id);
         if ($post->status === 'approved' && now()->diffInDays($post->approved_at) < 7) {
-            $post->update(['status' => 'rejected']);
-            return redirect()->route('profile')->with('success', 'Post marked as adopted and moved to rejected status in admin panel. Adopted count updated.');
+            $post->update(['status' => 'adopted']);
+            return redirect()->route('profile')->with('success', 'Post marked as adopted successfully. Adopted count updated.');
         }
         return redirect()->route('profile')->with('error', 'Cannot mark this post as adopted.');
     }

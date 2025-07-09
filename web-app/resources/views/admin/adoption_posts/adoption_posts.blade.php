@@ -59,6 +59,8 @@
                                     <option value="pending" {{ $post->status === 'pending' ? 'selected' : '' }}>Pending</option>
                                     <option value="approved" {{ $post->status === 'approved' ? 'selected' : '' }}>Approved</option>
                                     <option value="rejected" {{ $post->status === 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                    <option value="expired" {{ $post->status === 'expired' ? 'selected' : '' }}>Expired</option>
+                                    <option value="adopted" {{ $post->status === 'adopted' ? 'selected' : '' }}>Adopted</option>
                                 </select>
                             </form>
                         </td>
