@@ -1832,7 +1832,7 @@ label {
 .faq-bg {
     background: #d5e6eb;
     position: relative;
-    padding: 110px 0 110px;
+    padding: 25px 0 110px;
 }
 .faq-area.faq-bg::after {
 	top: auto;
@@ -1852,6 +1852,7 @@ label {
 .faq-img-wrap .main-img {
     position: absolute;
     max-width: 71%;
+height: 65%;
     left: 36px;
     bottom: 32px;
     z-index: -1;
@@ -1983,6 +1984,8 @@ label {
     bottom: 0;
     z-index: -1;
 }
+
+
 
 /* 13. Breeder Gallery */
 .breeder-gallery-area {

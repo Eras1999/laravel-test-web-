@@ -161,61 +161,76 @@
             <div class="col-xl-7 col-lg-9">
                 <div class="section-title text-center mb-65">
                     <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
-                    <h5 class="sub-title">Service to Breeds</h5>
-                    <h2 class="title">Most Popular Dog Breed</h2>
-                    <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a breed brwn and information Most dogs</p>
+                    <h5 class="sub-title">Adoption Cats & Dogs </h5>
+                    <h2 class="title">Give Them a Second Chance</h2>
+                    <p>Save Sathwa is dedicated to rescuing stray and abandoned animals across Sri Lanka. Through our adoption program, you can give a loving home to a dog or cat in need — because every life deserves love and care.</p>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="breed-services-active owl-carousel">
+                    <!-- Dog 1 -->
                     <div class="breed-services-item">
                         <div class="thumb">
-                            <img src="{{ asset('frontend/img/images/breed_services_img01.jpg') }}" alt="">
+                            <img src="{{ asset('frontend/img/images/sinhala_hound.jpg') }}" alt="Sinhala Hound">
                         </div>
                         <div class="content">
-                            <h3 class="title"><a href="breeder-details.html">Golden Retriever</a></h3>
+                            <h3 class="title">Sinhala Hound</h3>
                         </div>
                     </div>
+                    <!-- Cat 3 -->
                     <div class="breed-services-item">
                         <div class="thumb">
-                            <img src="{{ asset('frontend/img/images/breed_services_img02.jpg') }}" alt="">
+                            <img src="{{ asset('frontend/img/images/Orange Sri Lankan Cat.jpg') }}" alt="Orange Sri Lankan Cat">
                         </div>
                         <div class="content">
-                            <h3 class="title"><a href="breeder-details.html">German Sharped</a></h3>
+                            <h3 class="title">Orange Sri Lankan Cat</h3>
                         </div>
                     </div>
+                    <!-- Dog 2 -->
                     <div class="breed-services-item">
                         <div class="thumb">
-                            <img src="{{ asset('frontend/img/images/breed_services_img03.jpg') }}" alt="">
+                            <img src="{{ asset('frontend/img/images/sri_lankan_ridgeback.jpg') }}" alt="Sri Lankan Ridgeback">
                         </div>
                         <div class="content">
-                            <h3 class="title"><a href="breeder-details.html">Siberian Husky</a></h3>
+                            <h3 class="title">Sri Lankan Ridgeback</h3>
                         </div>
                     </div>
+                    <!-- Cat 1 -->
                     <div class="breed-services-item">
                         <div class="thumb">
-                            <img src="{{ asset('frontend/img/images/breed_services_img04.jpg') }}" alt="">
+                            <img src="{{ asset('frontend/img/images/street_cat.jpg') }}" alt="Sri Lankan Street Cat">
                         </div>
                         <div class="content">
-                            <h3 class="title"><a href="breeder-details.html">Bernes Mountain</a></h3>
+                            <h3 class="title">Sri Lankan Street Cat</h3>
+                        </div>
+                    </div>
+                    <!-- Cat 2 -->
+                    <div class="breed-services-item">
+                        <div class="thumb">
+                            <img src="{{ asset('frontend/img/images/tabby_cat.jpg') }}" alt="Tabby Cat">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Local Tabby Cat</h3>
                         </div>
                     </div>
                 </div>
             </div>
+        
+            <!-- Side Info Box -->
             <div class="col-lg-4 col-md-6">
                 <div class="breed-services-info" data-background="{{ asset('frontend/img/bg/breed_services_bg.jpg') }}">
-                    <h5 class="sub-title">Dog Breeder</h5>
-                    <h3 class="title">Available for Breed</h3>
-                    <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provid dogs</p>
-                    <a href="dog-list.html" class="btn">More Pets <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
+                    <h5 class="sub-title">Adopt a Friend</h5>
+                    <h3 class="title">Dogs & Cats Available</h3>
+                    <p>Rescued and ready for love — our local dogs and cats are waiting for a second chance. Adopt a life, change a life.</p>
+                    <a href="{{ route('adoption-posts.index') }}" class="btn">
+                        View All <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt="">
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="breed-services-shape"><img src="{{ asset('frontend/img/images/breed_services_shape01.png') }}" alt=""></div>
-    <div class="breed-services-shape shape-two"><img src="{{ asset('frontend/img/images/breed_services_shape02.png') }}" alt=""></div>
 </section>
 <!-- breeds-services-end -->
 
@@ -226,8 +241,8 @@
             <div class="col-lg-6">
                 <div class="faq-img-wrap">
                     <img src="{{ asset('frontend/img/images/faq_tv.png') }}" class="img-frame" alt="">
-                    <img src="{{ asset('frontend/img/images/faq_img.png') }}" class="main-img" alt="">
-                    <a href="https://www.youtube.com/watch?v=XdFfCPK5ycw" class="popup-video"></a>
+                    <img src="{{ asset('frontend/img/images/faq_img.jpg') }}" class="main-img" alt="">
+                    <a href="https://www.youtube.com/watch?v=B5A4L7PLuhE" class="popup-video"></a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -242,14 +257,13 @@
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                                         data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Working for dog adoption
+                                        How did Save Sathwa begin?
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    The best overall dog DNA test is embark breed & health Kit (view atths Chewy), which provides you with a breed brwn and ition on provides ancestors most dogs.
-                                </div>
+                                    Save Sathwa was born from a simple act of compassion — rescuing a helpless puppy abandoned near a roadside. Since then, we’ve grown into a community-driven organization dedicated to rescuing, healing, and rehoming stray and injured animals across Sri Lanka. Our name “Sathwa” comes from the Sinhala word for “living being,” because we believe every life deserves care and dignity.                                </div>
                             </div>
                         </div>
                         <div class="card">
@@ -257,14 +271,13 @@
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
                                         data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Competitions & Awards
+                                        Can families adopt pets through Save Sathwa?
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    The best overall dog DNA test is embark breed & health Kit (view atths Chewy), which provides you with a breed brwn and ition on provides ancestors most dogs.
-                                </div>
+                                    Absolutely! We encourage loving families to open their hearts and homes to our rescued animals. Each pet is vaccinated, health-checked, and ready to be part of a caring home. Whether you're a first-time pet parent or looking to add a furry friend to your family, we guide you through every step of the adoption process.                                </div>
                             </div>
                         </div>
                         <div class="card">
@@ -272,14 +285,13 @@
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
                                         data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        The puppies are 3 months old
+                                        How does the animal rescue form work?
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    The best overall dog DNA test is embark breed & health Kit (view atths Chewy), which provides you with a breed brwn and ition on provides ancestors most dogs.
-                                </div>
+                                    Anyone who finds an injured, abandoned, or at-risk animal (dog, cat, bird, snake, or any other animal) can fill out our Rescue Form. You simply select the animal type, describe the situation, upload a clear photo, and share the location. Once submitted, our network of volunteers, organizations, and kind individuals are notified to take action quickly.                                </div>
                             </div>
                         </div>
                     </div>
@@ -297,37 +309,37 @@
         <div class="row brand-active">
             <div class="col-12">
                 <div class="brand-item">
-                    <img src="{{ asset('frontend/img/brand/brand_item01.png') }}" alt="img">
+                    <img src="{{ asset('frontend/img/brand/brand1.png') }}" alt="img">
                 </div>
             </div>
             <div class="col-12">
                 <div class="brand-item">
-                    <img src="{{ asset('frontend/img/brand/brand_item02.png') }}" alt="img">
+                    <img src="{{ asset('frontend/img/brand/brand2.png') }}" alt="img">
                 </div>
             </div>
             <div class="col-12">
                 <div class="brand-item">
-                    <img src="{{ asset('frontend/img/brand/brand_item03.png') }}" alt="img">
+                    <img src="{{ asset('frontend/img/brand/brand3.png') }}" alt="img">
                 </div>
             </div>
             <div class="col-12">
                 <div class="brand-item">
-                    <img src="{{ asset('frontend/img/brand/brand_item04.png') }}" alt="img">
+                    <img src="{{ asset('frontend/img/brand/brand4.png') }}" alt="img">
                 </div>
             </div>
             <div class="col-12">
                 <div class="brand-item">
-                    <img src="{{ asset('frontend/img/brand/brand_item05.png') }}" alt="img">
+                    <img src="{{ asset('frontend/img/brand/brand5.png') }}" alt="img">
                 </div>
             </div>
             <div class="col-12">
                 <div class="brand-item">
-                    <img src="{{ asset('frontend/img/brand/brand_item06.png') }}" alt="img">
+                    <img src="{{ asset('frontend/img/brand/brand6.png') }}" alt="img">
                 </div>
             </div>
             <div class="col-12">
                 <div class="brand-item">
-                    <img src="{{ asset('frontend/img/brand/brand_item03.png') }}" alt="img">
+                    <img src="{{ asset('frontend/img/brand/brand3.png') }}" alt="img">
                 </div>
             </div>
         </div>
@@ -348,183 +360,7 @@
                         breed brwn and information Most dogs</p>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6">
-                <div class="adoption-shop-item">
-                    <div class="adoption-shop-thumb">
-                        <img src="{{ asset('frontend/img/product/adoption_shop_thumb01.jpg') }}" alt="">
-                        <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                    </div>
-                    <div class="adoption-shop-content">
-                        <h4 class="title"><a href="shop-details.html">Mister Tartosh</a></h4>
-                        <div class="adoption-meta">
-                            <ul>
-                                <li><i class="fas fa-cog"></i><a href="#">Siberian Husky</a></li>
-                                <li><i class="far fa-calendar-alt"></i> Birth : 2021</li>
-                            </ul>
-                        </div>
-                        <div class="adoption-rating">
-                            <ul>
-                                <li class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </li>
-                                <li class="price">Total Price : <span>Free</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="adoption-shop-item">
-                    <div class="adoption-shop-thumb">
-                        <img src="{{ asset('frontend/img/product/adoption_shop_thumb02.jpg') }}" alt="">
-                        <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                    </div>
-                    <div class="adoption-shop-content">
-                        <h4 class="title"><a href="shop-details.html">Charlie</a></h4>
-                        <div class="adoption-meta">
-                            <ul>
-                                <li><i class="fas fa-cog"></i><a href="#">Golden Retriever</a></li>
-                                <li><i class="far fa-calendar-alt"></i> Birth : 2020</li>
-                            </ul>
-                        </div>
-                        <div class="adoption-rating">
-                            <ul>
-                                <li class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </li>
-                                <li class="price">Total Price : <span>$30</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="adoption-shop-item">
-                    <div class="adoption-shop-thumb">
-                        <img src="{{ asset('frontend/img/product/adoption_shop_thumb03.jpg') }}" alt="">
-                        <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                    </div>
-                    <div class="adoption-shop-content">
-                        <h4 class="title"><a href="shop-details.html">Alessia Max</a></h4>
-                        <div class="adoption-meta">
-                            <ul>
-                                <li><i class="fas fa-cog"></i><a href="#">German Sherped</a></li>
-                                <li><i class="far fa-calendar-alt"></i> Birth : 2020</li>
-                            </ul>
-                        </div>
-                        <div class="adoption-rating">
-                            <ul>
-                                <li class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </li>
-                                <li class="price">Total Price : <span>$29</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="adoption-shop-item">
-                    <div class="adoption-shop-thumb">
-                        <img src="{{ asset('frontend/img/product/adoption_shop_thumb04.jpg') }}" alt="">
-                        <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                    </div>
-                    <div class="adoption-shop-content">
-                        <h4 class="title"><a href="shop-details.html">Canadian</a></h4>
-                        <div class="adoption-meta">
-                            <ul>
-                                <li><i class="fas fa-cog"></i><a href="#">German Sherped</a></li>
-                                <li><i class="far fa-calendar-alt"></i> Birth : 2021</li>
-                            </ul>
-                        </div>
-                        <div class="adoption-rating">
-                            <ul>
-                                <li class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </li>
-                                <li class="price">Total Price : <span>$39</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="adoption-shop-item">
-                    <div class="adoption-shop-thumb">
-                        <img src="{{ asset('frontend/img/product/adoption_shop_thumb05.jpg') }}" alt="">
-                        <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                    </div>
-                    <div class="adoption-shop-content">
-                        <h4 class="title"><a href="shop-details.html">Entertainment</a></h4>
-                        <div class="adoption-meta">
-                            <ul>
-                                <li><i class="fas fa-cog"></i><a href="#">Siberian Husky</a></li>
-                                <li><i class="far fa-calendar-alt"></i> Birth : 2021</li>
-                            </ul>
-                        </div>
-                        <div class="adoption-rating">
-                            <ul>
-                                <li class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </li>
-                                <li class="price">Total Price : <span>Free</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="adoption-shop-item">
-                    <div class="adoption-shop-thumb">
-                        <img src="{{ asset('frontend/img/product/adoption_shop_thumb06.jpg') }}" alt="">
-                        <a href="shop-details.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
-                    </div>
-                    <div class="adoption-shop-content">
-                        <h4 class="title"><a href="shop-details.html">Dangerous</a></h4>
-                        <div class="adoption-meta">
-                            <ul>
-                                <li><i class="fas fa-cog"></i><a href="#">Golden Retriever</a></li>
-                                <li><i class="far fa-calendar-alt"></i> Birth : 2021</li>
-                            </ul>
-                        </div>
-                        <div class="adoption-rating">
-                            <ul>
-                                <li class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </li>
-                                <li class="price">Total Price : <span>Free</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>       
     </div>
 </section>
 <!-- adoption-shop-area-end -->
@@ -653,30 +489,8 @@
 </section>
 <!-- Latest News-end -->
 
-<!-- newsletter-area -->
-<div class="newsletter-area pb-110">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="newsletter-wrap">
-                    <div class="newsletter-content">
-                        <h2 class="title">Newsletter For</h2>
-                        <p><span>*</span> Do Not Show Your Email.</p>
-                    </div>
-                    <div class="newsletter-form">
-                        <form action="#">
-                            <input type="email" placeholder="Enter Your Email...">
-                            <button type="submit" class="btn">Subscribe</button>
-                        </form>
-                    </div>
-                    <div class="newsletter-shape"><img src="{{ asset('frontend/img/images/newsletter_shape01.png') }}" alt=""></div>
-                    <div class="newsletter-shape shape-two"><img src="{{ asset('frontend/img/images/newsletter_shape02.png') }}" alt=""></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- newsletter-area-end -->
+
+
 </main>
 <!-- main-area-end -->
 
@@ -745,5 +559,7 @@
             window.location.href = url + '#latest-news';
         });
     });
+
+    
 </script>
 @endsection
