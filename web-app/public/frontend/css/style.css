@@ -4131,3 +4131,318 @@ height: 65%;
 
 
 
+
+
+
+
+
+
+/* Rescue Highlight Area */
+.rescue-highlight-area {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+    padding: 60px 0;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.rescue-highlight-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20 20h10v10H20zM40 40h10v10H40zM60 20h10v10H60zM80 60h10v10H80z" fill="rgba(255,255,255,0.05)"/></svg>');
+    animation: float 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Animal Categories */
+.animal-categories {
+    margin-bottom: 40px;
+}
+
+.animal-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.animal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.animal-icon {
+    font-size: 2.5rem;
+    color: #667eea;
+    transition: color 0.3s ease;
+}
+
+.animal-card:hover .animal-icon {
+    color: white;
+}
+
+.animal-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.animal-card:hover .animal-name {
+    color: white;
+}
+
+/* Action Buttons */
+.rescue-actions {
+    margin-bottom: 40px;
+}
+
+.rescue-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rescue-btn.btn-outline-primary {
+    background: transparent;
+    border: 2px solid #667eea;
+    color: #667eea;
+    box-shadow: none;
+}
+
+.rescue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.rescue-btn.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-color: transparent;
+}
+
+.rescue-btn i {
+    font-size: 1.2rem;
+}
+
+/* Stats Section */
+.rescue-stats {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    .rescue-highlight-area {
+        padding: 40px 0;
+    }
+
+    .animal-card {
+        padding: 15px;
+    }
+
+    .animal-icon {
+        font-size: 2rem;
+    }
+
+    .animal-name {
+        font-size: 0.9rem;
+    }
+
+    .rescue-btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .rescue-highlight-area {
+        padding: 30px 0;
+    }
+
+    .animal-card {
+        padding: 12px;
+    }
+
+    .animal-icon {
+        font-size: 1.8rem;
+    }
+
+    .animal-name {
+        font-size: 0.85rem;
+    }
+
+    .rescue-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .rescue-btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px 20px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .animal-card {
+        padding: 10px;
+    }
+
+    .animal-icon {
+        font-size: 1.6rem;
+    }
+
+    .animal-name {
+        font-size: 0.8rem;
+    }
+
+    .rescue-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .rescue-btn i {
+        font-size: 1rem;
+    }
+
+    .stat-card {
+        padding: 10px;
+    }
+
+    .stat-number {
+        font-size: 1.6rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .animal-card {
+        padding: 8px;
+    }
+
+    .animal-icon {
+        font-size: 1.4rem;
+    }
+
+    .animal-name {
+        font-size: 0.75rem;
+    }
+
+    .rescue-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    .stat-card {
+        padding: 8px;
+    }
+
+    .stat-number {
+        font-size: 1.4rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

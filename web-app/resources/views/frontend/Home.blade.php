@@ -348,22 +348,146 @@
 <!-- brand-area-end -->
 
 <!-- adoption-shop-area -->
-<section class="adoption-shop-area">
+<section class="rescue-highlight-area pb-100">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-7 col-lg-9">
-                <div class="section-title text-center mb-65">
-                    <div class="section-icon"><img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></div>
-                    <h5 class="sub-title">Meet the animals</h5>
-                    <h2 class="title">Puppies Waiting for Adoption</h2>
-                    <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a
-                        breed brwn and information Most dogs</p>
+        <div class="row justify-content-center mb-5">
+            <div class="col-xl-8 col-lg-10 text-center">
+                <div class="section-title position-relative">
+                    <div class="section-icon mb-4 d-inline-flex align-items-center justify-content-center">
+                        <div class="icon-wrapper">
+                            <img src="frontend/img/icon/pawprint.png" alt="Paw Icon" class="paw-icon">
+                        </div>
+                    </div>
+                    <h5 class="sub-title text-uppercase fw-bold mb-3">Real-Time Rescues</h5>
+                    <h2 class="title display-4 fw-bold mb-4">Animals That Need You</h2>
+                    <p class="description lead text-muted mb-5">These are real cases submitted by kind-hearted people. Injured, lost, or abandoned — every one of them needs a helping hand.</p>
                 </div>
             </div>
-        </div>       
+        </div>
+
+        <!-- Animal Categories -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10">
+                <div class="animal-categories">
+                    <div class="row g-4">
+                        <div class="col-lg-2 col-md-4 col-6">
+                            <div class="animal-card text-center">
+                                <div class="animal-icon mb-3">
+                                    <i class="fas fa-dog"></i>
+                                </div>
+                                <h6 class="animal-name">Dogs</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6">
+                            <div class="animal-card text-center">
+                                <div class="animal-icon mb-3">
+                                    <i class="fas fa-cat"></i>
+                                </div>
+                                <h6 class="animal-name">Cats</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6">
+                            <div class="animal-card text-center">
+                                <div class="animal-icon mb-3">
+                                    <i class="fas fa-dove"></i>
+                                </div>
+                                <h6 class="animal-name">Birds</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6">
+                            <div class="animal-card text-center">
+                                <div class="animal-icon mb-3">
+                                    <i class="fas fa-dragon"></i>
+                                </div>
+                                <h6 class="animal-name">Snakes</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6">
+                            <div class="animal-card text-center">
+                                <div class="animal-icon mb-3">
+                                    <i class="fas fa-paw"></i>
+                                </div>
+                                <h6 class="animal-name">Others</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="rescue-actions d-flex flex-wrap justify-content-center gap-4">
+                    <a href="{{ route('rescue-posts.index') }}" class="btn btn-primary btn-lg rescue-btn">
+                        <i class="fas fa-search me-2"></i>
+                        View All Rescues posts
+                    </a>                   
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-10">
+                <div class="rescue-stats">
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card text-center">
+                                <div class="stat-number">254</div>
+                                <div class="stat-label">Animals Rescued</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card text-center">
+                                <div class="stat-number">89</div>
+                                <div class="stat-label">Active Cases</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card text-center">
+                                <div class="stat-number">1.2K</div>
+                                <div class="stat-label">Community Members</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card text-center">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Success Stories</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+
 <!-- adoption-shop-area-end -->
+
+
+
+<!-- rescue-highlight-area -->
+<!-- Snake Catcher Banner Section -->
+<section class="snake-catcher-section">
+    <img src="{{ asset('frontend/img/snake_catcher/banner.jpg') }}" alt="Snake Catcher Banner" class="img-fluid w-100" style="max-height: 550px; object-fit: cover;">
+</section>
+
+<!-- Snake Catcher Call-to-Action -->
+<section class="snake-catcher-cta py-5 text-center bg-light">
+    <div class="container">
+        <h2 class="fw-bold mb-3">Need a Snake Catcher?</h2>
+        <p class="mb-4">If you encounter a snake, don’t panic. Our trained rescue team is just a click away to handle it safely and humanely.</p>
+        <a href="{{ route('snake-catchers.index') }}" class="btn btn-primary btn-lg">
+            Contact Snake Catcher
+            <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt="icon" style="width: 18px; margin-left: 6px;">
+        </a>
+    </div>
+</section>
+
+
+<!-- rescue-highlight-area-end -->
 
 <!-- testimonial-area -->
 <section class="testimonial-area testimonial-bg">
@@ -500,6 +624,7 @@
 <!-- Owl Carousel CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
+
 
 @endsection
 
