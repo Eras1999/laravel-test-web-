@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\SnakeCatcherController;
 use App\Http\Controllers\admin\SnakeCatcherController as AdminSnakeCatcherController;
 use App\Http\Controllers\Frontend\RescuePostsController;
 use App\Http\Controllers\admin\RescuePostsController as AdminRescuePostsController;
+use App\Http\Controllers\admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -197,3 +198,15 @@ Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout'
 Route::get('/my-profile', [RescuePostsController::class, 'profile'])->name('profile')->middleware('auth:frontend');
 
 
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/reports', function () {
+        return view('admin.reports'); // Placeholder: Create a controller and view
+    })->name('reports');
+    Route::get('/settings', function () {
+        return view('admin.settings'); // Placeholder: Create a controller and view
+    })->name('settings');
+    Route::get('/notifications', function () {
+        return view('admin.notifications'); // Placeholder: Create a controller and view
+    })->name('notifications');
+});

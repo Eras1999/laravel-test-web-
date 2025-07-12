@@ -14,7 +14,6 @@
     @endif
 </div>
 
-<!-- Add New Blog Card -->
 <div class="card mb-4 shadow-sm border-0">
     <div class="card-header bg-primary text-white d-flex align-items-center">
         <i class="fas fa-blog me-2"></i>
@@ -44,7 +43,6 @@
     </div>
 </div>
 
-<!-- Blog List Card -->
 <div class="card mb-4 shadow-sm border-0">
     <div class="card-header bg-primary text-white d-flex align-items-center">
         <i class="fas fa-list me-2"></i>
@@ -56,6 +54,7 @@
                 No official blogs available yet.
             </div>
         @else
+            {{-- This is the change: The table is already wrapped in table-responsive --}}
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-primary">
@@ -86,7 +85,6 @@
                                         <i class="fas fa-trash"></i> Delete
                                     </a>
 
-                                    <!-- Edit Modal -->
                                     <div class="modal fade" id="editModal{{ $blog->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $blog->id }}" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -127,7 +125,6 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4">
                 {{ $blogs->links('pagination::bootstrap-5') }}
             </div>

@@ -55,7 +55,7 @@
                     <th>Image</th>
                     <th>Title</th>
                     <th>Content</th>
-                    <śc th>Date</th>
+                    <th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
