@@ -54,42 +54,7 @@
 </section>
 <!-- slider-area-end -->
 
-<!-- find-area -->
-<div class="find-area">
-    <div class="container custom-container">
-        <div class="row">
-            <div class="col-12">
-                <form action="#">
-                    <div class="find-wrap">
-                        <div class="location">
-                            <i class="flaticon-location"></i>
-                            <input type="text" value="Enter City, State. or Zip">
-                        </div>
-                        <div class="find-category">
-                            <ul>
-                                <li><a href="shop.html"><i class="flaticon-dog"></i> Find Your Dog</a></li>
-                                <li><a href="shop.html"><i class="flaticon-happy"></i> Find Your Cat</a></li>
-                                <li><a href="shop.html"><i class="flaticon-dove"></i> Find Your Birds</a></li>
-                            </ul>
-                        </div>
-                        <div class="other-find">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Find Other Pets
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="shop.html">Find Your Dog</a>
-                                    <a class="dropdown-item" href="shop.html">Find Your Cat</a>
-                                    <a class="dropdown-item" href="shop.html">Find Your Birds</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-<!-- find-area-end -->
+
 
 <!-- counter-area -->
 <section class="counter-area counter-bg" data-background="{{ asset('frontend/img/bg/counter_bg.jpg') }}">
@@ -145,7 +110,7 @@
                 <div class="adoption-content">
                     <h2 class="title">Working For <br> Dog <span>Adoption</span> Free, Happy Time</h2>
                     <p>The best overall dog DNA test is Embark Breed & Health Kit (view at Chewy), which provides you with a breed brwn and information.</p>
-                    <a href="adoption.html" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
+                    <a href="{{ route('adoption-posts.index') }}" class="btn">Adoption <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt=""></a>
                 </div>
             </div>
         </div>

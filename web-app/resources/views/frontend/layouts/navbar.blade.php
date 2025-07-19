@@ -5,8 +5,8 @@
                 <div class="col-md-7">
                     <div class="header-top-left">
                         <ul>
-                            <li>Call us: 011 1234567</li>
-                            <li><i class="far fa-clock"></i>SaveSathwa@gmail.com</li>
+                            <li><i class="fas fa-phone"></i> Call us: 011 1234567</li>
+                            <li><i class="fas fa-envelope"></i> SaveSathwa@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -15,9 +15,7 @@
                         <ul class="header-top-social">
                             <li class="follow">Follow :</li>
                             <li><a href="https://www.facebook.com/profile.php?id=61577191816912"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href="https://www.linkedin.com/company/save-sathwa/?viewAsMember=true"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
                 </div>
