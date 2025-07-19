@@ -4205,6 +4205,30 @@ height: 65%;
     color: white;
 }
 
+.animal-categories {
+    text-align: center;
+}
+
+.animal-categories .row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.animal-card {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 150px; /* Optional: Limits card width for uniformity */
+}
+
+@media (max-width: 767px) {
+    .animal-card {
+        max-width: 120px; /* Slightly smaller on mobile for better fit */
+    }
+}
+
 /* Action Buttons */
 .rescue-actions {
     margin-bottom: 40px;

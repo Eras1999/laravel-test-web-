@@ -63,33 +63,34 @@
             <div class="col-xl-6 col-lg-8">
                 <div class="counter-title text-center mb-65">
                     <h6 class="sub-title">Why Choose Us?</h6>
-                    <h2 class="title">Best Service to Breeds Your Loved Dog Explore</h2>
+                    <h2 class="title">Dedicated to Protecting and Rescuing Animals in Need</h2>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="counter-item">
-                    <h2 class="count"><span class="odometer" data-count="73"></span>%</h2>
-                    <p>dogs are first bred</p>
+                    <h2 class="count"><span class="odometer" data-count="90"></span>%</h2>
+                    <p>	Community Reports
+                    </p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="counter-item">
-                    <h2 class="count"><span class="odometer" data-count="259"></span>+</h2>
-                    <p>Most dogs are first</p>
+                    <h2 class="count"><span class="odometer" data-count="1000"></span>+</h2>
+                    <p>Animals Rescued</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="counter-item">
-                    <h2 class="count"><span class="odometer" data-count="39"></span>K</h2>
-                    <p>Dog Breeding</p>
+                    <h2 class="count"><span class="odometer" data-count="1"></span>K</h2>
+                    <p>Pet Adopted</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="counter-item">
-                    <h2 class="count"><span class="odometer" data-count="45"></span>+</h2>
-                    <p>Years Of History</p>
+                    <h2 class="count"><span class="odometer" data-count="25"></span>+</h2>
+                    <p>Active Partners</p>
                 </div>
             </div>
         </div>
@@ -324,62 +325,61 @@
                         </div>
                     </div>
                     <h5 class="sub-title text-uppercase fw-bold mb-3">Real-Time Rescues</h5>
-                    <h2 class="title display-4 fw-bold mb-4">Animals That Need You</h2>
+                    <h2 class="title">Animals That Need You</h2>
                     <p class="description lead text-muted mb-5">These are real cases submitted by kind-hearted people. Injured, lost, or abandoned — every one of them needs a helping hand.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Animal Categories -->
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-10">
-                <div class="animal-categories">
-                    <div class="row g-4">
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <div class="animal-card text-center">
-                                <div class="animal-icon mb-3">
-                                    <i class="fas fa-dog"></i>
-                                </div>
-                                <h6 class="animal-name">Dogs</h6>
-                            </div>
+       <!-- Animal Categories -->
+<div class="row justify-content-center mb-5">
+    <div class="col-lg-10">
+        <div class="animal-categories">
+            <div class="row g-4 justify-content-center">
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="animal-card text-center">
+                        <div class="animal-icon mb-3">
+                            <i class="fas fa-dog"></i>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <div class="animal-card text-center">
-                                <div class="animal-icon mb-3">
-                                    <i class="fas fa-cat"></i>
-                                </div>
-                                <h6 class="animal-name">Cats</h6>
-                            </div>
+                        <h6 class="animal-name">Dogs</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="animal-card text-center">
+                        <div class="animal-icon mb-3">
+                            <i class="fas fa-cat"></i>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <div class="animal-card text-center">
-                                <div class="animal-icon mb-3">
-                                    <i class="fas fa-dove"></i>
-                                </div>
-                                <h6 class="animal-name">Birds</h6>
-                            </div>
+                        <h6 class="animal-name">Cats</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="animal-card text-center">
+                        <div class="animal-icon mb-3">
+                            <i class="fas fa-dove"></i>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <div class="animal-card text-center">
-                                <div class="animal-icon mb-3">
-                                    <i class="fas fa-dragon"></i>
-                                </div>
-                                <h6 class="animal-name">Snakes</h6>
-                            </div>
+                        <h6 class="animal-name">Birds</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="animal-card text-center">
+                        <div class="animal-icon mb-3">
+                            <i class="fas fa-dragon"></i>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <div class="animal-card text-center">
-                                <div class="animal-icon mb-3">
-                                    <i class="fas fa-paw"></i>
-                                </div>
-                                <h6 class="animal-name">Others</h6>
-                            </div>
+                        <h6 class="animal-name">Snakes</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="animal-card text-center">
+                        <div class="animal-icon mb-3">
+                            <i class="fas fa-paw"></i>
                         </div>
+                        <h6 class="animal-name">Others</h6>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
+</div>
         <!-- Action Buttons -->
         <div class="row justify-content-center">
             <div class="col-lg-8">
