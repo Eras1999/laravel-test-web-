@@ -3,25 +3,25 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  
-  body {
+}
+
+body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.5;
     background: #f4f7fa;
     color: #333;
     height: 100vh;
     display: flex;
-  }
-  
-  .auth-page {
+}
+
+.auth-page {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     position: relative;
-  }
-  
-  .auth-page::before {
+}
+
+.auth-page::before {
     content: '';
     position: absolute;
     top: 0;
@@ -30,10 +30,10 @@
     height: 100%;
     background: rgba(0, 0, 0, .55);
     z-index: 1;
-  }
-  
-  /* Wrapper keeps card on the left on desktop */
-  .auth-wrapper {
+}
+
+/* Wrapper keeps card on the left on desktop */
+.auth-wrapper {
     padding: 4vw;
     display: flex;
     align-items: center;
@@ -41,10 +41,10 @@
     width: 100%;
     position: relative;
     z-index: 2;
-  }
-  
-  /* Card */
-  .auth-card {
+}
+
+/* Card */
+.auth-card {
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, .08);
@@ -52,94 +52,94 @@
     width: 100%;
     max-width: 420px;
     transition: transform .35s ease, box-shadow .35s ease;
-  }
-  
-  .auth-card:hover {
+}
+
+.auth-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 25px 55px rgba(0, 0, 0, .12);
-  }
-  
-  .auth-card .logo {
+}
+
+.auth-card .logo {
     max-width: 140px;
     margin: 0 auto 25px;
     display: block;
-  }
-  
-  /* Typography */
-  .auth-header h2 {
+}
+
+/* Typography */
+.auth-header h2 {
     font-size: 1.9rem;
     font-weight: 600;
     margin-bottom: 8px;
     letter-spacing: .5px;
     color: #222;
-  }
-  
-  .auth-header p {
+}
+
+.auth-header p {
     font-size: .95rem;
     color: #666;
     margin-bottom: 30px;
-  }
-  
-  /* Form */
-  .form-group {
+}
+
+/* Form */
+.form-group {
     margin-bottom: 22px;
     text-align: left;
-  }
-  
-  label {
+}
+
+label {
     font-weight: 500;
     font-size: .9rem;
     margin-bottom: 6px;
     display: block;
-  }
-  
-  .form-control {
+}
+
+.form-control {
     width: 100%;
     padding: 13px 16px;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     font-size: 1rem;
     transition: border .25s, box-shadow .25s;
-  }
-  
-  .form-control:focus {
+}
+
+.form-control:focus {
     border-color: #4f46e5;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, .15);
     outline: none;
-  }
-  
-  /* Checkbox & Link */
-  .d-flex {
+}
+
+/* Checkbox & Link */
+.d-flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: .85rem;
-  }
-  
-  .form-check {
+}
+
+.form-check {
     display: flex;
     align-items: center;
-  }
-  
-  .form-check-input {
+}
+
+.form-check-input {
     width: 16px;
     height: 16px;
     margin-right: 6px;
     accent-color: #4f46e5;
-  }
-  
-  .forgot-link {
+}
+
+.forgot-link {
     color: #4f46e5;
     text-decoration: none;
     font-weight: 500;
-  }
-  
-  .forgot-link:hover {
+}
+
+.forgot-link:hover {
     text-decoration: underline;
-  }
-  
-  /* Button */
-  .auth-btn {
+}
+
+/* Button */
+.auth-btn {
     width: 100%;
     background: #4f46e5;
     color: #fff;
@@ -151,85 +151,68 @@
     cursor: pointer;
     transition: background .3s, transform .2s;
     letter-spacing: .5px;
-  }
-  
-  .auth-btn:hover {
+}
+
+.auth-btn:hover {
     background: #4338ca;
     transform: scale(1.02);
-  }
-  
-  .auth-btn:active {
+}
+
+.auth-btn:active {
     transform: scale(.98);
-  }
-  
-  /* Footer */
-  .auth-footer {
+}
+
+/* Footer */
+.auth-footer {
     margin-top: 25px;
     font-size: .9rem;
     color: #555;
-  }
-  
-  .auth-footer a {
+}
+
+.auth-footer a {
     color: #4f46e5;
     font-weight: 600;
     text-decoration: none;
-  }
-  
-  .auth-footer a:hover {
+}
+
+.auth-footer a:hover {
     text-decoration: underline;
-  }
-  
-  /* Alerts */
-  .alert {
-    padding: 12px 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: .85rem;
-  }
-  
-  .alert-danger {
-    background: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fca5a5;
-  }
-  
-  .alert ul {
-    list-style: none;
-  }
-  
-  /* Responsive centering */
-  @media (max-width: 992px) {
+}
+
+/* Responsive centering */
+@media (max-width: 992px) {
     .auth-wrapper {
-      justify-content: center;
+        justify-content: center;
     }
     .auth-card {
-      max-width: 420px;
-      padding: 45px 40px;
+        max-width: 420px;
+        padding: 45px 40px;
     }
-  }
-  
-  @media (max-width: 576px) {
+}
+
+@media (max-width: 576px) {
     .auth-wrapper {
-      padding: 0 15px;
+        padding: 0 15px;
     }
     .auth-card {
-      max-width: 100%;
-      padding: 35px 25px;
+        max-width: 100%;
+        padding: 35px 25px;
     }
     .auth-header h2 {
-      font-size: 1.75rem;
+        font-size: 1.75rem;
     }
-  }
-  
-  /* signin page background */
-  .signin-page {
+}
+
+/* Signin page background */
+.signin-page {
     background-image: url('../img/auth/signin-bg1.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-  }
+}
 
-  .signup-page {
+/* Signup page background */
+.signup-page {
     background-image: url('../img/auth/signup-bg.png');
     background-size: cover;
     background-position: center;
@@ -240,7 +223,7 @@
 @media (max-height: 800px) {
     .auth-card {
         max-height: 90vh;
-        overflow-y: auto;
+        overflow-y:auto;
         margin: 20px 0;
     }
 }
@@ -255,11 +238,15 @@
     }
 }
 
+/* Additional styles for forgot password page */
+.forgot-password-page {
+    background-image: url('../img/auth/forgot-password-bg.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-    /* Additional styles for forgot password page */
-    .forgot-password-page {
-        background-image: url('../img/auth/forgot-password-bg.jpeg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
+/* Ensure SweetAlert2 z-index is above overlay */
+.swal2-container {
+    z-index: 10000 !important;
+}

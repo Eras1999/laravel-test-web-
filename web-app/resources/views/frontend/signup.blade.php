@@ -6,7 +6,7 @@
     <title>Sign Up - SaveSathwa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('frontend/css/auth.css') }}">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="auth-page signup-page">
     <main class="auth-wrapper">
@@ -17,23 +17,7 @@
                 <p>Create an account to join our community!</p>
             </div>
 
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="{{ route('signup.post') }}" method="POST" class="auth-form">
+            <form id="signup-form" action="{{ route('signup.post') }}" method="POST" class="auth-form">
                 @csrf
                 <div class="form-group">
                     <label for="name">Full Name</label>
@@ -65,5 +49,49 @@
             </div>
         </section>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // SweetAlert for success messages
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#4f46e5',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            // SweetAlert for error messages
+            @if ($errors->any())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    html: `<ul style="text-align: left; list-style: none; padding: 0;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                           </ul>`,
+                    confirmButtonColor: '#4f46e5',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            // SweetAlert for showing loading state on form submission
+            document.getElementById('signup-form').addEventListener('submit', function () {
+                Swal.fire({
+                    title: 'Processing',
+                    text: 'Please wait while we create your account...',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    willOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
