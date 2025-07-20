@@ -1,0 +1,105 @@
+.snake-ai-page {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f7fafc, #edf2f7);
+    min-height: 100vh;
+    padding: 50px 0;
+}
+
+.snake-ai-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.snake-ai-card:hover {
+    transform: translateY(-5px);
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-section h2 {
+    font-size: 2rem;
+    color: #2d3748;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.header-section h2 i {
+    color: #667eea;
+    margin-right: 10px;
+}
+
+.header-section p {
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.snake-ai-content {
+    text-align: center;
+}
+
+.snake-ai-content p {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.snake-ai-content .btn-primary {
+    background: #46ac0b;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.snake-ai-content .btn-primary:hover {
+    background: #5a67d8;
+}
+
+.snake-ai-content .btn-primary i {
+    margin-right: 8px;
+}
+
+.instruction-section {
+    background: #f7fafc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.instruction-section h4 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.instruction-section h4 i {
+    color: #667eea;
+    margin-right: 8px;
+}
+
+.instruction-section ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.instruction-section ul li {
+    margin-bottom: 12px;
+}
+
+.instruction-section ul li i {
+    color: #48bb78;
+    margin-right: 10px;
+}

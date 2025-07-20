@@ -67,9 +67,10 @@
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('rescue-posts.index') ? 'active' : '' }}"><a href="{{ route('rescue-posts.index') }}">Rescue</a></li>
-                                    <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }} menu-item-has-children">
-                                        <a href="snakeID.html">SnakeID</a>
+                                    <li class="{{ request()->routeIs('snake-catchers.index') || request()->routeIs('snake-ai') ? 'active' : '' }} menu-item-has-children">
+                                        <a href="#">SnakeID</a>
                                         <ul class="submenu">
+                                            <li class="{{ request()->routeIs('snake-ai') ? 'active' : '' }}"><a href="{{ route('snake-ai') }}">Snake AI</a></li>
                                             <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }}"><a href="{{ route('snake-catchers.index') }}">Snake Catchers</a></li>
                                         </ul>
                                     </li>

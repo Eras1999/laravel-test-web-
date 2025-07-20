@@ -182,6 +182,10 @@ Route::get('/about-us', function () {
     return view('frontend.about-us');
 })->name('about-us');
 
+Route::get('/snake-ai', function () {
+    return view('frontend.snake-ai');
+})->name('snake-ai');
+
 require __DIR__.'/auth.php';
 
 // Custom Authentication Routes for Frontend Users
