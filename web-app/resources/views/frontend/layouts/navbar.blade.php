@@ -115,11 +115,8 @@
                             </div>
                             <div class="social-links">
                                 <ul class="clearfix">
-                                    <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-instagram"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                                    <li><a href="https://www.facebook.com/profile.php?id=61577191816912"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/company/save-sathwa/?viewAsMember=true"><i class="fab fa-linkedin-in"></i></a></li>
                                 </ul>
                             </div>
                         </nav>

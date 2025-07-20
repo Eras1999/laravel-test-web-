@@ -12,8 +12,48 @@
                             <p class="section-subtitle">Help save lives, one paw at a time</p>
                         </div>
                         
+                         <!-- Instruction Section -->
+                         <div class="instruction-section" style="background: linear-gradient(135deg, #f7fafc, #edf2f7); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <h4 style="font-size: 1.5rem; color: #2d3748; margin-bottom: 15px; font-weight: 600;">
+                                <i class="fas fa-info-circle" style="color: #667eea; margin-right: 8px;"></i> How to Upload a Rescue Post
+                            </h4>
+                            <ul style="list-style: none; padding: 0; font-size: 1rem; color: #4a5568; line-height: 1.6;">
+                                <li style="margin-bottom: 12px;">
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Login First:</strong> Ensure you're logged in to auto-fill your name as the author.
+                                </li>
+                                <li style="margin-bottom: 12px;">
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Select Animal Type:</strong> Choose the correct animal type (e.g., Dog, Cat) from the dropdown.
+                                </li>
+                                <li style="margin-bottom: 12px;">
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Upload Clear Image:</strong> Add a clear photo of the animal to help others identify it.
+                                </li>
+                                <li style="margin-bottom: 12px;">
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Specify Health Status:</strong> Select the animal’s health condition to inform rescuers of urgency.
+                                </li>
+                                <li style="margin-bottom: 12px;">
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Pin Location:</strong> Click on the map to set the exact location where the animal was found.
+                                </li>
+                                <li style="margin-bottom: 12px;">
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Describe the Situation:</strong> Provide details about the animal’s condition or situation to help rescuers.
+                                </li>
+                                <li style="margin-bottom: 12px;">
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Add Contact Info:</strong> Include a valid Sri Lankan phone number for communication.
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle" style="color: #48bb78; margin-right: 10px;"></i>
+                                    <strong>Submit:</strong> Review your details and click "Submit Rescue Post" to share.
+                                </li>
+                            </ul>
+                        </div>
                         <button class="btn btn-primary mb-4 upload-btn" id="upload-post-btn">
-                            <i class="fas fa-plus"></i> Upload Rescue Post
+                            <i class="fas fa-plus"></i>  Upload Rescue Post
                         </button>
                         <div id="upload-post-form" class="upload-form-container">
                             <form action="{{ route('rescue-posts.store') }}" method="POST" enctype="multipart/form-data" id="rescue-form">
