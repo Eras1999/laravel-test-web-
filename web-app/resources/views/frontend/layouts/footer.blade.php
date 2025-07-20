@@ -33,33 +33,29 @@
                                 <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
                                 <li><a href="{{ route('terms-conditions') }}">Terms and Conditions</a></li>
                                 <li><a href="{{ route('faq') }}">FAQ</a></li>
-                                <li><a href="contact.html">Return Policy</a></li>
-                                <li><a href="contact.html">IP Policy</a></li>
-                                <li><a href="contact.html">Grievance Redressal Policy</a></li>
-                                <li><a href="contact.html">Our Conditions</a></li>
+                                <li><a href="{{ route('disclaimer') }}">Disclaimer</a></li>
+            
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="footer-widget">
-                        <h4 class="fw-title">Our Services</h4>
+                        <h4 class="fw-title">Quick Link</h4>
                         <div class="fw-link">
                             <ul>
-                                <li><a href="breeder.html">Our Breeder</a></li>
-                                <li><a href="adoption.html">Our Adoption</a></li>
-                                <li><a href="contact.html">Editorial Policy</a></li>
-                                <li><a href="contact.html">Return Policy</a></li>
-                                <li><a href="contact.html">Grievance Policy</a></li>
-                                <li><a href="contact.html">Redressal Policy</a></li>
-                                <li><a href="{{ route('what-we-do') }}">What We Do</a></li>
+                                <li><a href="breeder.html">About Us</a></li>
+                                <li><a href="adoption.html">Contact Us</a></li>
+                                <li><a href="contact.html">Adopts Posts</a></li>
+                                <li><a href="contact.html">Snake Catchers</a></li>
+                
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="footer-widget">
-                        <h4 class="fw-title">Instagram</h4>
+                        
                         <div class="fw-insta">
                             <ul>
                                 <li><a href="#"><img src="{{ asset('frontend/img/images/insta_img01.png') }}" alt=""></a></li>
