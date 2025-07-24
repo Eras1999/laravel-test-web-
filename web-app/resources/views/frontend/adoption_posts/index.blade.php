@@ -226,7 +226,7 @@
 @section('styles')
 <style>
     .adoption-index-page {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #66ea71 0%, #764ba2 100%);
         font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
         padding: 60px 0;
         min-height: 100vh;

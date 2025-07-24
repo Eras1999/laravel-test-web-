@@ -54,9 +54,6 @@
                                 <ul class="navigation">
                                     <li class="{{ request()->is('/') || request()->routeIs('home.authenticated') ? 'active' : '' }} menu-item-has-children">
                                         <a href="{{ route('home') }}">Home</a>
-                                        <ul class="submenu">
-                                            <li class="{{ request()->is('/') || request()->routeIs('home.authenticated') ? 'active' : '' }}"><a href="{{ route('home') }}">Home One</a></li>
-                                        </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('about-us') ? 'active' : '' }}"><a href="{{ route('about-us') }}">About Us</a></li>
                                     <li class="{{ request()->routeIs('adoption-posts.create') || request()->routeIs('adoption-posts.index') ? 'active' : '' }} menu-item-has-children">
@@ -67,13 +64,21 @@
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('rescue-posts.index') ? 'active' : '' }}"><a href="{{ route('rescue-posts.index') }}">Rescue</a></li>
-                                    <li class="{{ request()->routeIs('snake-catchers.index') || request()->routeIs('snake-ai') ? 'active' : '' }} menu-item-has-children">
-                                        <a href="#">SnakeID</a>
+                                    <li class="{{ request()->routeIs('snake-catchers.index') || request()->routeIs('snake-ai') || request()->routeIs('dogbreed-ai') ? 'active' : '' }} menu-item-has-children">
+                                        <a href="#">Support</a>
                                         <ul class="submenu">
-                                            <li class="{{ request()->routeIs('snake-ai') ? 'active' : '' }}"><a href="{{ route('snake-ai') }}">Snake AI</a></li>
-                                            <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }}"><a href="{{ route('snake-catchers.index') }}">Snake Catchers</a></li>
+                                            <li class="{{ request()->routeIs('dogbreed-ai') ? 'active' : '' }}">
+                                                <a href="{{ route('dogbreed-ai') }}">Dog Breed AI</a>
+                                            </li>
+                                            <li class="{{ request()->routeIs('snake-ai') ? 'active' : '' }}">
+                                                <a href="{{ route('snake-ai') }}">Snake AI</a>
+                                            </li>
+                                            <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }}">
+                                                <a href="{{ route('snake-catchers.index') }}">Snake Catchers</a>
+                                            </li>
                                         </ul>
                                     </li>
+                                    
                                     <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') || request()->routeIs('community-blogs.index') || request()->routeIs('community-blogs.submit') ? 'active' : '' }} menu-item-has-children">
                                         <a href="#">Blog</a>
                                         <ul class="submenu">

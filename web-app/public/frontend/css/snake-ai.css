@@ -30,7 +30,7 @@
 }
 
 .header-section h2 i {
-    color: #667eea;
+    color: #46ac0b;
     margin-right: 10px;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .snake-ai-content .btn-primary:hover {
-    background: #5a67d8;
+    background: #46ac0b;
 }
 
 .snake-ai-content .btn-primary i {
@@ -83,7 +83,7 @@
 }
 
 .instruction-section h4 i {
-    color: #667eea;
+    color: #46ac0b;
     margin-right: 8px;
 }
 

@@ -190,6 +190,10 @@ Route::get('/snake-ai', function () {
     return view('frontend.snake-ai');
 })->name('snake-ai');
 
+Route::get('/dogbreed-ai', function () {
+    return view('frontend.dogbreed-ai');
+})->name('dogbreed-ai');
+
 Route::get('/disclaimer', function () {
     return view('frontend.disclaimer');
 })->name('disclaimer');
