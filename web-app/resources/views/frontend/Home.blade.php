@@ -451,6 +451,34 @@
     </div>
 </section>
 
+<br>
+
+<!-- Animal Care Places Call-to-Action -->
+<section class="animal-care-cta py-5 text-center position-relative overlay-dark"
+    style="background: url('{{ asset('frontend/img/bg/disclaimer-bg.jpg') }}') center/cover no-repeat;">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-9 col-md-10 col-sm-11">
+                <div class="section-title text-center mb-4 p-4 bg-white shadow-sm rounded" style="opacity: 0.9;">
+                    <div class="section-icon mb-3">
+                        <img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt="Pawprint Icon" class="pawprint-icon">
+                    </div>
+                    <h5 class="sub-title">Care Places</h5>
+                    <h2 class="title">Find Animal Care Places</h2>
+                    <p>Discover veterinary clinics, pet shops, animal shelters, and more across Sri Lanka to support animal welfare.</p>
+                    <br>
+                    <a href="{{ route('animal-care') }}" class="btn btn-primary btn-lg cta-button" aria-label="Explore animal care places in Sri Lanka">
+                        Explore Animal Care Places
+                        <img src="{{ asset('frontend/img/icon/w_pawprint.png') }}" alt="icon" style="width: 18px; margin-left: 6px;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 
 <!-- rescue-highlight-area-end -->
 
@@ -584,6 +612,7 @@
 <!-- main-area-end -->
 
 @endsection
+
 
 @section('styles')
 <!-- Owl Carousel CSS -->

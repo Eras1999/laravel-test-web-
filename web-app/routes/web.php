@@ -162,6 +162,10 @@ Route::controller(AdminRescuePostsController::class)->middleware(['auth', 'verif
     Route::patch('/admin/rescue-posts/{id}/rescued', 'rescued')->name('admin.rescue-posts.rescued');
 });
 
+Route::get('/animal-care', function () {
+    return view('frontend.animalcare');
+})->name('animal-care');
+
 Route::get('/privacy-policy', function () {
     return view('frontend.privacy-policy');
 })->name('privacy-policy');

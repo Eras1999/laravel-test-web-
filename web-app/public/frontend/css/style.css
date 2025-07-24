@@ -4456,7 +4456,43 @@ height: 65%;
 
 
 
-
+.overlay-dark {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .overlay-dark::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    z-index: 1;
+  }
+  
+  .overlay-dark > .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  @media (max-width: 768px) {
+    .section-title {
+      padding: 1.5rem;
+    }
+    .section-title h2 {
+      font-size: 1.5rem;
+    }
+    .section-title p {
+      font-size: 1rem;
+    }
+    .btn.cta-button {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+    }
+  }
+  
 
 
 
