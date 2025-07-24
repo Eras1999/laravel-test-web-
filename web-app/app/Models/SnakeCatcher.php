@@ -8,6 +8,7 @@ class SnakeCatcher extends Model
 {
     protected $fillable = [
         'name',
+        'email',
         'image',
         'district',
         'description',

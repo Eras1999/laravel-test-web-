@@ -12,10 +12,17 @@
     </div>
 @endif
 
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show mx-4" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <div class="card mb-4 mx-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        Snake Catchers List
+        Snake Catchers List ({{ $snakeCatchers->count() }} records)
         <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addCatcherModal">Add Snake Catcher</a>
     </div>
     <div class="card-body">
@@ -62,7 +69,6 @@
                         </td>
                     </tr>
 
-                    <!-- Details Modal -->
                     <div class="modal fade" id="detailsModal{{ $catcher->id }}" tabindex="-1" aria-labelledby="detailsModalLabel{{ $catcher->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -71,6 +77,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <p><strong>Email:</strong> {{ $catcher->email ?? 'Not provided' }}</p>
                                     <p><strong>District:</strong> {{ $catcher->district }}</p>
                                     <p><strong>Description:</strong> {{ $catcher->description }}</p>
                                     <p><strong>Mobile Number:</strong> {{ $catcher->mobile_number }}</p>
@@ -92,7 +99,6 @@
     </div>
 </div>
 
-<!-- Add Catcher Modal -->
 <div class="modal fade" id="addCatcherModal" tabindex="-1" aria-labelledby="addCatcherModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -106,6 +112,10 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
