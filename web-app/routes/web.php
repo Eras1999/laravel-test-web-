@@ -17,6 +17,8 @@ use App\Http\Controllers\admin\SnakeCatcherController as AdminSnakeCatcherContro
 use App\Http\Controllers\Frontend\RescuePostsController;
 use App\Http\Controllers\admin\RescuePostsController as AdminRescuePostsController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\Frontend\ElephantAlertController;
+use App\Http\Controllers\admin\ElephantAlertController as AdminElephantAlertController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -161,6 +163,20 @@ Route::controller(AdminRescuePostsController::class)->middleware(['auth', 'verif
     Route::delete('/admin/rescue-posts/{id}', 'delete')->name('admin.rescue-posts.delete');
     Route::patch('/admin/rescue-posts/{id}/rescued', 'rescued')->name('admin.rescue-posts.rescued');
 });
+
+
+// Add Elephant Alert Routes
+Route::controller(ElephantAlertController::class)->middleware(['auth:frontend'])->group(function () {
+    Route::get('/elephant-alerts', 'index')->name('elephant-alerts.index');
+    Route::post('/elephant-alerts', 'store')->name('elephant-alerts.store');
+    Route::get('/elephant-alerts/map', 'map')->name('elephant-alerts.map');
+});
+
+Route::controller(AdminElephantAlertController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/elephant-alerts', 'index')->name('admin.elephant-alerts.index');
+    Route::delete('/admin/elephant-alerts/{id}', 'delete')->name('admin.elephant-alerts.delete');
+});
+
 
 Route::get('/animal-care', function () {
     return view('frontend.animalcare');

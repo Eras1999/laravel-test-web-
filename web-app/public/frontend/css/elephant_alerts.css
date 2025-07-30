@@ -1,0 +1,126 @@
+.elephant-alerts-page {
+    padding: 40px 0;
+    background-color: #f8f9fa;
+}
+
+.apply-section {
+    margin-top: 30px;
+}
+
+.apply-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.apply-header {
+    margin-bottom: 20px;
+}
+
+.apply-header h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.apply-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+.apply-form-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-group input[readonly] {
+    background-color: #f8f8f8;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-modern {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-success {
+    background-color: #22c55e;
+    color: #fff;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #16a34a;
+}
+
+.btn-cancel {
+    background-color: #ef4444;
+    color: #fff;
+    border: none;
+}
+
+.btn-cancel:hover {
+    background-color: #dc2626;
+}
+
+.btn-primary {
+    background-color: #667eea;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #4f46e5;
+}
+
+.btn-accent {
+    background-color: #f59e0b;
+    color: #fff;
+    border: none;
+}
+
+.btn-accent:hover {
+    background-color: #d97706;
+}

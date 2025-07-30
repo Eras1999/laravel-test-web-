@@ -64,7 +64,7 @@
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('rescue-posts.index') ? 'active' : '' }}"><a href="{{ route('rescue-posts.index') }}">Rescue</a></li>
-                                    <li class="{{ request()->routeIs('snake-catchers.index') || request()->routeIs('snake-ai') || request()->routeIs('dogbreed-ai') ? 'active' : '' }} menu-item-has-children">
+                                    <li class="{{ request()->routeIs('snake-catchers.index') || request()->routeIs('snake-ai') || request()->routeIs('dogbreed-ai') || request()->routeIs('elephant-alerts.index') || request()->routeIs('elephant-alerts.map') ? 'active' : '' }} menu-item-has-children">
                                         <a href="#">Support</a>
                                         <ul class="submenu">
                                             <li class="{{ request()->routeIs('dogbreed-ai') ? 'active' : '' }}">
@@ -76,9 +76,15 @@
                                             <li class="{{ request()->routeIs('snake-catchers.index') ? 'active' : '' }}">
                                                 <a href="{{ route('snake-catchers.index') }}">Snake Catchers</a>
                                             </li>
+                                            <li class="{{ request()->routeIs('elephant-alerts.index') || request()->routeIs('elephant-alerts.map') ? 'active' : '' }} menu-item-has-children">
+                                                <a href="#">Elephant Alert</a>
+                                                <ul class="submenu">
+                                                    <li class="{{ request()->routeIs('elephant-alerts.index') ? 'active' : '' }}"><a href="{{ route('elephant-alerts.index') }}">Report Alert</a></li>
+                                                    <li class="{{ request()->routeIs('elephant-alerts.map') ? 'active' : '' }}"><a href="{{ route('elephant-alerts.map') }}">View Map</a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
-                                    
                                     <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') || request()->routeIs('community-blogs.index') || request()->routeIs('community-blogs.submit') ? 'active' : '' }} menu-item-has-children">
                                         <a href="#">Blog</a>
                                         <ul class="submenu">

@@ -72,7 +72,17 @@
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('admin.rescue-posts.index') }}">Manage Rescue Posts</a>
                         </nav>
-                    </div>                   
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseElephantAlerts" aria-expanded="false" aria-controls="collapseElephantAlerts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-elephant"></i></div>
+                        Elephant Alerts
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseElephantAlerts" aria-labelledby="headingEight" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('admin.elephant-alerts.index') }}">Manage Alerts</a>
+                        </nav>
+                    </div>
                 </div>
             </div>
             <div class="sb-sidenav-footer">
