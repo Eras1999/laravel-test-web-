@@ -150,7 +150,7 @@ $('.breed-services-active').owlCarousel({
 	autoplay: false,
 	autoplayTimeout: 5000,
 	autoplaySpeed: 1000,
-	navText: ['<img src="img/icon/arrow.png" />', '<img src="img/icon/arrow.png" />'],
+	
 	nav: true,
 	dots: false,
 	responsive: {

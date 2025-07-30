@@ -1786,47 +1786,10 @@ label {
     color: #fff;
     margin-bottom: 30px;
 }
-.breed-services-info .btn {
-    background: #fff;
-    color: #46ac0b;
-}
-.breed-services-info .btn img {
-	-webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
-    filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
-}
-.breed-services-info .btn:hover {
-	color: #fff;
-}
-.breed-services-active .owl-next {
-	display: none;
-}
-.breed-services-active .owl-nav button.owl-prev {
-    transform: rotateY(180deg) translateY(-50%);
-    background-image: url(../img/icon/arrow_bg.png)!important;
-    background-position: right;
-    background-repeat: no-repeat;
-    padding: 10px 16px !important;
-    position: absolute;
-    top: 50%;
-    left: -16%;
-}
-.breed-services-active .owl-prev img {
-	max-width: 47px;
-}
-.breed-services-active .owl-nav button.owl-prev:hover img {
-	filter: brightness(100);
-}
-.breed-services-shape {
-    position: absolute;
-    left: 0;
-    top: -5%;
-    z-index: -1;
-}
-.breed-services-shape.shape-two {
-    top: -7%;
-    left: auto;
-    right: 0;
-}
+
+
+
+
 
 /* 12. FAQ */
 .faq-bg {
@@ -4235,7 +4198,7 @@ height: 65%;
 }
 
 .rescue-btn {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #46ac0b);
     border: none;
     padding: 12px 30px;
     border-radius: 25px;
@@ -4295,9 +4258,9 @@ height: 65%;
 .stat-number {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #667eea;
+    color: #46ac0b;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #46ac0b);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
