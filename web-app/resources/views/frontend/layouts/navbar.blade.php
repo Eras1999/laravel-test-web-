@@ -56,14 +56,14 @@
                                         <a href="{{ route('home') }}">Home</a>
                                     </li>
                                     <li class="{{ request()->routeIs('about-us') ? 'active' : '' }}"><a href="{{ route('about-us') }}">About Us</a></li>
-                                    <li class="{{ request()->routeIs('adoption-posts.create') || request()->routeIs('adoption-posts.index') ? 'active' : '' }} menu-item-has-children">
+                                    <li class="{{ request()->routeIs('adoption-posts.create') || request()->routeIs('adoption-posts.form') || request()->routeIs('adoption-posts.index') ? 'active' : '' }} menu-item-has-children">
                                         <a href="#">Adopts</a>
                                         <ul class="submenu">
-                                            <li class="{{ request()->routeIs('adoption-posts.create') ? 'active' : '' }}"><a href="{{ route('adoption-posts.create') }}">Create Post</a></li>
+                                            <li class="{{ request()->routeIs('adoption-posts.create') || request()->routeIs('adoption-posts.form') ? 'active' : '' }}"><a href="{{ route('adoption-posts.create') }}">Create Post</a></li>
                                             <li class="{{ request()->routeIs('adoption-posts.index') ? 'active' : '' }}"><a href="{{ route('adoption-posts.index') }}">View Posts</a></li>
                                         </ul>
                                     </li>
-                                    <li class="{{ request()->routeIs('rescue-posts.index') ? 'active' : '' }}"><a href="{{ route('rescue-posts.index') }}">Rescue</a></li>
+                                    <li class="{{ request()->routeIs('rescue-posts.index') || request()->routeIs('rescue-posts.show') ? 'active' : '' }}"><a href="{{ route('rescue-posts.index') }}">Rescue</a></li>
                                     <li class="{{ request()->routeIs('snake-catchers.index') || request()->routeIs('snake-ai') || request()->routeIs('dogbreed-ai') || request()->routeIs('elephant-alerts.index') || request()->routeIs('elephant-alerts.map') ? 'active' : '' }} menu-item-has-children">
                                         <a href="#">Support</a>
                                         <ul class="submenu">

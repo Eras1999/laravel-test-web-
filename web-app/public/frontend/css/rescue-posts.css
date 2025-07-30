@@ -1,5 +1,5 @@
 .rescue-page {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #6cc150 0%, #dbffd4 100%);
     padding: 40px 0;
     min-height: 100vh;
     position: relative;
@@ -56,7 +56,7 @@
 
 .section-title {
     font-size: 2.5rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: #46ac0b;
     -webkit-background-clip: text;   /* Safari/Chrome */
     background-clip: text;           /* Standard */
     -webkit-text-fill-color: transparent;
@@ -71,7 +71,7 @@
 }
 
 .upload-btn {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: #46ac0b;
     border: none;
     padding: 12px 30px;
     border-radius: 50px;
@@ -124,7 +124,7 @@
 }
 
 .modern-input:focus, .modern-select:focus, .modern-textarea:focus {
-    border-color: #667eea;
+    border-color: #46ac0b;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
     outline: none;
 }
@@ -204,7 +204,7 @@
 }
 
 .filter-title i {
-    color: #667eea;
+    color: #46ac0b;
     font-size: 1.1rem;
 }
 
@@ -219,7 +219,7 @@
 }
 
 .toggle-filter:hover {
-    background: #667eea;
+    background: #46ac0b;
     color: white;
     transform: translateY(-2px);
 }
@@ -290,7 +290,7 @@
 }
 
 .filter-apply-btn {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #46ac0b, #46ac0b    );
     border: none;
     padding: 12px 25px;
     border-radius: 25px;
@@ -473,7 +473,7 @@
 .modern-pagination .page-link {
     border: none;
     padding: 12px 18px;
-    color: #667eea;
+    color: #8d8d8d    ;
     background: white;
     transition: all 0.3s ease;
     border-right: 1px solid #e1e5e9;
@@ -484,13 +484,13 @@
 }
 
 .modern-pagination .page-link:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #46ac0b, #46ac0b);
     color: white;
     transform: translateY(-2px);
 }
 
 .modern-pagination .page-item.active .page-link {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #46ac0b, #46ac0b);
     color: white;
 }
 
