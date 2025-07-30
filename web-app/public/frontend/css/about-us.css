@@ -138,48 +138,7 @@
     color: #666;
 }
 
-.features-slider .slick-prev,
-.features-slider .slick-next {
-    font-size: 0;
-    line-height: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    cursor: pointer;
-    color: transparent;
-    border: none;
-    outline: none;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-}
 
-.features-slider .slick-prev:before,
-.features-slider .slick-next:before {
-    font-size: 20px;
-    line-height: 40px;
-    color: white;
-    opacity: 0.75;
-}
-
-.features-slider .slick-prev:before {
-    content: '←';
-}
-
-.features-slider .slick-next:before {
-    content: '→';
-}
-
-.features-slider .slick-prev {
-    left: 10px;
-}
-
-.features-slider .slick-next {
-    right: 10px;
-}
 
 .features-slider .slick-dots {
     text-align: center;
@@ -196,14 +155,14 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #ccc;
+    background: #28a745;
     border: none;
     outline: none;
     cursor: pointer;
 }
 
 .features-slider .slick-dots li.slick-active button {
-    background: #333;
+    background: #000000;
 }
 
 /* Our Partnerships */
