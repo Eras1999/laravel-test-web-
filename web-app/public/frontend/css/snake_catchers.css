@@ -2,7 +2,7 @@
 
 .hero-banner {
     height: 40vh;
-    background: linear-gradient(135deg, #d0d0d0 0%, #9f9f9f 100%);
+    background: #84ce5a ;
     position: relative;
     display: flex;
     align-items: center;
@@ -41,7 +41,7 @@
 }
 
 .snake-catchers-page {
-    background: #f8fafc;
+    background: #ffffff;
     min-height: 60vh;
     padding: 3rem 0;
 }
@@ -132,12 +132,12 @@
 }
 
 .btn-accent {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    background: #46ac0b;
     color: white;
 }
 
@@ -206,7 +206,7 @@
 }
 
 .district-badge {
-    background: rgba(255,255,255,0.9);
+    background:#46ac0b ;
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: 600;
