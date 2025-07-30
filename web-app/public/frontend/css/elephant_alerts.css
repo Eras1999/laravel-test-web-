@@ -15,6 +15,38 @@
     text-align: center;
 }
 
+
+/* Responsive Button Section within apply-card */
+.apply-card .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.apply-card .btn-modern {
+    width: 100%; /* Full width on smaller screens */
+    text-align: center;
+    padding: 12px;
+}
+
+@media (min-width: 768px) {
+    .apply-card .button-group {
+        flex-direction: row; /* Horizontal layout on larger screens */
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .apply-card .btn-modern {
+        width: auto; /* Reset to auto width on larger screens */
+        padding: 10px 20px; /* Restore original padding */
+    }
+
+    .apply-card .btn-primary {
+        margin-top: 0; /* Remove margin-top on larger screens */
+    }
+}
+
 .apply-header {
     margin-bottom: 20px;
 }
@@ -86,13 +118,13 @@
 }
 
 .btn-success {
-    background-color: #22c55e;
+    background-color: #16a34a;
     color: #fff;
     border: none;
 }
 
 .btn-success:hover {
-    background-color: #16a34a;
+    background-color: #517e61;
 }
 
 .btn-cancel {
@@ -116,11 +148,140 @@
 }
 
 .btn-accent {
-    background-color: #f59e0b;
+    background-color: #46ac0b;
     color: #fff;
     border: none;
 }
 
 .btn-accent:hover {
     background-color: #d97706;
+}
+
+
+
+
+
+
+
+
+
+
+/* How to Give Alert Section */
+.how-to-alert-section {
+    padding: 40px 0;
+    background-color: #e9ecef;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 30px;
+    color: #46ac0b;
+    margin-bottom: 30px;
+}
+
+.how-to-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.step-card {
+    background: #71d67f;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+}
+
+.step-card i {
+    font-size: 30px;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.step-card h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.step-card p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Elephant Images Section */
+.elephant-images-section {
+    padding: 40px 0;
+    background-color: #f8f9fa;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.image-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.image-caption {
+    padding: 10px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 24px;
+    }
+
+    .how-to-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .image-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .apply-card, .apply-form-container {
+        padding: 15px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-modern {
+        width: 100%;
+    }
 }

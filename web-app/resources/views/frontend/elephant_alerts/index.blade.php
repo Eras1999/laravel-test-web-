@@ -19,13 +19,65 @@
     </div>
 </section>
 
-<div class="hero-banner">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <h1 class="hero-title">Elephant Alert</h1>
-        <p class="hero-subtitle">Report elephant sightings to help protect wildlife in Sri Lanka</p>
+
+
+<section class="how-to-alert-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="section-title">How to Give an Elephant Alert</h2>
+                <div class="how-to-steps">
+                    <div class="step-card">
+                        <i class="fas fa-info-circle"></i>
+                        <h4>Step 1: Identify the Sighting</h4>
+                        <p>Observe the number of elephants and note their health status (Healthy, Normal, or Injured). Ensure you are at a safe distance.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Step 2: Locate the Area</h4>
+                        <p>Use the location selector to mark the exact spot on the map within your district.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fas fa-camera"></i>
+                        <h4>Step 3: Upload Evidence</h4>
+                        <p>Optionally upload a clear photo of the elephants to support your report.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fas fa-check"></i>
+                        <h4>Step 4: Submit the Report</h4>
+                        <p>Fill in the details and submit the form. Our team will review and take action if needed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
+<section class="elephant-images-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="section-title">Elephant Sightings Gallery</h2>
+                <div class="image-gallery">
+                    <div class="image-card">
+                        <img src="{{ asset('frontend/img/images/e1.jpg') }}" alt="Elephant 1" class="gallery-image">
+                        <p class="image-caption">Healthy Elephants - Polonnaruwa, 2025-07-29</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="{{ asset('frontend/img/images/e2.jpg') }}" alt="Elephant 2" class="gallery-image">
+                        <p class="image-caption">Normal Elephants - Kandy, 2025-07-28</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="{{ asset('frontend/img/images/e3.jpg') }}" alt="Elephant 3" class="gallery-image">
+                        <p class="image-caption">Healthy Elephants - Hambantota, 2025-07-27</p>
+                    </div>
+                    <!-- Add more image cards as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <main class="elephant-alerts-page">
     <section class="elephant-alerts-section">
@@ -38,14 +90,15 @@
                                 <h3>Report Elephant Sighting</h3>
                                 <p>Share details about elephant sightings in your area</p>
                             </div>
-                            <button class="btn-modern btn-accent" id="report-alert-btn">
-                                <i class="fas fa-plus"></i> Report Now
-                            </button>
-                            <a href="{{ route('elephant-alerts.map') }}" class="btn-modern btn-primary mt-3">
-                                <i class="fas fa-map"></i> View Sightings Map
-                            </a>
+                            <div class="button-group">
+                                <button class="btn-modern btn-accent" id="report-alert-btn">
+                                    <i class="fas fa-plus"></i> Report Now
+                                </button>
+                                <a href="{{ route('elephant-alerts.map') }}" class="btn-modern btn-primary">
+                                    <i class="fas fa-map"></i> View Sightings Map
+                                </a>
+                            </div>
                         </div>
-                        
                         <div id="report-alert-form" class="apply-form-container" style="display: none;">
                             <form action="{{ route('elephant-alerts.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
