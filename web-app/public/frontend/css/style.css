@@ -3948,9 +3948,21 @@ height: 65%;
     margin-right: 0;
 }
 .footer-social ul li a {
-    display: block;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
     font-size: 16px;
-    color: #0a303a;
+    color: #fff; 
+    background-color: #0a303a;
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%; 
+    transition: background-color 0.3s ease; 
+}
+
+.footer-social ul li a:hover {
+    background-color: #46ac0b;
+    color: #fff; 
 }
 .footer-widget .fw-title {
     font-size: 20px;

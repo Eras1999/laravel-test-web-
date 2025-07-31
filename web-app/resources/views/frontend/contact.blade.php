@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/cu.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -61,10 +61,7 @@
                                     <label for="message">Your Message <span>*</span></label>
                                     <textarea name="message" id="message" placeholder="Opinion..." class="form-control">{{ old('message') }}</textarea>
                                 </div>
-                                <div class="form-grp checkbox-grp">
-                                    <input type="checkbox" id="checkbox" name="hide_email">
-                                    <label for="checkbox">Don’t show your email address</label>
-                                </div>
+                              
                                 <button type="submit" class="btn rounded-btn">Send Now</button>
                             </form>
                         </div>
@@ -76,29 +73,28 @@
                                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
                                     <div class="content">
                                         <h4>Location</h4>
-                                        <p>W84 New Park Lan, New York, NY 4586 United States</p>
+                                        <p>5 Sirikurusa Mawatha, Gampaha 11000</p>
                                     </div>
                                 </div>
                                 <div class="contact-card">
                                     <div class="icon"><i class="fas fa-phone-alt"></i></div>
                                     <div class="content">
                                         <h4>Phone</h4>
-                                        <p>+9 (256) 254 9568</p>
+                                        <p> 011 1234567</p>
                                     </div>
                                 </div>
                                 <div class="contact-card">
                                     <div class="icon"><i class="fas fa-envelope-open"></i></div>
                                     <div class="content">
                                         <h4>Email</h4>
-                                        <p>Contact@ info.com</p>
+                                        <p>SaveSathwa@gmail.com</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="contact-social">
                                 <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="https://www.facebook.com/profile.php?id=61577191816912"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/company/save-sathwa/?viewAsMember=true"><i class="fab fa-linkedin-in"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -113,7 +109,7 @@
     <section class="map-area">
         <div class="container">
             <div class="map-wrap">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.142462771345!2d-73.93524268461462!3d40.73089997932587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a27e2f641f1%3A0x8dd2e7ba7e8ca4c!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2slk!4v1623456789!5m2!1sen!2slk" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.279620380752!2d79.99115467551633!3d7.093551816275453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2fb92df37e0e7%3A0x75d6d67caa65d4f8!2sREDTECH%20Computers!5e0!3m2!1sen!2slk!4v1753940652881!5m2!1sen!2slk" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
