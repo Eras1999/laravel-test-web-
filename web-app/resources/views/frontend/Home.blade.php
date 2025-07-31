@@ -554,17 +554,17 @@
                         <div class="blog-post-thumb">
                             <a href="#"><img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: auto; max-height: 200px; object-fit: cover;"></a>
                             <div class="blog-post-tag">
-                                <a href="#"><i class="flaticon-bookmark-1"></i>News</a>
+                                <a ><i class="flaticon-bookmark-1"></i>News</a>
                             </div>
                         </div>
                         <div class="blog-post-content">
                             <div class="blog-post-meta">
                                 <ul>
-                                    <li><i class="far fa-user"></i><a href="#">Admin</a></li>
+                                    <li><i class="far fa-user"></i><a >Admin</a></li>
                                     <li><i class="far fa-bell"></i> {{ $item->date->format('M d, Y') }}</li>
                                 </ul>
                             </div>
-                            <h3 class="title"><a href="#">{{ $item->title }}</a></h3>
+                            <h3 class="title"><a>{{ $item->title }}</a></h3>
                             <p class="text-truncate">{{ $item->content }}</p>
                             <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">Read More <img src="{{ asset('frontend/img/icon/pawprint.png') }}" alt=""></a>
                         </div>
