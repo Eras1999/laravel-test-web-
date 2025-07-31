@@ -387,45 +387,9 @@
             return false;
         }
 
-        // Confirm Update Slider
-        function confirmUpdateSlider() {
-            event.preventDefault();
+       
             
-            Swal.fire({
-                title: 'Update Slider?',
-                text: "Are you sure you want to save these changes?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: '<i class="fas fa-save me-2"></i>Yes, Save Changes!',
-                cancelButtonText: '<i class="fas fa-times me-2"></i>Cancel',
-                reverseButtons: true,
-                customClass: {
-                    confirmButton: 'btn btn-success btn-lg',
-                    cancelButton: 'btn btn-secondary btn-lg'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Show loading
-                    Swal.fire({
-                        title: 'Updating...',
-                        text: 'Saving your changes, please wait.',
-                        icon: 'info',
-                        allowOutsideClick: false,
-                        showConfirmButton: false,
-                        willOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-                    
-                    // Submit the form
-                    event.target.closest('form').submit();
-                }
-            });
-            
-            return false;
-        }
+      
 
         // Confirm Delete
         function confirmDelete(id, title) {
