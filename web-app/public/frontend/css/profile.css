@@ -97,7 +97,7 @@
 }
 
 .logout-btn {
-    background: #ff5733;
+    background: #46ac0b;
     color: white;
     padding: 10px 25px;
     border-radius: 25px;
@@ -141,7 +141,7 @@
 
 .stat-item i {
     font-size: 1.8rem;
-    color: #ff5733;
+    color: #46ac0b;
     margin-bottom: 10px;
 }
 
@@ -425,6 +425,269 @@
     }
 
     .blog-meta, .blog-excerpt {
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
+
+
+
+
+.my-rescue-posts-section .blog-item {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.my-rescue-posts-section .blog-item:hover {
+    transform: translateY(-5px);
+}
+
+.my-rescue-posts-section .blog-content {
+    padding: 15px;
+}
+
+.my-rescue-posts-section .blog-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.my-rescue-posts-section .blog-placeholder {
+    width: 100%;
+    height: 150px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.my-rescue-posts-section .blog-placeholder i {
+    font-size: 2rem;
+    color: #ccc;
+}
+
+.my-rescue-posts-section .blog-title {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+.my-rescue-posts-section .blog-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.my-rescue-posts-section .blog-excerpt {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.my-rescue-posts-section .status-rescued {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Styles for blog items */
+.my-blogs-section .blog-item {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.my-blogs-section .blog-item:hover {
+    transform: translateY(-5px);
+}
+
+.my-blogs-section .blog-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.my-blogs-section .blog-content {
+    padding: 15px;
+}
+
+.my-blogs-section .blog-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.my-blogs-section .blog-placeholder {
+    width: 100%;
+    height: 150px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.my-blogs-section .blog-placeholder i {
+    font-size: 2rem;
+    color: #ccc;
+}
+
+.my-blogs-section .blog-title {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+.my-blogs-section .blog-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.my-blogs-section .blog-excerpt {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Styles for adoption posts */
+.my-adoption-posts-section .blog-item {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.my-adoption-posts-section .blog-item:hover {
+    transform: translateY(-5px);
+}
+
+.my-adoption-posts-section .blog-content {
+    padding: 15px;
+}
+
+.my-adoption-posts-section .blog-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.my-adoption-posts-section .blog-placeholder {
+    width: 100%;
+    height: 150px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.my-adoption-posts-section .blog-placeholder i {
+    font-size: 2rem;
+    color: #ccc;
+}
+
+.my-adoption-posts-section .blog-title {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+.my-adoption-posts-section .blog-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.my-adoption-posts-section .blog-excerpt,
+.my-adoption-posts-section .blog-full-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.my-adoption-posts-section .read-more-btn,
+.my-rescue-posts-section .view-details-btn {
+    background: #ff5733;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.my-adoption-posts-section .read-more-btn:hover,
+.my-rescue-posts-section .view-details-btn:hover {
+    background: #e04e2b;
+}
+
+.my-adoption-posts-section .status-adopted {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.my-adoption-posts-section .status-expired {
+    color: #6c757d;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .my-rescue-posts-section .blog-image,
+    .my-rescue-posts-section .blog-placeholder,
+    .my-blogs-section .blog-image,
+    .my-blogs-section .blog-placeholder,
+    .my-adoption-posts-section .blog-image,
+    .my-adoption-posts-section .blog-placeholder {
+        height: 120px;
+    }
+
+    .my-rescue-posts-section .blog-title,
+    .my-blogs-section .blog-title,
+    .my-adoption-posts-section .blog-title {
+        font-size: 1.1rem;
+    }
+
+    .my-rescue-posts-section .blog-excerpt,
+    .my-blogs-section .blog-excerpt,
+    .my-adoption-posts-section .blog-excerpt,
+    .my-adoption-posts-section .blog-full-description {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .my-rescue-posts-section .blog-title,
+    .my-blogs-section .blog-title,
+    .my-adoption-posts-section .blog-title {
+        font-size: 1rem;
+    }
+
+    .my-rescue-posts-section .blog-meta,
+    .my-rescue-posts-section .blog-excerpt,
+    .my-blogs-section .blog-meta,
+    .my-blogs-section .blog-excerpt,
+    .my-adoption-posts-section .blog-meta,
+    .my-adoption-posts-section .blog-excerpt,
+    .my-adoption-posts-section .blog-full-description {
         font-size: 0.8rem;
     }
 }
