@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/ob2.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -99,7 +99,7 @@
             resize: vertical;
         }
         .btn-primary {
-            background: #ff5733;
+            background: #46ac0b;
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -109,7 +109,7 @@
             transition: background 0.3s ease;
         }
         .btn-primary:hover {
-            background: #e04e2b;
+            background: #46ac0b;
         }
 
         @media (max-width: 767px) {

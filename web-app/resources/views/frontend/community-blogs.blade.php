@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/cb1.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -103,10 +103,10 @@
             text-decoration: none;
         }
         .title a:hover {
-            color: #ff5733;
+            color: #46ac0b;
         }
         .read-more {
-            color: #ff5733;
+            color: #46ac0b;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
@@ -117,7 +117,7 @@
             width: 15px;
         }
         .btn-primary {
-            background: #ff5733;
+            background: #46ac0b;
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -127,13 +127,13 @@
             transition: background 0.3s ease;
         }
         .btn-primary:hover {
-            background: #e04e2b;
+            background: #46ac0b;
         }
         .pagination-wrap .pagination {
             justify-content: center;
         }
         .pagination-wrap .page-link {
-            color: #ff5733;
+            color: #46ac0b;
             border: none;
             padding: 10px 15px;
             margin: 0 5px;
@@ -141,11 +141,11 @@
             transition: background 0.3s ease;
         }
         .pagination-wrap .page-item.active .page-link {
-            background: #ff5733;
+            background: #46ac0b;
             color: #fff;
         }
         .pagination-wrap .page-link:hover {
-            background: #ff5733;
+            background: #46ac0b;
             color: #fff;
         }
 

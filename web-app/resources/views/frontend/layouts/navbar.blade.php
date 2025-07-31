@@ -85,11 +85,11 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') || request()->routeIs('community-blogs.index') || request()->routeIs('community-blogs.submit') ? 'active' : '' }} menu-item-has-children">
+                                    <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') || request()->routeIs('community-blogs.index') || request()->routeIs('community-blogs.submit') || request()->routeIs('community-blogs.show') ? 'active' : '' }} menu-item-has-children">
                                         <a href="#">Blog</a>
                                         <ul class="submenu">
                                             <li class="{{ request()->routeIs('official-blogs.index') || request()->routeIs('official-blogs.show') ? 'active' : '' }}"><a href="{{ route('official-blogs.index') }}">Official Blogs</a></li>
-                                            <li class="{{ request()->routeIs('community-blogs.index') || request()->routeIs('community-blogs.submit') ? 'active' : '' }}"><a href="{{ route('community-blogs.index') }}">Community Blogs</a></li>
+                                            <li class="{{ request()->routeIs('community-blogs.index') || request()->routeIs('community-blogs.submit') || request()->routeIs('community-blogs.show') ? 'active' : '' }}"><a href="{{ route('community-blogs.index') }}">Community Blogs</a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contacts</a></li>
