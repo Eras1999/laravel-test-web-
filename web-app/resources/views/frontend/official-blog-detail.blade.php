@@ -2,17 +2,17 @@
 
 @section('content')
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/ob.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 class="title">{{ $blog->title }}</h2>
+                        <h2 class="title">Official Blogs Details</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{{ route('official-blogs.index') }}">Official Blogs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($blog->title, 20) }}</li>
+                                <li class="breadcrumb-item active" aria-current="page">Official Blogs Details</li>
                             </ol>
                         </nav>
                     </div>
@@ -82,7 +82,7 @@
         }
         .blog-meta ul li i {
             margin-right: 5px;
-            color: #ff5733;
+            color: #46ac0b;
         }
         .blog-details-content .title {
             font-size: 28px;
@@ -96,7 +96,7 @@
             color: #666;
         }
         .blog-details-content .btn {
-            background: #ff5733;
+            background: #46ac0b;
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -106,7 +106,7 @@
             transition: background 0.3s ease;
         }
         .blog-details-content .btn:hover {
-            background: #e04e2b;
+            background: #46ac0b;
         }
 
         @media (max-width: 767px) {

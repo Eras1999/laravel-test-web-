@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/ob1.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -103,7 +103,7 @@
         }
         .blog-meta ul li i {
             margin-right: 5px;
-            color: #ff5733;
+            color: #46ac0b;
         }
         .blog-post-content .title {
             font-size: 20px;
@@ -115,7 +115,7 @@
             text-decoration: none;
         }
         .blog-post-content .title a:hover {
-            color: #ff5733;
+            color: #46ac0b;
         }
         .blog-post-content p {
             color: #666;
@@ -124,7 +124,7 @@
             margin-bottom: 20px;
         }
         .blog-post-content .btn {
-            background: #ff5733;
+            background: #46ac0b;
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -134,13 +134,13 @@
             transition: background 0.3s ease;
         }
         .blog-post-content .btn:hover {
-            background: #e04e2b;
+            background: #46ac0b;
         }
         .pagination-wrap .pagination {
             justify-content: center;
         }
         .pagination-wrap .page-link {
-            color: #ff5733;
+            color: #46ac0b;
             border: none;
             padding: 10px 15px;
             margin: 0 5px;
@@ -148,11 +148,11 @@
             transition: background 0.3s ease;
         }
         .pagination-wrap .page-item.active .page-link {
-            background: #ff5733;
+            background: #46ac0b;
             color: #fff;
         }
         .pagination-wrap .page-link:hover {
-            background: #ff5733;
+            background: #46ac0b;
             color: #fff;
         }
 
