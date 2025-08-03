@@ -33,7 +33,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('password.email') }}" method="POST" class="auth-form">
+            <form action="{{ route('front.password.email') }}" method="POST" class="auth-form">
                 @csrf
                 <div class="form-group">
                     <label for="email">Email Address</label>

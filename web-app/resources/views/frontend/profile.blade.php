@@ -39,10 +39,10 @@
                                 </div>
                             </div>
                             <div class="profile-actions">
-                                <a href="{{ route('logout') }}" class="btn logout-btn" id="logout-btn">
+                                <a href="{{ route('signout') }}" class="btn logout-btn" id="logout-btn">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('signout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>

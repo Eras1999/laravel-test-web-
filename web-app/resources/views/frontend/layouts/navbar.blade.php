@@ -36,7 +36,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="{{ route('profile') }}"><i class="fas fa-user-circle"></i> My Profile</a></li>
                                             <li>
-                                                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                                <form action="{{ route('signout') }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
                                                 </form>
@@ -104,9 +104,9 @@
                                             <ul class="dropdown-menu">
                                                 <li><a href="{{ route('profile') }}"><i class="fas fa-user-circle"></i> My Profile</a></li>
                                                 <li>
-                                                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                                    <form action="{{ route('signout') }}" method="POST" style="display: inline;">
                                                         @csrf
-                                                        <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                                                        <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout </button>
                                                     </form>
                                                 </li>
                                             </ul>

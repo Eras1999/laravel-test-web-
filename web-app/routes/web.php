@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\RescuePostsController;
 use App\Http\Controllers\admin\RescuePostsController as AdminRescuePostsController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\Frontend\ElephantAlertController;
+use App\Http\Controllers\Frontend\ResetPasswordController;
 use App\Http\Controllers\admin\ElephantAlertController as AdminElephantAlertController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +47,7 @@ Route::get('/home', function () {
     $testimonials = \App\Models\Testimonial::all();
     $news = \App\Models\News::orderBy('date', 'desc')->paginate(3);
     return view('frontend.home', compact('sliders', 'testimonials', 'news'));
-})->middleware(['auth:frontend'])->name('home.authenticated');
+})->middleware(['auth_front:frontend'])->name('home.authenticated');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -120,7 +121,7 @@ Route::controller(AdminCommunityBlogsController::class)->middleware(['auth', 've
     Route::delete('/admin/community-blogs/{id}', 'destroy')->name('admin.community-blogs.delete');
 });
 
-Route::controller(AdoptionPostsController::class)->middleware(['auth:frontend'])->group(function () {
+Route::controller(AdoptionPostsController::class)->middleware(['auth_front:frontend'])->group(function () {
     Route::get('/adoption-posts/create', 'create')->name('adoption-posts.create');
     Route::get('/adoption-posts/form', 'form')->name('adoption-posts.form');
     Route::post('/adoption-posts', 'store')->name('adoption-posts.store');
@@ -135,7 +136,7 @@ Route::controller(AdminAdoptionPostsController::class)->middleware(['auth', 'ver
     Route::delete('/admin/adoption-posts/{id}', 'delete')->name('admin.adoption-posts.delete');
 });
 
-Route::controller(SnakeCatcherController::class)->middleware(['auth:frontend'])->group(function () {
+Route::controller(SnakeCatcherController::class)->middleware(['auth_front:frontend'])->group(function () {
     Route::get('/snake-catchers', 'index')->name('snake-catchers.index');
     Route::post('/snake-catchers', 'store')->name('snake-catchers.store');
 });
@@ -147,7 +148,7 @@ Route::controller(AdminSnakeCatcherController::class)->middleware(['auth', 'veri
     Route::delete('/admin/snake-catchers/{id}', 'delete')->name('admin.snake-catchers.delete');
 });
 
-Route::controller(RescuePostsController::class)->middleware(['auth:frontend'])->group(function () {
+Route::controller(RescuePostsController::class)->middleware(['auth_front:frontend'])->group(function () {
     Route::get('/rescue-posts', 'index')->name('rescue-posts.index');
     Route::post('/rescue-posts', 'store')->name('rescue-posts.store');
     Route::get('/rescue-posts/{id}', 'show')->name('rescue-posts.show');
@@ -155,7 +156,7 @@ Route::controller(RescuePostsController::class)->middleware(['auth:frontend'])->
     Route::delete('/rescue-posts/{id}/comment/{commentIndex}', 'deleteComment')->name('rescue-posts.delete-comment');
     Route::patch('/rescue-posts/{id}/mark-rescued', [\App\Http\Controllers\Frontend\RescuePostsController::class, 'markAsRescued'])
     ->name('rescue-posts.markAsRescued')
-    ->middleware('auth:frontend');
+    ->middleware('auth_front:frontend');
 });
 
 Route::controller(AdminRescuePostsController::class)->middleware(['auth', 'verified'])->group(function () {
@@ -166,7 +167,7 @@ Route::controller(AdminRescuePostsController::class)->middleware(['auth', 'verif
 
 
 // Add Elephant Alert Routes
-Route::controller(ElephantAlertController::class)->middleware(['auth:frontend'])->group(function () {
+Route::controller(ElephantAlertController::class)->middleware(['auth_front:frontend'])->group(function () {
     Route::get('/elephant-alerts', 'index')->name('elephant-alerts.index');
     Route::post('/elephant-alerts', 'store')->name('elephant-alerts.store');
     Route::get('/elephant-alerts/map', 'map')->name('elephant-alerts.map');
@@ -221,13 +222,17 @@ Route::get('/signin', [FrontendAuthController::class, 'showSignIn'])->name('sign
 Route::post('/signin', [FrontendAuthController::class, 'signIn'])->name('signin.post');
 Route::get('/signup', [FrontendAuthController::class, 'showSignUp'])->name('signup');
 Route::post('/signup', [FrontendAuthController::class, 'signUp'])->name('signup.post');
+Route::post('/signout', [FrontendAuthController::class, 'logout'])->name('signout');
 Route::get('/forgot-password', function () {
     return view('frontend.forgot-password');
 })->name('forgot-password');
-Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
+Route::post('/send-reset', [ResetPasswordController::class, 'store'])->name('front.password.email');
+Route::get('/set-new-password/{user}', [ResetPasswordController::class, 'edit'])->name('front.password.edit');
+Route::patch('/set-new-password/{user}', [ResetPasswordController::class, 'update'])->name('front.password.update');
+
 
 // Update the profile route to use RescuePostsController@profile
-Route::get('/my-profile', [RescuePostsController::class, 'profile'])->name('profile')->middleware('auth:frontend');
+Route::get('/my-profile', [RescuePostsController::class, 'profile'])->name('profile')->middleware('auth_front:frontend');
 
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {

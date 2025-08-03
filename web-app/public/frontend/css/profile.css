@@ -10,10 +10,7 @@
     width: 100%;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+
 
 .profile-card, .stats-card, .blog-card {
     background: rgba(255, 255, 255, 0.95);

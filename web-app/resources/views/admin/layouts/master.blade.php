@@ -31,11 +31,7 @@
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright © Eranda Madusanka 2025</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                ·
-                                <a href="#">Terms & Conditions</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </footer>
