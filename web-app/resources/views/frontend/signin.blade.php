@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - SaveSathwa</title>
+    <link rel="icon" type="image/png" href="{{ asset('frontend/img/logo/logo_r.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('frontend/css/auth.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -28,10 +29,7 @@
                     <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
                 </div>
                 <div class="form-group d-flex">
-                    <div class="form-check">
-                        <input type="checkbox" id="remember" name="remember" class="form-check-input">
-                        <label for="remember" class="form-check-label">Remember Me</label>
-                    </div>
+                   
                     <a href="{{ route('forgot-password') }}" class="forgot-link">Forgot Password?</a>
                 </div>
                 <button type="submit" class="auth-btn">Sign In</button>
