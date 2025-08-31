@@ -43,13 +43,18 @@ class FrontendAuthController extends Controller
 
     // Handle Sign Up
     public function signUp(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:user_credentials,email',
-            'password' => 'required|min:8|confirmed',
-            'terms' => 'accepted',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => [
+            'required',
+            'email',
+            'unique:user_credentials,email',
+            'regex:/^[A-Za-z0-9._%+-]+@gmail\.com$/'
+        ],
+        'password' => 'required|min:8|confirmed',
+        'terms' => 'accepted',
+    ]);
 
         $user = UserCredential::create([
             'name' => $request->name,

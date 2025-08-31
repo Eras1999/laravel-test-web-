@@ -44,10 +44,10 @@
                         <h4 class="fw-title">Quick Link</h4>
                         <div class="fw-link">
                             <ul>
-                                <li><a href="breeder.html">About Us</a></li>
-                                <li><a href="adoption.html">Contact Us</a></li>
-                                <li><a href="contact.html">Adopts Posts</a></li>
-                                <li><a href="contact.html">Snake Catchers</a></li>
+                                <li><a href="{{ route('about-us') }}">About Us</a></li>
+                                <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                                <li><a href="{{ route('adoption-posts.index') }}">Adopts Posts</a></li>
+                                <li><a href="{{ route('snake-catchers.index') }}">Snake Catchers</a></li>
                 
                             </ul>
                         </div>

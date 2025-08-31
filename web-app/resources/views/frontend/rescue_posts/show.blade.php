@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 38px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText('SaveSathwa.com', canvas.width / 2, 60);
+        ctx.fillText('savesathwa.eranda.online', canvas.width / 2, 60);
 
         ctx.font = '20px Arial';
         ctx.fillText('Animal Rescue Platform', canvas.width / 2, 90);
@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             ctx.fillStyle = '#4F46E5'; // Indigo for website link
             ctx.font = 'bold 17px Arial';
-            ctx.fillText('Visit: SaveSathwa.com for more details', canvas.width / 2, currentY); // Moved up to align with reduced gap
+            ctx.fillText('Visit: savesathwa.eranda.online for more details', canvas.width / 2, currentY); // Moved up to align with reduced gap
 
             // Trigger download
             const link = document.createElement('a');
